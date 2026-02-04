@@ -5,164 +5,98 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-// CORS Configuration - allow frontend and dev
+/* =======================
+   CORS CONFIG
+======================= */
+
 const allowedOrigins = [
   'https://agamir-trishal-web.vercel.app',
   'http://localhost:3000',
 ];
 
-// Add FRONTEND_URL from environment if provided
 if (process.env.FRONTEND_URL) {
-  process.env.FRONTEND_URL.split(',')
-    .map((origin) => origin.trim().replace(/\/+$/, '')) // Remove trailing slashes
+  process.env.FRONTEND_URL
+    .split(',')
+    .map(o => o.trim().replace(/\/+$/, ''))
     .filter(Boolean)
-    .forEach((origin) => {
-      if (!allowedOrigins.includes(origin)) {
-        allowedOrigins.push(origin);
-      }
+    .forEach(o => {
+      if (!allowedOrigins.includes(o)) allowedOrigins.push(o);
     });
 }
 
 const isAllowedOrigin = (origin) => {
-  // Allow requests with no origin (like mobile apps or curl requests)
   if (!origin) return true;
-  
-  // Check exact match
   if (allowedOrigins.includes(origin)) return true;
 
-  // Allow Vercel preview deployments
-  const vercelPreviewPattern = /^https:\/\/agamir-trishal-web(-[\w-]+)?\.vercel\.app$/;
-  if (vercelPreviewPattern.test(origin)) return true;
-
-  // Log blocked origins for debugging (only in development)
-  if (process.env.NODE_ENV === 'development') {
-    console.log('CORS: Blocked origin:', origin);
-    console.log('CORS: Allowed origins:', allowedOrigins);
-  }
-  return false;
+  const vercelPreview = /^https:\/\/agamir-trishal-web(-[\w-]+)?\.vercel\.app$/;
+  return vercelPreview.test(origin);
 };
 
-// CORS middleware - must be before routes
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (isAllowedOrigin(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
+    origin: (origin, cb) => {
+      if (isAllowedOrigin(origin)) cb(null, true);
+      else cb(new Error('Not allowed by CORS'));
     },
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
     credentials: true,
-    optionsSuccessStatus: 200, // Some legacy browsers (IE11, various SmartTVs) choke on 204
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
   })
 );
+
 app.use(express.json({ limit: '100mb' }));
-app.use(express.urlencoded({ limit: '100mb', extended: true }));
+app.use(express.urlencoded({ extended: true, limit: '100mb' }));
 
-// Database Connection with proper timeout settings
-const mongooseOptions = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 30000, // 30 seconds
-  socketTimeoutMS: 45000, // 45 seconds
-  connectTimeoutMS: 30000, // 30 seconds
-  maxPoolSize: 10, // Maintain up to 10 socket connections
-  minPoolSize: 2, // Maintain at least 2 socket connections
-  maxIdleTimeMS: 30000, // Close connections after 30 seconds of inactivity
-  bufferMaxEntries: 0, // Disable mongoose buffering
-  bufferCommands: false, // Disable mongoose buffering
-};
+/* =======================
+   MONGODB CONNECTION
+   (VERCEL SAFE)
+======================= */
 
-// MongoDB Connection - optimized for serverless (Vercel)
-let isConnecting = false;
-let connectionPromise = null;
+let cached = global.mongoose;
 
-const connectDB = async () => {
-  // If already connected, return
-  if (mongoose.connection.readyState === 1) {
-    return true;
-  }
-  
-  // If already connecting, wait for that connection
-  if (isConnecting && connectionPromise) {
-    return connectionPromise;
-  }
-  
-  // Start new connection
-  isConnecting = true;
-  connectionPromise = (async () => {
-    try {
-      // Close existing connection if any
-      if (mongoose.connection.readyState !== 0) {
-        await mongoose.connection.close();
-      }
-      
-      const mongoUri = process.env.MONGODB_URI;
-      if (!mongoUri) {
-        throw new Error('MONGODB_URI environment variable is not set');
-      }
-      
-      console.log('Attempting MongoDB connection...');
-      console.log('MongoDB URI length:', mongoUri.length);
-      console.log('MongoDB URI starts with:', mongoUri.substring(0, 20) + '...');
-      
-      await mongoose.connect(mongoUri, {
-        ...mongooseOptions,
-        // Serverless-specific options - faster timeouts
-        serverSelectionTimeoutMS: 15000, // 15 seconds for serverless
-        socketTimeoutMS: 30000,
-        connectTimeoutMS: 15000,
-      });
-      
-      console.log('MongoDB Connected Successfully');
-      console.log('Connection state:', mongoose.connection.readyState);
-      
-      mongoose.connection.on('error', (err) => {
-        console.error('MongoDB connection error:', err);
-        isConnecting = false;
-        connectionPromise = null;
-      });
-      
-      mongoose.connection.on('disconnected', () => {
-        console.warn('MongoDB disconnected');
-        isConnecting = false;
-        connectionPromise = null;
-      });
-      
-      isConnecting = false;
-      return true;
-    } catch (err) {
-      console.error('MongoDB Connection Error:', err.message);
-      isConnecting = false;
-      connectionPromise = null;
-      return false;
-    }
-  })();
-  
-  return connectionPromise;
-};
-
-// Export connectDB before routes so controllers can use it
-app.connectDB = connectDB;
-
-// Connect to database (non-blocking for serverless)
-// In serverless, connection happens on first request
-if (process.env.VERCEL !== '1') {
-  connectDB();
-} else {
-  // In serverless, ensure connection on first request
-  app.use(async (req, res, next) => {
-    if (mongoose.connection.readyState !== 1 && req.path !== '/api/health') {
-      // Don't block, but try to connect in background
-      connectDB().catch(err => console.error('Background connection failed:', err.message));
-    }
-    next();
-  });
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
 }
 
-// Routes
+async function connectDB() {
+  if (cached.conn) return cached.conn;
+
+  if (!cached.promise) {
+    if (!process.env.MONGODB_URI) {
+      throw new Error('MONGODB_URI not set');
+    }
+
+    cached.promise = mongoose.connect(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 15000,
+      socketTimeoutMS: 30000,
+      connectTimeoutMS: 15000,
+      maxPoolSize: 10,
+      bufferCommands: false,
+    }).then(mongoose => mongoose);
+  }
+
+  cached.conn = await cached.promise;
+  return cached.conn;
+}
+
+/* =======================
+   AUTO CONNECT PER REQUEST
+======================= */
+
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    console.error('MongoDB connection failed:', err.message);
+    res.status(500).json({ error: 'Database connection failed' });
+  }
+});
+
+/* =======================
+   ROUTES
+======================= */
+
 app.use('/api/unions', require('./routes/unionRoutes'));
 app.use('/api/problems', require('./routes/problemRoutes'));
 app.use('/api/polling-stations', require('./routes/pollingStationRoutes'));
@@ -171,124 +105,73 @@ app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
 app.use('/api/helpline', require('./routes/helplineRoutes'));
 
-// Health Check - must handle errors gracefully
-app.get('/api/health', async (req, res) => {
-  try {
-    const mongoose = require('mongoose');
-    let dbStatus = mongoose.connection?.readyState || 0;
-    
-    // Try to connect if disconnected (for serverless)
-    if (dbStatus === 0) {
-      try {
-        console.log('Health check: Attempting to connect to MongoDB...');
-        const connected = await connectDB();
-        console.log('Health check: Connection result:', connected);
-        if (connected) {
-          // Wait a bit for connection to stabilize
-          await new Promise(resolve => setTimeout(resolve, 1500));
-          dbStatus = mongoose.connection?.readyState || 0;
-          console.log('Health check: Final connection state:', dbStatus);
-        } else {
-          console.log('Health check: Connection failed or returned false');
-        }
-      } catch (err) {
-        console.error('Health check connection attempt failed:', err.message);
-        console.error('Error stack:', err.stack);
-      }
-    }
-    
-    const dbStates = {
-      0: 'disconnected',
-      1: 'connected',
-      2: 'connecting',
-      3: 'disconnecting'
-    };
-    
-    res.json({ 
-      status: 'Server is running',
-      database: {
-        status: dbStates[dbStatus] || 'unknown',
-        readyState: dbStatus,
-        mongoUriSet: !!process.env.MONGODB_URI,
-        mongoUriLength: process.env.MONGODB_URI ? process.env.MONGODB_URI.length : 0
-      },
-      cors: {
-        allowedOrigins: allowedOrigins,
-        frontendUrl: process.env.FRONTEND_URL
-      },
-      environment: {
-        nodeEnv: process.env.NODE_ENV || 'development',
-        vercel: process.env.VERCEL || 'false'
-      }
-    });
-  } catch (error) {
-    console.error('Health check error:', error);
-    res.status(500).json({ 
-      status: 'Server error',
-      error: error.message 
-    });
-  }
-});
+/* =======================
+   HEALTH CHECK
+======================= */
 
-// Error handling middleware - MUST be after routes
-// This ensures CORS headers are sent even on errors
-app.use((err, req, res, next) => {
-  console.error('Error:', err);
-  
-  // Set CORS headers even on error
-  const origin = req.headers.origin;
-  if (origin && isAllowedOrigin(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-    res.setHeader('Vary', 'Origin');
-  } else if (!origin) {
-    // Allow requests with no origin
-    res.setHeader('Access-Control-Allow-Origin', '*');
-  }
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  
-  // Send error response
-  const statusCode = err.status || err.statusCode || 500;
-  res.status(statusCode).json({
-    error: err.message || 'Internal Server Error',
-    ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
+app.get('/api/health', (req, res) => {
+  const states = {
+    0: 'disconnected',
+    1: 'connected',
+    2: 'connecting',
+    3: 'disconnecting',
+  };
+
+  res.json({
+    status: 'OK',
+    database: {
+      state: states[mongoose.connection.readyState],
+      readyState: mongoose.connection.readyState,
+      mongoUriSet: !!process.env.MONGODB_URI,
+    },
+    cors: allowedOrigins,
+    environment: {
+      nodeEnv: process.env.NODE_ENV || 'development',
+      vercel: process.env.VERCEL || 'false',
+    },
   });
 });
 
-// 404 handler - must be last
-app.use((req, res) => {
-  // Set CORS headers for 404
+/* =======================
+   ERROR HANDLER
+======================= */
+
+app.use((err, req, res, next) => {
+  console.error(err);
+
   const origin = req.headers.origin;
   if (origin && isAllowedOrigin(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Vary', 'Origin');
-  } else if (!origin) {
+  } else {
     res.setHeader('Access-Control-Allow-Origin', '*');
   }
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  
-  res.status(404).json({ error: 'Route not found', path: req.path });
+
+  res.status(err.status || 500).json({
+    error: err.message || 'Internal Server Error',
+  });
 });
 
-// Export app and connectDB for Vercel serverless functions
-app.connectDB = connectDB;
-module.exports = app;
+/* =======================
+   404 HANDLER
+======================= */
 
-// Only start server if not in serverless environment
-if (process.env.VERCEL !== '1' && !process.env.AWS_LAMBDA_FUNCTION_NAME) {
+app.use((req, res) => {
+  res.status(404).json({
+    error: 'Route not found',
+    path: req.path,
+  });
+});
+
+/* =======================
+   SERVER START (LOCAL ONLY)
+======================= */
+
+if (!process.env.VERCEL) {
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-    console.log('CORS Allowed Origins:', allowedOrigins);
-    console.log('FRONTEND_URL from env:', process.env.FRONTEND_URL);
-    console.log('MongoDB URI:', process.env.MONGODB_URI ? 'Set' : 'Not set');
   });
-} else {
-  console.log('Running in serverless mode');
-  console.log('CORS Allowed Origins:', allowedOrigins);
-  console.log('FRONTEND_URL from env:', process.env.FRONTEND_URL);
-  console.log('MongoDB URI:', process.env.MONGODB_URI ? 'Set' : 'Not set');
 }
+
+module.exports = app;
