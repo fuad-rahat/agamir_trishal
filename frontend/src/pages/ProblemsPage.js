@@ -10,6 +10,7 @@ const ProblemsPage = () => {
   const [selectedUnion, setSelectedUnion] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const hasLoadedCache = useRef(false);
   const cacheKeys = useMemo(() => ({
     problems: 'cachedProblems',
@@ -17,26 +18,6 @@ const ProblemsPage = () => {
   }), []);
 
   const loadData = useCallback(async () => {
-    try {
-      if (!hasLoadedCache.current) {
-        setLoading(true);
-      }
-      const [problemsRes, unionsRes] = await Promise.all([
-        problemsAPI.getAll(),
-        unionsAPI.getAll()
-      ]);
-      setProblems(problemsRes.data);
-      setUnions(unionsRes.data);
-      sessionStorage.setItem(cacheKeys.problems, JSON.stringify(problemsRes.data));
-      sessionStorage.setItem(cacheKeys.unions, JSON.stringify(unionsRes.data));
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    } finally {
-      setLoading(false);
-    }
-  }, [cacheKeys]);
-
-  const fetchData = useCallback(async () => {
     try {
       if (!hasLoadedCache.current) {
         setLoading(true);
