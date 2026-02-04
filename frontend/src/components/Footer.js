@@ -49,11 +49,11 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <i className="fas fa-envelope text-green-500 mr-2"></i>
-                <a href="mailto:info@trishal.local" className="hover:text-green-500">info@trishal.local</a>
+                <a href="mailto:fuadrahat01@gmail.com" className="hover:text-green-500">fuadrahat01@gmail.com</a>
               </li>
               <li className="flex items-center">
                 <i className="fas fa-phone text-green-500 mr-2"></i>
-                <span>+880 XXX XXXX</span>
+                <span>01754677999</span>
               </li>
             </ul>
           </div>
@@ -100,6 +100,17 @@ const Footer = () => {
           {/* Copyright */}
           <div className="text-center text-sm text-gray-500">
             <p>© {currentYear} Trishal Civic Map. সকল অধিকার সংরক্ষিত।</p>
+            <p className="mt-2">
+              Developer:{' '}
+              <a
+                href="https://www.fuadrahat.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-green-400 hover:text-green-300 transition"
+              >
+                Md. Muhtasim Fuad Rahat
+              </a>
+            </p>
             <p className="mt-2">
               <button
                 type="button"
