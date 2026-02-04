@@ -8,7 +8,7 @@ const app = express();
 // CORS – allow frontend and dev
 const allowedOrigins = [
   process.env.FRONTEND_URL,
-  'http://localhost:3000',
+  'https://agamir-trishal-web.vercel.app/',
 ];
 
 app.use(
