@@ -16,6 +16,26 @@ const ProblemsPage = () => {
     unions: 'cachedUnions',
   }), []);
 
+  const loadData = useCallback(async () => {
+    try {
+      if (!hasLoadedCache.current) {
+        setLoading(true);
+      }
+      const [problemsRes, unionsRes] = await Promise.all([
+        problemsAPI.getAll(),
+        unionsAPI.getAll()
+      ]);
+      setProblems(problemsRes.data);
+      setUnions(unionsRes.data);
+      sessionStorage.setItem(cacheKeys.problems, JSON.stringify(problemsRes.data));
+      sessionStorage.setItem(cacheKeys.unions, JSON.stringify(unionsRes.data));
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false);
+    }
+  }, [cacheKeys]);
+
   const fetchData = useCallback(async () => {
     try {
       if (!hasLoadedCache.current) {
@@ -60,83 +80,6 @@ const ProblemsPage = () => {
   useEffect(() => {
     const cachedProblems = sessionStorage.getItem(cacheKeys.problems);
     const cachedUnions = sessionStorage.getItem(cacheKeys.unions);
-    const cacheTime = sessionStorage.getItem(cacheKeys.timestamp);
-    const cacheAge = cacheTime ? Date.now() - parseInt(cacheTime, 10) : Infinity;
-    const CACHE_MAX_AGE = 5 * 60 * 1000; // 5 minutes
-
-    if (cachedProblems && cachedUnions && cacheAge < CACHE_MAX_AGE) {
-      try {
-        const parsedProblems = JSON.parse(cachedProblems);
-        const parsedUnions = JSON.parse(cachedUnions);
-        setProblems(parsedProblems);
-        setUnions(parsedUnions);
-        setLoading(false);
-      } catch (err) {
-        console.error('Error parsing cached data:', err);
-      }
-    }
-  }, [cacheKeys]);
-
-  // Fetch fresh data in background
-  const fetchData = useCallback(async (showLoader = true) => {
-    try {
-      if (showLoader) setLoading(true);
-      setError('');
-
-      const [problemsRes, unionsRes] = await Promise.all([
-        problemsAPI.getAll().catch(err => {
-          console.error('Problems API error:', err);
-          const errorMsg = err.response?.data?.error || err.message || 'সমস্যা ডেটা লোড করতে ব্যর্থ';
-          console.error('Full error details:', {
-            message: errorMsg,
-            status: err.response?.status,
-            data: err.response?.data
-          });
-          throw new Error(errorMsg);
-        }),
-        unionsAPI.getAll().catch(err => {
-          console.error('Unions API error:', err);
-          throw new Error(err.response?.data?.error || 'ইউনিয়ন ডেটা লোড করতে ব্যর্থ');
-        })
-      ]);
-
-      // Handle response data - check if it's an array or wrapped in data property
-      const problemsData = Array.isArray(problemsRes?.data) ? problemsRes.data : (problemsRes?.data || []);
-      const unionsData = Array.isArray(unionsRes?.data) ? unionsRes.data : (unionsRes?.data || []);
-
-      console.log('Fetched problems count:', problemsData.length);
-      console.log('Fetched unions count:', unionsData.length);
-
-      setProblems(problemsData);
-      setUnions(unionsData);
-      
-      // Cache with timestamp
-      sessionStorage.setItem(cacheKeys.problems, JSON.stringify(problemsData));
-      sessionStorage.setItem(cacheKeys.unions, JSON.stringify(unionsData));
-      sessionStorage.setItem(cacheKeys.timestamp, Date.now().toString());
-    } catch (err) {
-      console.error('Error fetching data:', err);
-      setError(err.message || 'ডেটা লোড করতে সমস্যা হয়েছে');
-      // Keep cached data if available
-      const cached = sessionStorage.getItem(cacheKeys.problems);
-      if (cached && problems.length === 0) {
-        try {
-          const parsed = JSON.parse(cached);
-          setProblems(parsed);
-          console.log('Using cached problems:', parsed.length);
-        } catch (parseErr) {
-          console.error('Error parsing cached data:', parseErr);
-        }
-      }
-    } finally {
-      setLoading(false);
-    }
-  }, [cacheKeys, problems.length]);
-
-  // Initial load
-  useEffect(() => {
-    const cachedProblems = sessionStorage.getItem(cacheKeys.problems);
-    const cachedUnions = sessionStorage.getItem(cacheKeys.unions);
     if (cachedProblems && cachedUnions) {
       try {
         setProblems(JSON.parse(cachedProblems));
@@ -147,8 +90,8 @@ const ProblemsPage = () => {
         console.error('Error parsing cached data:', error);
       }
     }
-    fetchData();
-  }, [cacheKeys, fetchData]);
+    loadData();
+  }, [cacheKeys, loadData]);
 
   // Filter handling - optimized to avoid unnecessary calls
   useEffect(() => {
@@ -176,6 +119,8 @@ const ProblemsPage = () => {
         const response = await problemsAPI.getAll(params);
         if (response?.data) {
           setProblems(response.data);
+        } else {
+          await loadData();
         }
       } catch (error) {
         console.error('Error filtering problems:', error);
@@ -185,7 +130,7 @@ const ProblemsPage = () => {
     };
 
     applyFilter();
-  }, [fetchData, selectedUnion, selectedCategory]);
+  }, [loadData, selectedUnion, selectedCategory]);
 
   const handleShowDetails = (problem) => {
     alert(`সমস্যা: ${problem.title}\n\nবর্ণনা: ${problem.description}`);
