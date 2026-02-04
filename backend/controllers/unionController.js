@@ -47,11 +47,18 @@ const resolveUnionId = (id) => {
 // Get all unions
 exports.getAllUnions = async (req, res) => {
   try {
-    const unions = await Union.find();
-    res.json(unions);
+    // Check MongoDB connection state
+    const mongoose = require('mongoose');
+    if (mongoose.connection.readyState !== 1) {
+      console.error('MongoDB not connected. State:', mongoose.connection.readyState);
+      return res.status(503).json({ error: 'Database connection not ready. Please try again.' });
+    }
+
+    const unions = await Union.find().lean().limit(1000);
+    res.json(unions || []);
   } catch (error) {
-    console.error('getUnionById error:', error);
-    res.status(500).json({ error: error.message });
+    console.error('getAllUnions error:', error);
+    res.status(500).json({ error: error.message || 'ইউনিয়ন ডেটা লোড করতে ব্যর্থ হয়েছে' });
   }
 };
 

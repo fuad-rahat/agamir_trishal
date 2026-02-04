@@ -9,7 +9,6 @@ const app = express();
 const allowedOrigins = [
   'https://agamir-trishal-web.vercel.app',
   'http://localhost:3000',
-  'https://agamir-trishal.vercel.app'
 ];
 
 // Add FRONTEND_URL from environment if provided
@@ -117,11 +116,56 @@ app.get('/api/health', (req, res) => {
     database: {
       status: dbStates[dbStatus] || 'unknown',
       readyState: dbStatus
+    },
+    cors: {
+      allowedOrigins: allowedOrigins,
+      frontendUrl: process.env.FRONTEND_URL
     }
   });
+});
+
+// Error handling middleware - MUST be after routes but before listen
+// This ensures CORS headers are sent even on errors
+app.use((err, req, res, next) => {
+  console.error('Error:', err);
+  
+  // Set CORS headers even on error
+  const origin = req.headers.origin;
+  if (origin && isAllowedOrigin(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin');
+  }
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  
+  // Send error response
+  const statusCode = err.status || err.statusCode || 500;
+  res.status(statusCode).json({
+    error: err.message || 'Internal Server Error',
+    ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
+  });
+});
+
+// 404 handler
+app.use((req, res) => {
+  // Set CORS headers for 404
+  const origin = req.headers.origin;
+  if (origin && isAllowedOrigin(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin');
+  }
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  
+  res.status(404).json({ error: 'Route not found' });
 });
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  console.log('CORS Allowed Origins:', allowedOrigins);
+  console.log('FRONTEND_URL from env:', process.env.FRONTEND_URL);
+  console.log('MongoDB URI:', process.env.MONGODB_URI ? 'Set' : 'Not set');
 });
