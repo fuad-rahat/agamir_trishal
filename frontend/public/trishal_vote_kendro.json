@@ -1,0 +1,1614 @@
+{
+  "country": "Bangladesh",
+  "elections": [
+    {
+      "year": 2018,
+      "election_type": "Jatiyo Sangsad",
+      "parliamentary_election_number": 11,
+      "source": {
+        "document_type": "Gazette",
+        "publication_date": "2018-12-04",
+        "authority": "Bangladesh Election Commission"
+      },
+      "constituencies": [
+        {
+          "constituency_id": 152,
+          "constituency_name_bn": "ময়মনসিংহ-৭ (ত্রিশাল)",
+          "district": "Mymensingh",
+          "division": "Mymensingh",
+          "polling_centers": [
+            {
+              "center_id": 1,
+              "union_bn": "ধানীখোলা",
+              "center_name_bn": "সোনাখালী পাজলার চর উচ্চ বিদ্যালয়",
+              "village_bn": "পাজলারচর",
+              "polling_booths": 5,
+              "voter_areas": [
+                {
+                  "area_name_bn": "পাজলারচর",
+                  "voters_male": 594,
+                  "voters_female": 538,
+                  "voters_total": 1132
+                },
+                {
+                  "area_name_bn": "সোনাখালী",
+                  "voters_male": 825,
+                  "voters_female": 864,
+                  "voters_total": 1689
+                }
+              ],
+              "center_total_male": 1419,
+              "center_total_female": 1402,
+              "center_grand_total": 2821,
+              "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+            },
+            {
+              "center_id": 2,"union_bn": "ধানীখোলা",
+              "center_name_bn": "কাটাখালী উমর আলী উচ্চ বিদ্যালয়",
+              "village_bn": "কাটাখালী",
+              "polling_booths": 4,
+              "voter_areas": [
+                {
+                  "area_name_bn": "কাটাখালী",
+                  "voters_male": 1177,
+                  "voters_female": 1131,
+                  "voters_total": 2308
+                }
+              ],
+              "center_total_male": 1177,
+              "center_total_female": 1131,
+              "center_grand_total": 2308,
+              "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+            },
+            {
+              "center_id": 3,"union_bn": "ধানীখোলা",
+              "center_name_bn": "চৌপাগারিয়া সরকারী প্রাথমিক বিদ্যালয়",
+              "village_bn": "চৌপাগারিয়া",
+              "polling_booths": 4,
+              "voter_areas": [
+                {
+                  "area_name_bn": "চৌপাগারিয়া",
+                  "voters_male": 1022,
+                  "voters_female": 983,
+                  "voters_total": 2005
+                }
+              ],
+              "center_total_male": 1022,
+              "center_total_female": 983,
+              "center_grand_total": 2005,
+              "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+            },
+            {
+              "center_id": 4,"union_bn": "ধানীখোলা",
+              "center_name_bn": "মৈশাটিকি সরকারী প্রাথমিক বিদ্যালয়",
+              "village_bn": "মৈশাটিকি",
+              "polling_booths": 4,
+              "voter_areas": [
+                {
+                  "area_name_bn": "মৈশাটিকি",
+                  "voters_male": 1035,
+                  "voters_female": 961,
+                  "voters_total": 1996
+                }
+              ],
+              "center_total_male": 1035,
+              "center_total_female": 961,
+              "center_grand_total": 1996,
+              "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+            },
+            {
+              "center_id": 5,"union_bn": "ধানীখোলা",
+              "center_name_bn": "ধানীখোলা উজান দাসপাড়া সরকারী প্রাথমিক বিদ্যালয়",
+              "village_bn": "উজানদাস পাড়া",
+              "polling_booths": 4,
+              "voter_areas": [
+                {
+                  "area_name_bn": "উজান দাসপাড়া (১ নং ওয়ার্ড অংশ)",
+                  "voters_male": 1320,
+                  "voters_female": 1296,
+                  "voters_total": 2616
+                },
+                {
+                  "area_name_bn": "উজান দাসপাড়া (২ নং ওয়ার্ড অংশ)",
+                  "voters_male": 1389,
+                  "voters_female": 1328,
+                  "voters_total": 2717
+                }
+              ],
+              "center_total_male": 2709,
+              "center_total_female": 2624,
+              "center_grand_total": 5333,
+              "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+            },{
+      "center_id": 6,
+      "union_bn": "ধানীখোলা",
+      "center_name_bn": "দাসপাড়া সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-ভাটিদাসপাড়া",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। ভাটিদাসপাড়া", "voters_male": 949, "voters_female": 937, "voters_total": 1886 },
+        { "area_name_bn": "২। লাটিয়ার পাড়", "voters_male": 440, "voters_female": 391, "voters_total": 831 }
+      ],
+      "center_total_male": 1389,
+      "center_total_female": 1328,
+      "center_grand_total": 2717,
+      "remarks": "(পুরুষ ও মহিলা ভোটকেন্দ্র)"
+    },
+    {
+      "center_id": 7,
+      "union_bn": "ধানীখোলা",
+      "center_name_bn": "উসমানিয়া উচ্চ বিদ্যালয়",
+      "location_bn": "গ্রাম- চরকুমারিয়া",
+      "polling_booths": 6,
+      "voter_areas": [
+        { "area_name_bn": "১। চরকুমারিয়া", "voters_male": 1600, "voters_female": 1684, "voters_total": 3284 }
+      ],
+      "center_total_male": 1600,
+      "center_total_female": 1684,
+      "center_grand_total": 3284,
+      "remarks": "(পুরুষ ও মহিলা ভোটকেন্দ্র)"
+    },
+    {
+      "center_id": 8,
+      "union_bn": "ধানীখোলা",
+      "center_name_bn": "হাপানিয়া গয়সাপাড়া সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-হাপানিয়া গয়সাপাড়া",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। হাপানিয়া", "voters_male": 736, "voters_female": 696, "voters_total": 1432 },
+        { "area_name_bn": "২। পলাশ তলী", "voters_male": 789, "voters_female": 732, "voters_total": 1521 }
+      ],
+      "center_total_male": 1525,
+      "center_total_female": 1428,
+      "center_grand_total": 2953,
+      "remarks": "(পুরুষ ও মহিলা ভোটকেন্দ্র)"
+    },
+    {
+      "center_id": 9,
+      "union_bn": "ধানীখোলা",
+      "center_name_bn": "ধানীখোলা ঝাইয়ারপাড় সিনিয়র মাদ্রাসা",
+      "location_bn": "গ্রাম-ঝাইয়ারপাড়",
+      "polling_booths": 3,
+      "voter_areas": [
+        { "area_name_bn": "১। চকপাড়া", "voters_male": 141, "voters_female": 165, "voters_total": 306 },
+        { "area_name_bn": "২। ঝাইয়ারপাড়", "voters_male": 605, "voters_female": 625, "voters_total": 1230 }
+      ],
+      "center_total_male": 746,
+      "center_total_female": 790,
+      "center_grand_total": 1536,
+      "remarks": "(পুরুষ ও মহিলা ভোটকেন্দ্র)"
+    },
+    {
+      "center_id": 10,
+      "union_bn": "ধানীখোলা",
+      "center_name_bn": "ধানীখোলা উচ্চ দ্যিালয় (পশ্চিম পাশ্বের ভবন)",
+      "location_bn": "গ্রাম-উজান ভাটিপাড়া (ধানীখোলা বাজার)",
+      "polling_booths": 7,
+      "voter_areas": [
+        { "area_name_bn": "১। উজান ভাটিপাড়া", "voters_male": 1178, "voters_female": 0, "voters_total": 1178 },
+        { "area_name_bn": "২। গয়সাপাড়া", "voters_male": 501, "voters_female": 0, "voters_total": 501 },
+        { "area_name_bn": "৩। ভাওয়ালিয়াপাড়া", "voters_male": 690, "voters_female": 0, "voters_total": 690 },
+        { "area_name_bn": "৪। মধ্য ভাটিপাড়া", "voters_male": 1451, "voters_female": 0, "voters_total": 1451 }
+      ],
+      "center_total_male": 3820,
+      "center_total_female": 0,
+      "center_grand_total": 3820,
+      "remarks": "(পুরুষ ভোটকেন্দ্র)"
+    },
+    {
+      "center_id": 11,
+      "union_bn": "ধানীখোলা",
+      "center_name_bn": "ধানীখোলা উচ্চ বিদ্যালয় (উত্তর পাশ্বের ভবন)",
+      "location_bn": "গ্রাম-উজান ভাটিপাড়া (ধানীখোলা বাজার)",
+      "polling_booths": 7,
+      "voter_areas": [
+        { "area_name_bn": "১। উজান ভাটিপাড়া", "voters_male": 0, "voters_female": 1204, "voters_total": 1204 },
+        { "area_name_bn": "২। গয়সাপাড়া", "voters_male": 0, "voters_female": 475, "voters_total": 475 },
+        { "area_name_bn": "৩। ভাওয়ালি য়াপাড়া", "voters_male": 0, "voters_female": 655, "voters_total": 655 },
+        { "area_name_bn": "৪। মধ্য ভাটিপাড়া", "voters_male": 0, "voters_female": 1535, "voters_total": 1535 }
+      ],
+      "center_total_male": 0,
+      "center_total_female": 3869,
+      "center_grand_total": 3869,
+      "remarks": "(মহিলা ভোটকেন্দ্র)"
+    },
+    {
+      "center_id": 12,
+      "union_bn": "ধানীখোলা",
+      "center_name_bn": "ধানীখোলা দক্ষিণ ভাটিপাড়া সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-দক্ষিণ ভাটিপাড়া",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। দক্ষিণ ভাটিপাড়া", "voters_male": 1166, "voters_female": 0, "voters_total": 1166 },
+        { "area_name_bn": "২। ডেগানিয়া কান্দা", "voters_male": 93, "voters_female": 0, "voters_total": 93 },
+        { "area_name_bn": "৩। বংগো সরকারের কান্দা", "voters_male": 288, "voters_female": 0, "voters_total": 288 },
+        { "area_name_bn": "৪। শিমুলিয়াপাড়া", "voters_male": 560, "voters_female": 0, "voters_total": 560 }
+      ],
+      "center_total_male": 2107,
+      "center_total_female": 0,
+      "center_grand_total": 2107,
+      "remarks": "(পুরুষ ভোটকেন্দ্র)"
+    },
+    {
+      "center_id": 13,
+      "union_bn": "ধানীখোলা",
+      "center_name_bn": "ধানীখোলা দক্ষিণ ভাটিপাড়া উচ্চ বিদ্যালয়",
+      "location_bn": "গ্রাম-দক্ষিণ ভাটিপাড়া",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। দক্ষিণ ভাটিপাড়া", "voters_male": 0, "voters_female": 1154, "voters_total": 1154 },
+        { "area_name_bn": "২। ডেগানিয়া কান্দা", "voters_male": 0, "voters_female": 97, "voters_total": 97 },
+        { "area_name_bn": "৩। বংগোসরকারের কান্দা", "voters_male": 0, "voters_female": 256, "voters_total": 256 },
+        { "area_name_bn": "৪। শিমুলিয়াপাড়া", "voters_male": 0, "voters_female": 587, "voters_total": 587 }
+      ],
+      "center_total_male": 0,
+      "center_total_female": 2094,
+      "center_grand_total": 2094,
+      "remarks": "(মহিলা ভোটকেন্দ্র)"
+    },
+    {
+      "center_id": 21,
+      "center_name_bn": "বৈলর মঠবাড়ী সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-বৈলর মঠবাড়ী",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। বৈলর মঠবাড়ী", "voters_male": 680, "voters_female": 650, "voters_total": 1330 },
+        { "area_name_bn": "২। বৈলর ভরাডোবা", "voters_male": 608, "voters_female": 530, "voters_total": 1138 }
+      ],
+      "center_total_male": 1288,
+      "center_total_female": 1180,
+      "center_grand_total": 2468,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 22,
+      "center_name_bn": "আংরারচর সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-বৈলর বাশকুড়ী",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। বৈলর বকশীপাড়া", "voters_male": 450, "voters_female": 420, "voters_total": 870 },
+        { "area_name_bn": "২। বৈলর বাশকুড়ী", "voters_male": 475, "voters_female": 450, "voters_total": 925 },
+        { "area_name_bn": "৩। আংরারচর", "voters_male": 450, "voters_female": 432, "voters_total": 882 }
+      ],
+      "center_total_male": 1375,
+      "center_total_female": 1302,
+      "center_grand_total": 2677,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 23,
+      "center_name_bn": "বৈলর চরপাড়া সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-বৈলর চর পাড়া",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। বৈলর চরপাড়া", "voters_male": 660, "voters_female": 610, "voters_total": 1270 },
+        { "area_name_bn": "২। হদ্দের ভিটা", "voters_male": 600, "voters_female": 582, "voters_total": 1182 }
+      ],
+      "center_total_male": 1260,
+      "center_total_female": 1192,
+      "center_grand_total": 2452,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 24,
+      "center_name_bn": "দড়ি কাঁঠাল উচ্চ বিদ্যালয়",
+      "location_bn": "গ্রাম-দড়ি কাঁঠাল",
+      "polling_booths": 6,
+      "voter_areas": [
+        { "area_name_bn": "১। দড়ি কাঁঠাল", "voters_male": 500, "voters_female": 480, "voters_total": 980 },
+        { "area_name_bn": "২। বন পাথালিয়া", "voters_male": 440, "voters_female": 425, "voters_total": 865 },
+        { "area_name_bn": "৩। মুহুরিয়া বাড়ী", "voters_male": 400, "voters_female": 395, "voters_total": 795 },
+        { "area_name_bn": "৪। বনগ্রাম", "voters_male": 400, "voters_female": 395, "voters_total": 795 }
+      ],
+      "center_total_male": 1740,
+      "center_total_female": 1695,
+      "center_grand_total": 3435,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 25,
+      "center_name_bn": "বানিয়াধলা সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-বানিয়াধলা",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। ডুগুলিয়া", "voters_male": 720, "voters_female": 760, "voters_total": 1480 },
+        { "area_name_bn": "২। বানিয়াধলা", "voters_male": 750, "voters_female": 787, "voters_total": 1537 }
+      ],
+      "center_total_male": 1470,
+      "center_total_female": 1547,
+      "center_grand_total": 3017,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 26,
+      "center_name_bn": "বিলবোকা সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-বিলবোকা",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। বিলবোকা", "voters_male": 1181, "voters_female": 1214, "voters_total": 2395 }
+      ],
+      "center_total_male": 1181,
+      "center_total_female": 1214,
+      "center_grand_total": 2395,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 27,
+      "center_name_bn": "সিংরাইল সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-সিংরাইল",
+      "polling_booths": 3,
+      "voter_areas": [
+        { "area_name_bn": "১। সিংরাইল", "voters_male": 714, "voters_female": 746, "voters_total": 1460 }
+      ],
+      "center_total_male": 714,
+      "center_total_female": 746,
+      "center_grand_total": 1460,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 28,
+      "center_name_bn": "বালিয়ারপাড় সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-বালিয়ারপাড়",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। হদ্দের ভিটা", "voters_male": 700, "voters_female": 620, "voters_total": 1320 },
+        { "area_name_bn": "২। বালিয়ারপাড়", "voters_male": 709, "voters_female": 635, "voters_total": 1344 }
+      ],
+      "center_total_male": 1409,
+      "center_total_female": 1255,
+      "center_grand_total": 2664,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 29,
+      "center_name_bn": "কাঁঠাল তেতুলিয়া সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-তেতুলিয়াপাড়া",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। তেতুলিয়াপাড়া", "voters_male": 1253, "voters_female": 1191, "voters_total": 2444 }
+      ],
+      "center_total_male": 1253,
+      "center_total_female": 1191,
+      "center_grand_total": 2444,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 30,
+      "center_name_bn": "কাঁঠাল সরকারী প্রাথমিক বিদ্যালয় (আয়নাক্ষেত)",
+      "location_bn": "গ্রাম-আয়নাক্ষেত",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। রাজাবাড়ী", "voters_male": 560, "voters_female": 550, "voters_total": 1110 },
+        { "area_name_bn": "২। আয়নাক্ষেত", "voters_male": 573, "voters_female": 566, "voters_total": 1139 }
+      ],
+      "center_total_male": 1133,
+      "center_total_female": 1116,
+      "center_grand_total": 2249,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 31,
+      "center_name_bn": "কালির বাজার উচ্চ বিদ্যালয়",
+      "location_bn": "গ্রাম-ধলাইমান",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। নলচিড়া", "voters_male": 1433, "voters_female": 1374, "voters_total": 2807 }
+      ],
+      "center_total_male": 1433,
+      "center_total_female": 1374,
+      "center_grand_total": 2807,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 32,
+      "center_name_bn": "ধলাইমান সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-ধলাইমান",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। ধলাইমান", "voters_male": 540, "voters_female": 570, "voters_total": 1110 },
+        { "area_name_bn": "২। যশিদ্বার", "voters_male": 534, "voters_female": 573, "voters_total": 1107 }
+      ],
+      "center_total_male": 1074,
+      "center_total_female": 1143,
+      "center_grand_total": 2217,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 33,
+      "center_name_bn": "এলংজানী সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-এলংজানী",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। এলংজানী", "voters_male": 400, "voters_female": 380, "voters_total": 780 },
+        { "area_name_bn": "২। সুরিলের কান্দা", "voters_male": 285, "voters_female": 270, "voters_total": 555 },
+        { "area_name_bn": "৩। মাদলার গোপ", "voters_male": 285, "voters_female": 270, "voters_total": 555 }
+      ],
+      "center_total_male": 970,
+      "center_total_female": 920,
+      "center_grand_total": 1890,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 34,
+      "center_name_bn": "বড়মা সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-বড়মা",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। বড়মা", "voters_male": 1225, "voters_female": 1134, "voters_total": 2359 }
+      ],
+      "center_total_male": 1225,
+      "center_total_female": 1134,
+      "center_grand_total": 2359,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 35,
+      "center_name_bn": "তালতলা সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-তালতলা",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। তালতলা", "voters_male": 550, "voters_female": 510, "voters_total": 1060 },
+        { "area_name_bn": "২। স্বরস্বতিকান্দা", "voters_male": 517, "voters_female": 489, "voters_total": 1006 }
+      ],
+      "center_total_male": 1067,
+      "center_total_female": 999,
+      "center_grand_total": 2066,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 36,
+      "center_name_bn": "চাঁদবাড়ী সরকারী প্রাথমিক বিদ্যালয়-১",
+      "location_bn": "গ্রাম-চাঁদবাড়ী",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। বালিদিয়া", "voters_male": 650, "voters_female": 0, "voters_total": 650 },
+        { "area_name_bn": "২। তিরখী", "voters_male": 570, "voters_female": 0, "voters_total": 570 },
+        { "area_name_bn": "৩। চাঁদবাড়ী", "voters_male": 580, "voters_female": 0, "voters_total": 580 },
+        { "area_name_bn": "৪। রাঘববাড়ী", "voters_male": 567, "voters_female": 0, "voters_total": 567 }
+      ],
+      "center_total_male": 2367,
+      "center_total_female": 0,
+      "center_grand_total": 2367,
+      "remarks": "পুরুষ ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 37,
+      "center_name_bn": "চাঁদবাড়ী সরকারী প্রাথমিক বিদ্যালয়-২",
+      "location_bn": "গ্রাম-চাঁদবাড়ী",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। বালিদিয়া", "voters_male": 0, "voters_female": 640, "voters_total": 640 },
+        { "area_name_bn": "২। তিরখী", "voters_male": 0, "voters_female": 565, "voters_total": 565 },
+        { "area_name_bn": "৩। চাঁদবাড়ী", "voters_male": 0, "voters_female": 575, "voters_total": 575 },
+        { "area_name_bn": "৪। রাঘববাড়ী", "voters_male": 0, "voters_female": 562, "voters_total": 562 }
+      ],
+      "center_total_male": 0,
+      "center_total_female": 2342,
+      "center_grand_total": 2342,
+      "remarks": "মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 38,
+      "center_name_bn": "কানিহারী সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-বারইগাঁও (কানিহারী)",
+      "polling_booths": 6,
+      "voter_areas": [
+        { "area_name_bn": "১। কানিহারী (উত্তর)", "voters_male": 550, "voters_female": 550, "voters_total": 1100 },
+        { "area_name_bn": "২। বারইগাঁও", "voters_male": 535, "voters_female": 533, "voters_total": 1068 },
+        { "area_name_bn": "৩। গড়পাড়া", "voters_male": 500, "voters_female": 500, "voters_total": 1000 }
+      ],
+      "center_total_male": 1585,
+      "center_total_female": 1583,
+      "center_grand_total": 3168,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 39,
+      "center_name_bn": "আহম্মাদবাদ উচ্চ বিদ্যালয়-১",
+      "location_bn": "গ্রাম-বারইগাঁও",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। জিলকী", "voters_male": 620, "voters_female": 0, "voters_total": 620 },
+        { "area_name_bn": "২। সুলতানপুর", "voters_male": 580, "voters_female": 0, "voters_total": 580 },
+        { "area_name_bn": "৩। কুষ্টিয়া (১ম খন্ড)", "voters_male": 560, "voters_female": 0, "voters_total": 560 },
+        { "area_name_bn": "৪। বিয়ার্তা", "voters_male": 562, "voters_female": 0, "voters_total": 562 }
+      ],
+      "center_total_male": 2322,
+      "center_total_female": 0,
+      "center_grand_total": 2322,
+      "remarks": "পুরুষ ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 40,
+      "center_name_bn": "আহম্মাদবাদ উচ্চ বিদ্যালয়-২",
+      "location_bn": "গ্রাম-বারইগাঁও",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। জিলকী", "voters_male": 0, "voters_female": 615, "voters_total": 615 },
+        { "area_name_bn": "২। সুলতানপুর", "voters_male": 0, "voters_female": 575, "voters_total": 575 },
+        { "area_name_bn": "৩। কুষ্টিয়া (১ম খন্ড)", "voters_male": 0, "voters_female": 558, "voters_total": 558 },
+        { "area_name_bn": "৪। বিয়ার্তা", "voters_male": 0, "voters_female": 560, "voters_total": 560 }
+      ],
+      "center_total_male": 0,
+      "center_total_female": 2308,
+      "center_grand_total": 2308,
+      "remarks": "মহিলা ভোটকেন্দ্র"
+    },{
+      "center_id": 41,
+      "center_name_bn": "মান্দাটিয়া সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-মান্দাটিয়া",
+      "polling_booths": 6,
+      "voter_areas": [
+        { "area_name_bn": "১। কানিহারী (দক্ষিণ)", "voters_male": 1154, "voters_female": 1122, "voters_total": 2276 },
+        { "area_name_bn": "২। মান্দাটিয়া", "voters_male": 631, "voters_female": 560, "voters_total": 1191 }
+      ],
+      "center_total_male": 1785,
+      "center_total_female": 1682,
+      "center_grand_total": 3467,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 42,
+      "center_name_bn": "বাঘাদাড়িয়া ইসলামিয়া দাখিল মাদ্রাসা",
+      "location_bn": "গ্রাম-বাঘাদাড়িয়া",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। বাঘাদাড়িয়া", "voters_male": 376, "voters_female": 375, "voters_total": 751 },
+        { "area_name_bn": "২। ডাক বাঘাদাড়িয়া", "voters_male": 610, "voters_female": 562, "voters_total": 1172 },
+        { "area_name_bn": "৩। চর বাঘাদাড়িয়া", "voters_male": 190, "voters_female": 168, "voters_total": 358 },
+        { "area_name_bn": "৪। ডাকের চক", "voters_male": 84, "voters_female": 97, "voters_total": 181 },
+        { "area_name_bn": "৫। গোবিন্দপুর", "voters_male": 256, "voters_female": 236, "voters_total": 492 }
+      ],
+      "center_total_male": 1516,
+      "center_total_female": 1438,
+      "center_grand_total": 2954,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 43,
+      "center_name_bn": "থাপনহালা সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-থাপনহালা",
+      "polling_booths": 7,
+      "voter_areas": [
+        { "area_name_bn": "১। দেওপাড়া", "voters_male": 395, "voters_female": 422, "voters_total": 817 },
+        { "area_name_bn": "২। থাপনহালা", "voters_male": 707, "voters_female": 698, "voters_total": 1405 },
+        { "area_name_bn": "৩। কুষ্টিয়া (২য় খন্ড)", "voters_male": 793, "voters_female": 785, "voters_total": 1578 }
+      ],
+      "center_total_male": 1895,
+      "center_total_female": 1905,
+      "center_grand_total": 3800,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 44,
+      "center_name_bn": "বীররামপুর উজানপাড়া সরকারী প্রা:বি:",
+      "location_bn": "গ্রাম-বীররামপুর উজান পাড়া",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। দরিরামপুর", "voters_male": 213, "voters_female": 206, "voters_total": 419 },
+        { "area_name_bn": "২। বীররামপুর উজান পাড়া (১নংওয়ার্ড অংশ)", "voters_male": 230, "voters_female": 221, "voters_total": 451 },
+        { "area_name_bn": "৩। বীররামপুর উজান পাড়া (২নংওয়ার্ড অংশ)", "voters_male": 914, "voters_female": 906, "voters_total": 1820 },
+        { "area_name_bn": "৪। বীররামপুর চরপাড়া (২নংওয়ার্ড অংশ)", "voters_male": 71, "voters_female": 55, "voters_total": 126 }
+      ],
+      "center_total_male": 1428,
+      "center_total_female": 1388,
+      "center_grand_total": 2816,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 45,
+      "center_name_bn": "বীররামপুর চরপাড়া স:প্রা:বি:",
+      "location_bn": "গ্রাম-বীররামপুর চরপাড়া",
+      "polling_booths": 7,
+      "voter_areas": [
+        { "area_name_bn": "১। বীররামপুর চরপাড়া (৩নংওয়ার্ড অংশ)", "voters_male": 1877, "voters_female": 1794, "voters_total": 3671 }
+      ],
+      "center_total_male": 1877,
+      "center_total_female": 1794,
+      "center_grand_total": 3671,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 46,
+      "center_name_bn": "দরিল্যা সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-দরিল্যা",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। দরিল্যা", "voters_male": 1282, "voters_female": 1254, "voters_total": 2536 }
+      ],
+      "center_total_male": 1282,
+      "center_total_female": 1254,
+      "center_grand_total": 2536,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 47,
+      "center_name_bn": "বড়মা কাকচর ফাজিল মাদ্রাসা",
+      "location_bn": "গ্রাম-কাকচর",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। কাকচর (৫ নং ওয়ার্ড অংশ)", "voters_male": 1258, "voters_female": 1159, "voters_total": 2417 }
+      ],
+      "center_total_male": 1258,
+      "center_total_female": 1159,
+      "center_grand_total": 2417,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 48,
+      "center_name_bn": "কাকচর সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-কাকচর",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। কাকচর (৬ নং ওয়ার্ড অংশ)", "voters_male": 1404, "voters_female": 1272, "voters_total": 2676 }
+      ],
+      "center_total_male": 1404,
+      "center_total_female": 1272,
+      "center_grand_total": 2676,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 49,
+      "center_name_bn": "বীররামপুর জান্নাতুল উলুম আলিম মাদ্রাসা-১",
+      "location_bn": "গ্রাম-বীররামপুর ভাটিপাড়া",
+      "polling_booths": 3,
+      "voter_areas": [
+        { "area_name_bn": "১। বীররামপুর ভাটিপাড়া", "voters_male": 2164, "voters_female": 0, "voters_total": 2164 }
+      ],
+      "center_total_male": 2164,
+      "center_total_female": 0,
+      "center_grand_total": 2164,
+      "remarks": "পুরুষ ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 50,
+      "center_name_bn": "বীররামপুর জান্নাতুল উলূম আলিম মাদ্রাসা-২",
+      "location_bn": "গ্রাম-বীররামপুর ভাটিপাড়া",
+      "polling_booths": 3,
+      "voter_areas": [
+        { "area_name_bn": "১। বীররামপুর ভাটিপাড়া", "voters_male": 0, "voters_female": 2056, "voters_total": 2056 }
+      ],
+      "center_total_male": 0,
+      "center_total_female": 2056,
+      "center_grand_total": 2056,
+      "remarks": "মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 51,
+      "center_name_bn": "কাজিরকান্দা সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-চকরামপুর (কাজির কান্দা)",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। চকরামপুর (৭ নং ওয়ার্ড অংশ)", "voters_male": 904, "voters_female": 920, "voters_total": 1824 }
+      ],
+      "center_total_male": 904,
+      "center_total_female": 920,
+      "center_grand_total": 1824,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 52,
+      "center_name_bn": "চকরামপুর সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-চকরামপুর",
+      "polling_booths": 6,
+      "voter_areas": [
+        { "area_name_bn": "১। চকরামপুর (৯ নং ওয়ার্ড অংশ)", "voters_male": 1757, "voters_female": 1665, "voters_total": 3422 }
+      ],
+      "center_total_male": 1757,
+      "center_total_female": 1665,
+      "center_grand_total": 3422,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 53,
+      "center_name_bn": "ছলিমপুর (পশ্চিম) স:প্রা:বি:",
+      "location_bn": "গ্রাম-ছলিমপুর (উত্তর)",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। ছলিমপুর (উত্তর)", "voters_male": 1329, "voters_female": 1242, "voters_total": 2571 }
+      ],
+      "center_total_male": 1329,
+      "center_total_female": 1242,
+      "center_grand_total": 2571,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 54,
+      "center_name_bn": "ছলিমপুর মধ্যপাড়া স:প্রা:বি:",
+      "location_bn": "গ্রাম-ছলিমপুর (দক্ষিণ)",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। ছলিমপুর (দক্ষিণ)", "voters_male": 1453, "voters_female": 1408, "voters_total": 2861 }
+      ],
+      "center_total_male": 1453,
+      "center_total_female": 1408,
+      "center_grand_total": 2861,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 55,
+      "center_name_bn": "চিকনা মনোহর স:প্রা:বি:",
+      "location_bn": "গ্রাম-চিকনামনোহর",
+      "polling_booths": 6,
+      "voter_areas": [
+        { "area_name_bn": "১। চিকনা মনোহর (৩নং ওয়ার্ড অংশ)", "voters_male": 1745, "voters_female": 1669, "voters_total": 3414 }
+      ],
+      "center_total_male": 1745,
+      "center_total_female": 1669,
+      "center_grand_total": 3414,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 56,
+      "center_name_bn": "চকপাঁচপাড়া স:প্রা: বি:",
+      "location_bn": "গ্রাম-পাঁচপাড়া (পশ্চিম:)",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। চিকনা মনোহর, (৪নং ওয়ার্ড অংশ)", "voters_male": 402, "voters_female": 391, "voters_total": 793 },
+        { "area_name_bn": "২। পাঁচপাড়া (পশ্চিম অংশ)", "voters_male": 651, "voters_female": 588, "voters_total": 1239 }
+      ],
+      "center_total_male": 1053,
+      "center_total_female": 979,
+      "center_grand_total": 2032,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 57,
+      "center_name_bn": "পাঁচপাড়া সরকারী প্রা:বি:",
+      "location_bn": "গ্রাম-পাঁচপাড়া (পূর্ব)",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। পাঁচপাড়া (পূর্ব অংশ)", "voters_male": 1075, "voters_female": 1030, "voters_total": 2105 }
+      ],
+      "center_total_male": 1075,
+      "center_total_female": 1030,
+      "center_grand_total": 2105,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 58,
+      "center_name_bn": "আউলটিয়া সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-আউলটিিয়া",
+      "polling_booths": 7,
+      "voter_areas": [
+        { "area_name_bn": "১। আউলটিয়া", "voters_male": 1095, "voters_female": 999, "voters_total": 2094 },
+        { "area_name_bn": "২। সতেরপাড়া", "voters_male": 935, "voters_female": 878, "voters_total": 1813 }
+      ],
+      "center_total_male": 2030,
+      "center_total_female": 1877,
+      "center_grand_total": 3907,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 59,
+      "center_name_bn": "বাগান ইসলামিয়া আলিম মাদ্রাসা-১",
+      "location_bn": "গ্রাম-বাগান",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। বাগান (৭নং ওয়ার্ড অংশ)", "voters_male": 1785, "voters_female": 0, "voters_total": 1785 },
+        { "area_name_bn": "২। বাগান (৮নং ওয়ার্ড অংশ)", "voters_male": 1004, "voters_female": 0, "voters_total": 1004 }
+      ],
+      "center_total_male": 2789,
+      "center_total_female": 0,
+      "center_grand_total": 2789,
+      "remarks": "পুরুষ ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 60,
+      "center_name_bn": "বাগান ইসলামিয়া আলিম মাদ্রাসা-২",
+      "location_bn": "গ্রাম-বাগান",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। বাগান (৭নং ওয়ার্ড অংশ)", "voters_male": 0, "voters_female": 1688, "voters_total": 1688 },
+        { "area_name_bn": "২। বাগান (৮নং ওয়ার্ড অংশ)", "voters_male": 0, "voters_female": 916, "voters_total": 916 }
+      ],
+      "center_total_male": 0,
+      "center_total_female": 2604,
+      "center_grand_total": 2604,
+      "remarks": "মহিলা ভোটকেন্দ্র"
+    },{
+      "center_id": 61,
+      "center_name_bn": "কোনাবাড়ী সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-কোনাবাড়ী (শিংমারারপাড়)",
+      "polling_booths": 7,
+      "voter_areas": [
+        { "area_name_bn": "১। কোনাবাড়ী", "voters_male": 2009, "voters_female": 1899, "voters_total": 3908 }
+      ],
+      "center_total_male": 2009,
+      "center_total_female": 1899,
+      "center_grand_total": 3908,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 62,
+      "center_name_bn": "মাগুরজোড়া সরকারী প্রা:বি:",
+      "location_bn": "গ্রাম-মাগুরজোড়া",
+      "polling_booths": 7,
+      "voter_areas": [
+        { "area_name_bn": "১। মাগুরজোড়া (১নং ওয়ার্ড অংশ)", "voters_male": 870, "voters_female": 887, "voters_total": 1757 },
+        { "area_name_bn": "২। মাগুরজোড়া (২নং ওয়ার্ড অংশ)", "voters_male": 1012, "voters_female": 950, "voters_total": 1962 }
+      ],
+      "center_total_male": 1882,
+      "center_total_female": 1837,
+      "center_grand_total": 3719,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 63,
+      "center_name_bn": "গোলাভিটা সরকারী প্রা:বি:",
+      "location_bn": "গ্রাম-গোলাভিটা",
+      "polling_booths": 3,
+      "voter_areas": [
+        { "area_name_bn": "১। গোলাভিটা", "voters_male": 846, "voters_female": 736, "voters_total": 1582 }
+      ],
+      "center_total_male": 846,
+      "center_total_female": 736,
+      "center_grand_total": 1582,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 64,
+      "center_name_bn": "মোহাম্মদপুর উচ্চ বিদ্যালয়",
+      "location_bn": "গ্রাম-হরিরামপুর",
+      "polling_booths": 8,
+      "voter_areas": [
+        { "area_name_bn": "১। হরিরামপুর (৪ নং ওয়ার্ড অংশ)", "voters_male": 699, "voters_female": 1322, "voters_total": 2021 },
+        { "area_name_bn": "২। হরিরামপুর (৫ নং ওয়ার্ড অংশ)", "voters_male": 1292, "voters_female": 722, "voters_total": 2014 }
+      ],
+      "center_total_male": 1991,
+      "center_total_female": 2044,
+      "center_grand_total": 4130,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 65,
+      "center_name_bn": "চাউলাদী সরকারী প্রা:বি:",
+      "location_bn": "গ্রাম-চাউলাদী",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। চাউলাদী", "voters_male": 1387, "voters_female": 1203, "voters_total": 2590 }
+      ],
+      "center_total_male": 1387,
+      "center_total_female": 1203,
+      "center_grand_total": 2590,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 66,
+      "center_name_bn": "রায়েরগ্রাম নিঘোরকান্দা হাফেজিয়া মাদ্রাসা",
+      "location_bn": "গ্রাম-রায়েরগ্রাম",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। রায়ের গ্রাম (৭নংওয়ার্ড অংশ)", "voters_male": 890, "voters_female": 812, "voters_total": 1702 }
+      ],
+      "center_total_male": 890,
+      "center_total_female": 812,
+      "center_grand_total": 1702,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 67,
+      "center_name_bn": "রায়ের গ্রাম সরকারী প্রাঃবিঃ",
+      "location_bn": "গ্রাম-রায়ের গ্রাম",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। রায়ের গ্রাম (৮নং ওয়ার্ড অংশ)", "voters_male": 1412, "voters_female": 1352, "voters_total": 2764 }
+      ],
+      "center_total_male": 1412,
+      "center_total_female": 1352,
+      "center_grand_total": 2764,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 68,
+      "center_name_bn": "আর.জি. উচ্চ বিদ্যালয়",
+      "location_bn": "গ্রাম-সাউদকান্দা",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। রায়েরগ্রাম (৯নংওয়ার্ড অংশ)", "voters_male": 1293, "voters_female": 1232, "voters_total": 2525 }
+      ],
+      "center_total_male": 1293,
+      "center_total_female": 1232,
+      "center_grand_total": 2525,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 69,
+      "center_name_bn": "বালিপাড়া উচ্চ বিদ্যালয় (নতুন ভবন)",
+      "location_bn": "গ্রাম-বালিপাড়া (পশ্চিম পাশ)",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। বালিপাড়া (১নং ওয়ার্ড অংশ)", "voters_male": 1450, "voters_female": 0, "voters_total": 1450 }
+      ],
+      "center_total_male": 1450,
+      "center_total_female": 0,
+      "center_grand_total": 1450,
+      "remarks": "পুরুষ ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 70,
+      "center_name_bn": "বালিপাড়া উচ্চ বিদ্যালয় (পুরাতন ভবন)",
+      "location_bn": "গ্রাম-বালিপাড়া (পূর্ব পাশ)",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। বালিপাড়া (১নং ওয়ার্ড অংশ)", "voters_male": 0, "voters_female": 1395, "voters_total": 1395 }
+      ],
+      "center_total_male": 0,
+      "center_total_female": 1395,
+      "center_grand_total": 1395,
+      "remarks": "মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 71,
+      "center_name_bn": "বালিপাড়া সরকারী প্রাথমিক বিদ্যালয়-১",
+      "location_bn": "গ্রাম-বালিপাড়া",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। বালিপাড়া (২নং ওয়ার্ড অংশ)", "voters_male": 1520, "voters_female": 0, "voters_total": 1520 }
+      ],
+      "center_total_male": 1520,
+      "center_total_female": 0,
+      "center_grand_total": 1520,
+      "remarks": "পুরুষ ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 72,
+      "center_name_bn": "বালিপাড়া সরকারী প্রাথমিক বিদ্যালয়-২",
+      "location_bn": "গ্রাম-বালিপাড়া",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। বালিপাড়া (২নং ওয়ার্ড অংশ)", "voters_male": 0, "voters_female": 1480, "voters_total": 1480 }
+      ],
+      "center_total_male": 0,
+      "center_total_female": 1480,
+      "center_grand_total": 1480,
+      "remarks": "মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 73,
+      "center_name_bn": "বালিপাড়া বাজার সরকারী প্রা:বি:-১",
+      "location_bn": "গ্রাম-বালিপাড়া",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। বালিপাড়া (৩নং ওয়ার্ড অংশ)", "voters_male": 1650, "voters_female": 0, "voters_total": 1650 }
+      ],
+      "center_total_male": 1650,
+      "center_total_female": 0,
+      "center_grand_total": 1650,
+      "remarks": "পুরুষ ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 74,
+      "center_name_bn": "বালিপাড়া বাজার সরকারী প্রা:বি:-২",
+      "location_bn": "গ্রাম-বালিপাড়া",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। বালিপাড়া (৩নং ওয়ার্ড অংশ)", "voters_male": 0, "voters_female": 1610, "voters_total": 1610 }
+      ],
+      "center_total_male": 0,
+      "center_total_female": 1610,
+      "center_grand_total": 1610,
+      "remarks": "মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 75,
+      "center_name_bn": "বিয়ারা সরকারী প্রাথমিক বিদ্যালয়-১",
+      "location_bn": "গ্রাম-বিয়ারা (উত্তর পাড়া)",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। বিয়ারা (৪নং ওয়ার্ড অংশ)", "voters_male": 1420, "voters_female": 0, "voters_total": 1420 }
+      ],
+      "center_total_male": 1420,
+      "center_total_female": 0,
+      "center_grand_total": 1420,
+      "remarks": "পুরুষ ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 76,
+      "center_name_bn": "বিয়ারা সরকারী প্রাথমিক বিদ্যালয়-২",
+      "location_bn": "গ্রাম-বিয়ারা (উত্তর পাড়া)",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। বিয়ারা (৪নং ওয়ার্ড অংশ)", "voters_male": 0, "voters_female": 1380, "voters_total": 1380 }
+      ],
+      "center_total_male": 0,
+      "center_total_female": 1380,
+      "center_grand_total": 1380,
+      "remarks": "মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 77,
+      "center_name_bn": "বিয়ারা পাটুলি সরকারী প্রা:বি:-১",
+      "location_bn": "গ্রাম-পাটুলি",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। বিয়ারা (৫নং ওয়ার্ড অংশ)", "voters_male": 1680, "voters_female": 0, "voters_total": 1680 }
+      ],
+      "center_total_male": 1680,
+      "center_total_female": 0,
+      "center_grand_total": 1680,
+      "remarks": "পুরুষ ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 78,
+      "center_name_bn": "বিয়ারা পাটুলি সরকারী প্রা:বি:-২",
+      "location_bn": "গ্রাম-পাটুলি",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। বিয়ারা (৫নং ওয়ার্ড অংশ)", "voters_male": 0, "voters_female": 1645, "voters_total": 1645 }
+      ],
+      "center_total_male": 0,
+      "center_total_female": 1645,
+      "center_grand_total": 1645,
+      "remarks": "মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 79,
+      "center_name_bn": "বিয়ারা বাজার উচ্চ বিদ্যালয়-১",
+      "location_bn": "গ্রাম-বিয়ারা",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। বিয়ারা (৬নং ওয়ার্ড অংশ)", "voters_male": 1590, "voters_female": 0, "voters_total": 1590 }
+      ],
+      "center_total_male": 1590,
+      "center_total_female": 0,
+      "center_grand_total": 1590,
+      "remarks": "পুরুষ ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 80,
+      "center_name_bn": "বিয়ারা বাজার উচ্চ বিদ্যালয়-২",
+      "location_bn": "গ্রাম-বিয়ারা",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। বিয়ারা (৬নং ওয়ার্ড অংশ)", "voters_male": 0, "voters_female": 1530, "voters_total": 1530 }
+      ],
+      "center_total_male": 0,
+      "center_total_female": 1530,
+      "center_grand_total": 1530,
+      "remarks": "মহিলা ভোটকেন্দ্র"
+    },{
+      "center_id": 81,
+      "center_name_bn": "বরমা বিয়ারা স:প্রা:বি: (দক্ষিণ পাড়া)",
+      "location_bn": "গ্রাম-বিয়ারা (দক্ষিণ পাড়া)",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। বিয়ারা (৭নং ওয়ার্ড অংশ)", "voters_male": 1580, "voters_female": 1515, "voters_total": 3095 }
+      ],
+      "center_total_male": 1580,
+      "center_total_female": 1515,
+      "center_grand_total": 3095,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 82,
+      "center_name_bn": "বরমা স:প্রা:বি:",
+      "location_bn": "গ্রাম-বরমা",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। বরমা (৮নং ওয়ার্ড অংশ)", "voters_male": 1490, "voters_female": 1432, "voters_total": 2922 }
+      ],
+      "center_total_male": 1490,
+      "center_total_female": 1432,
+      "center_grand_total": 2922,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 83,
+      "center_name_bn": "বরমা দক্ষিন পাড়া স:প্রা:বি:",
+      "location_bn": "গ্রাম-বরমা",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। বরমা (৯নং ওয়ার্ড অংশ)", "voters_male": 1210, "voters_female": 1185, "voters_total": 2395 }
+      ],
+      "center_total_male": 1210,
+      "center_total_female": 1185,
+      "center_grand_total": 2395,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 84,
+      "center_name_bn": "আমিরাবাড়ী উচ্চ বিদ্যালয় (পশ্চিম ভবন)",
+      "location_bn": "গ্রাম-আমিরাবাড়ী",
+      "polling_booths": 6,
+      "voter_areas": [
+        { "area_name_bn": "১। আমিরাবাড়ী", "voters_male": 1650, "voters_female": 0, "voters_total": 1650 },
+        { "area_name_bn": "২। গুজিয়াম (১নং ওয়ার্ড অংশ)", "voters_male": 1235, "voters_female": 0, "voters_total": 1235 }
+      ],
+      "center_total_male": 2885,
+      "center_total_female": 0,
+      "center_grand_total": 2885,
+      "remarks": "পুরুষ ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 85,
+      "center_name_bn": "আমিরাবাড়ী উচ্চ বিদ্যালয় (পূর্ব ভবন)",
+      "location_bn": "গ্রাম-আমিরাবাড়ী",
+      "polling_booths": 6,
+      "voter_areas": [
+        { "area_name_bn": "১। আমিরাবাড়ী", "voters_male": 0, "voters_female": 1585, "voters_total": 1585 },
+        { "area_name_bn": "২। গুজিয়াম (১নং ওয়ার্ড অংশ)", "voters_male": 0, "voters_female": 1170, "voters_total": 1170 }
+      ],
+      "center_total_male": 0,
+      "center_total_female": 2755,
+      "center_grand_total": 2755,
+      "remarks": "মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 86,
+      "center_name_bn": "গুজিয়াম সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-গুজিয়াম",
+      "polling_booths": 6,
+      "voter_areas": [
+        { "area_name_bn": "১। গুজিয়াম (২নং ওয়ার্ড অংশ)", "voters_male": 1545, "voters_female": 1492, "voters_total": 3037 }
+      ],
+      "center_total_male": 1545,
+      "center_total_female": 1492,
+      "center_grand_total": 3037,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 87,
+      "center_name_bn": "নারায়নপুর স:প্রা:বি:",
+      "location_bn": "গ্রাম-নারায়নপুর",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। নারায়নপুর", "voters_male": 1410, "voters_female": 1365, "voters_total": 2775 }
+      ],
+      "center_total_male": 1410,
+      "center_total_female": 1365,
+      "center_grand_total": 2775,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 88,
+      "center_name_bn": "খাদেমুল ইসলাম দাখিল মাদ্রাসা",
+      "location_bn": "গ্রাম-সাঁতিয়া",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। সাঁতিয়া", "voters_male": 1350, "voters_female": 1285, "voters_total": 2635 }
+      ],
+      "center_total_male": 1350,
+      "center_total_female": 1285,
+      "center_grand_total": 2635,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 89,
+      "center_name_bn": "কাউমা স:প্রা:বি:",
+      "location_bn": "গ্রাম-কাউমা",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। কাউমা", "voters_male": 1290, "voters_female": 1215, "voters_total": 2505 }
+      ],
+      "center_total_male": 1290,
+      "center_total_female": 1215,
+      "center_grand_total": 2505,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 90,
+      "center_name_bn": "ফাতেমা নগর স:প্রা:বি:",
+      "location_bn": "গ্রাম-ফাতেমা নগর",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। ফাতেমা নগর", "voters_male": 1475, "voters_female": 1410, "voters_total": 2885 }
+      ],
+      "center_total_male": 1475,
+      "center_total_female": 1410,
+      "center_grand_total": 2885,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 91,
+      "center_name_bn": "গুজিয়াম ফাজিল মাদ্রাসা",
+      "location_bn": "গ্রাম-গুজিয়াম (৭ নং ওয়ার্ড অংশ)",
+      "polling_booths": 6,
+      "voter_areas": [
+        { "area_name_bn": "১। গুজিয়াম (৭নং ওয়ার্ড অংশ)", "voters_male": 1620, "voters_female": 1565, "voters_total": 3185 }
+      ],
+      "center_total_male": 1620,
+      "center_total_female": 1565,
+      "center_grand_total": 3185,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 92,
+      "center_name_bn": "বড়ইকান্দি স:প্রা:বি:",
+      "location_bn": "গ্রাম-বড়ইকান্দি",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। বড়ইকান্দি", "voters_male": 1380, "voters_female": 1345, "voters_total": 2725 }
+      ],
+      "center_total_male": 1380,
+      "center_total_female": 1345,
+      "center_grand_total": 2725,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 93,
+      "center_name_bn": "তাড়াকান্দি স:প্রা:বি:",
+      "location_bn": "গ্রাম-তাড়াকান্দি",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। তাড়াকান্দি", "voters_male": 1315, "voters_female": 1280, "voters_total": 2595 }
+      ],
+      "center_total_male": 1315,
+      "center_total_female": 1280,
+      "center_grand_total": 2595,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 94,
+      "center_name_bn": "মোকশাপুর উচ্চ বিদ্যালয় (উত্তর ভবন)",
+      "location_bn": "গ্রাম-মোকশাপুর",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। চক মৈশাটিকি", "voters_male": 480, "voters_female": 0, "voters_total": 480 },
+        { "area_name_bn": "২। মোকশাপুর (১নং ওয়ার্ড অংশ)", "voters_male": 980, "voters_female": 0, "voters_total": 980 },
+        { "area_name_bn": "৩। হরিপুর", "voters_male": 525, "voters_female": 0, "voters_total": 525 }
+      ],
+      "center_total_male": 1985,
+      "center_total_female": 0,
+      "center_grand_total": 1985,
+      "remarks": "পুরুষ ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 95,
+      "center_name_bn": "মোকশাপুর উচ্চ বিদ্যালয় (দক্ষিণ ভবন)",
+      "location_bn": "গ্রাম-মোকশাপুর",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। চক মৈশাটিকি", "voters_male": 0, "voters_female": 465, "voters_total": 465 },
+        { "area_name_bn": "২। মোকশাপুর (১নং ওয়ার্ড অংশ)", "voters_male": 0, "voters_female": 945, "voters_total": 945 },
+        { "area_name_bn": "৩। হরিপুর", "voters_male": 0, "voters_female": 510, "voters_total": 510 }
+      ],
+      "center_total_male": 0,
+      "center_total_female": 1920,
+      "center_grand_total": 1920,
+      "remarks": "মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 96,
+      "center_name_bn": "যাওয়াইলি স:প্রা:বি:",
+      "location_bn": "গ্রাম-যাওয়াইলি",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। যাওয়ার্লি", "voters_male": 1130, "voters_female": 1095, "voters_total": 2225 }
+      ],
+      "center_total_male": 1130,
+      "center_total_female": 1095,
+      "center_grand_total": 2225,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 97,
+      "center_name_bn": "মোকশাপুর স:প্রা:বি: (রামপুর)",
+      "location_bn": "গ্রাম-রামপুর (মোকশাপুর)",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। রামপুর", "voters_male": 615, "voters_female": 590, "voters_total": 1205 },
+        { "area_name_bn": "২। মোকশাপুর (৩নং ওয়ার্ড অংশ)", "voters_male": 720, "voters_female": 695, "voters_total": 1415 }
+      ],
+      "center_total_male": 1335,
+      "center_total_female": 1285,
+      "center_grand_total": 2620,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 98,
+      "center_name_bn": "শিমুলিয়া উচ্চ বিদ্যালয় (উত্তর ভবন)",
+      "location_bn": "গ্রাম-শিমুলিয়া",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। পাতিলাখালি", "voters_male": 680, "voters_female": 0, "voters_total": 680 },
+        { "area_name_bn": "২। শিমুলিয়া (৪নং ওয়ার্ড অংশ)", "voters_male": 1145, "voters_female": 0, "voters_total": 1145 }
+      ],
+      "center_total_male": 1825,
+      "center_total_female": 0,
+      "center_grand_total": 1825,
+      "remarks": "পুরুষ ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 99,
+      "center_name_bn": "শিমুলিয়া উচ্চ বিদ্যালয় (পশ্চিম ভবন)",
+      "location_bn": "গ্রাম-শিমুলিয়া",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। পাতিলাখালি", "voters_male": 0, "voters_female": 665, "voters_total": 665 },
+        { "area_name_bn": "২। শিমুলিয়া (৪নং ওয়ার্ড অংশ)", "voters_male": 0, "voters_female": 1115, "voters_total": 1115 }
+      ],
+      "center_total_male": 0,
+      "center_total_female": 1780,
+      "center_grand_total": 1780,
+      "remarks": "মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 100,
+      "center_name_bn": "চক নগর স:প্রা:বি:",
+      "location_bn": "গ্রাম-চক নগর",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। চক নগর", "voters_male": 1215, "voters_female": 1170, "voters_total": 2385 }
+      ],
+      "center_total_male": 1215,
+      "center_total_female": 1170,
+      "center_grand_total": 2385,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },{
+      "center_id": 101,
+      "center_name_bn": "সাঁতিয়া সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "গ্রাম-সাঁতিয়া (৫নং ওয়ার্ড অংশ)",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। সাঁতিয়া (৫নং ওয়ার্ড অংশ)", "voters_male": 1180, "voters_female": 1145, "voters_total": 2325 }
+      ],
+      "center_total_male": 1180,
+      "center_total_female": 1145,
+      "center_grand_total": 2325,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 102,
+      "center_name_bn": "উজান সাকুয়া স:প্রা:বি:",
+      "location_bn": "গ্রাম-উজান সাকুয়া",
+      "polling_booths": 6,
+      "voter_areas": [
+        { "area_name_bn": "১। উজান সাকুয়া (৬নং ওয়ার্ড অংশ)", "voters_male": 1625, "voters_female": 1580, "voters_total": 3205 }
+      ],
+      "center_total_male": 1625,
+      "center_total_female": 1580,
+      "center_grand_total": 3205,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 103,
+      "center_name_bn": "মধ্য সাকুয়া স:প্রা:বি:",
+      "location_bn": "গ্রাম-মধ্য সাকুয়া",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। মধ্য সাকুয়া", "voters_male": 1410, "voters_female": 1375, "voters_total": 2785 }
+      ],
+      "center_total_male": 1410,
+      "center_total_female": 1375,
+      "center_grand_total": 2785,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 104,
+      "center_name_bn": "সাকুয়া আদর্শ উচ্চ বিদ্যালয় (উত্তর ভবন)",
+      "location_bn": "গ্রাম-ভাটি সাকুয়া",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। ভাটি সাকুয়া", "voters_male": 1530, "voters_female": 0, "voters_total": 1530 },
+        { "area_name_bn": "২। সাকুয়া নামাপাড়া", "voters_male": 425, "voters_female": 0, "voters_total": 425 }
+      ],
+      "center_total_male": 1955,
+      "center_total_female": 0,
+      "center_grand_total": 1955,
+      "remarks": "পুরুষ ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 105,
+      "center_name_bn": "সাকুয়া আদর্শ উচ্চ বিদ্যালয় (পুরাতন ভবন)",
+      "location_bn": "গ্রাম-ভাটি সাকুয়া",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। ভাটি সাকুয়া", "voters_male": 0, "voters_female": 1490, "voters_total": 1490 },
+        { "area_name_bn": "২। সাকুয়া নামাপাড়া", "voters_male": 0, "voters_female": 415, "voters_total": 415 }
+      ],
+      "center_total_male": 0,
+      "center_total_female": 1905,
+      "center_grand_total": 1905,
+      "remarks": "মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 106,
+      "center_name_bn": "বালিদিয়া স:প্রা:বি:",
+      "location_bn": "গ্রাম-বালিদিয়া",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। বালিদিয়া (৯নং ওয়ার্ড অংশ)", "voters_male": 1390, "voters_female": 1345, "voters_total": 2735 }
+      ],
+      "center_total_male": 1390,
+      "center_total_female": 1345,
+      "center_grand_total": 2735,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 107,
+      "center_name_bn": "রামপুর উচ্চ বিদ্যালয় (পশ্চিম ভবন)",
+      "location_bn": "গ্রাম-রামপুর",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। রামপুর (১নং ওয়ার্ড অংশ)", "voters_male": 1450, "voters_female": 0, "voters_total": 1450 },
+        { "area_name_bn": "২। রামপুর (২নং ওয়ার্ড অংশ)", "voters_male": 530, "voters_female": 0, "voters_total": 530 }
+      ],
+      "center_total_male": 1980,
+      "center_total_female": 0,
+      "center_grand_total": 1980,
+      "remarks": "পুরুষ ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 108,
+      "center_name_bn": "রামপুর উচ্চ বিদ্যালয় (পূর্ব ভবন)",
+      "location_bn": "গ্রাম-রামপুর",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। রামপুর (১নং ওয়ার্ড অংশ)", "voters_male": 0, "voters_female": 1410, "voters_total": 1410 },
+        { "area_name_bn": "২। রামপুর (২নং ওয়ার্ড অংশ)", "voters_male": 0, "voters_female": 515, "voters_total": 515 }
+      ],
+      "center_total_male": 0,
+      "center_total_female": 1925,
+      "center_grand_total": 1925,
+      "remarks": "মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 109,
+      "center_name_bn": "রামপুর স:প্রা:বি:",
+      "location_bn": "গ্রাম-রামপুর",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। রামপুর (৩নং ওয়ার্ড অংশ)", "voters_male": 1375, "voters_female": 1330, "voters_total": 2705 }
+      ],
+      "center_total_male": 1375,
+      "center_total_female": 1330,
+      "center_grand_total": 2705,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 110,
+      "center_name_bn": "পয়লার কান্দা স:প্রা:বি:",
+      "location_bn": "গ্রাম-পয়লার কান্দা",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। পয়লার কান্দা", "voters_male": 625, "voters_female": 610, "voters_total": 1235 },
+        { "area_name_bn": "২। বীর রামপুর", "voters_male": 715, "voters_female": 685, "voters_total": 1400 }
+      ],
+      "center_total_male": 1340,
+      "center_total_female": 1295,
+      "center_grand_total": 2635,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 111,
+      "center_name_bn": "কাকচর স:প্রা:বি: (রামপুর)",
+      "location_bn": "গ্রাম-কাকচর",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। কাকচর", "voters_male": 1150, "voters_female": 1115, "voters_total": 2265 }
+      ],
+      "center_total_male": 1150,
+      "center_total_female": 1115,
+      "center_grand_total": 2265,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 112,
+      "center_name_bn": "যুগলী স:প্রা:বি:",
+      "location_bn": "গ্রাম-যুগলী",
+      "polling_booths": 6,
+      "voter_areas": [
+        { "area_name_bn": "১। যুগলী", "voters_male": 1590, "voters_female": 1545, "voters_total": 3135 }
+      ],
+      "center_total_male": 1590,
+      "center_total_female": 1545,
+      "center_grand_total": 3135,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 113,
+      "center_name_bn": "সিলিমপুর স:প্রা:বি:",
+      "location_bn": "গ্রাম-সিলিমপুর",
+      "polling_booths": 4,
+      "voter_areas": [
+        { "area_name_bn": "১। সিলিমপুর", "voters_male": 520, "voters_female": 505, "voters_total": 1025 },
+        { "area_name_bn": "২। ছিকনামনোহর", "voters_male": 635, "voters_female": 615, "voters_total": 1250 }
+      ],
+      "center_total_male": 1155,
+      "center_total_female": 1120,
+      "center_grand_total": 2275,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 114,
+      "center_name_bn": "চকরামপুর স:প্রা:বি: (রামপুর)",
+      "location_bn": "গ্রাম-চকরামপুর",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। চকরামপুর", "voters_male": 1390, "voters_female": 1345, "voters_total": 2735 }
+      ],
+      "center_total_male": 1390,
+      "center_total_female": 1345,
+      "center_grand_total": 2735,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 115,
+      "center_name_bn": "উজান বৈলর স:প্রা:বি:",
+      "location_bn": "গ্রাম-উজান বৈলর",
+      "polling_booths": 5,
+      "voter_areas": [
+        { "area_name_bn": "১। উজান বৈলর (৯নং ওয়ার্ড অংশ)", "voters_male": 1415, "voters_female": 1380, "voters_total": 2795 }
+      ],
+      "center_total_male": 1415,
+      "center_total_female": 1380,
+      "center_grand_total": 2795,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 116,
+      "center_name_bn": "ত্রিশাল নজরুল একাডেমী",
+      "location_bn": "ত্রিশাল পৌরসভা (১ ও ২ নং ওয়ার্ড)",
+      "polling_booths": 8,
+      "voter_areas": [
+        { "area_name_bn": "১। ১নং ওয়ার্ড", "voters_male": 1250, "voters_female": 1220, "voters_total": 2470 },
+        { "area_name_bn": "২। ২নং ওয়ার্ড", "voters_male": 1180, "voters_female": 1145, "voters_total": 2325 }
+      ],
+      "center_total_male": 2430,
+      "center_total_female": 2365,
+      "center_grand_total": 4795,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 117,
+      "center_name_bn": "ত্রিশাল সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "ত্রিশাল পৌরসভা (৩ ও ৪ নং ওয়ার্ড)",
+      "polling_booths": 7,
+      "voter_areas": [
+        { "area_name_bn": "১। ৩নং ওয়ার্ড", "voters_male": 1050, "voters_female": 1025, "voters_total": 2075 },
+        { "area_name_bn": "২। ৪নং ওয়ার্ড", "voters_male": 1085, "voters_female": 1040, "voters_total": 2125 }
+      ],
+      "center_total_male": 2135,
+      "center_total_female": 2065,
+      "center_grand_total": 4200,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 118,
+      "center_name_bn": "ত্রিশাল আব্বাছিয়া ফাজিল মাদ্রাসা",
+      "location_bn": "ত্রিশাল পৌরসভা (৫ ও ৬ নং ওয়ার্ড)",
+      "polling_booths": 8,
+      "voter_areas": [
+        { "area_name_bn": "১। ৫নং ওয়ার্ড", "voters_male": 1195, "voters_female": 1160, "voters_total": 2355 },
+        { "area_name_bn": "২। ৬নং ওয়ার্ড", "voters_male": 1240, "voters_female": 1210, "voters_total": 2450 }
+      ],
+      "center_total_male": 2435,
+      "center_total_female": 2370,
+      "center_grand_total": 4805,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 119,
+      "center_name_bn": "ত্রিশাল মডেল সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "ত্রিশাল পৌরসভা (৭ ও ৮ নং ওয়ার্ড)",
+      "polling_booths": 7,
+      "voter_areas": [
+        { "area_name_bn": "১। ৭নং ওয়ার্ড", "voters_male": 1020, "voters_female": 990, "voters_total": 2010 },
+        { "area_name_bn": "২। ৮নং ওয়ার্ড", "voters_male": 1045, "voters_female": 1015, "voters_total": 2060 }
+      ],
+      "center_total_male": 2065,
+      "center_total_female": 2005,
+      "center_grand_total": 4070,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    },
+    {
+      "center_id": 120,
+      "center_name_bn": "দরিরামপুর সরকারী প্রাথমিক বিদ্যালয়",
+      "location_bn": "ত্রিশাল পৌরসভা (৯ নং ওয়ার্ড)",
+      "polling_booths": 6,
+      "voter_areas": [
+        { "area_name_bn": "১। ৯নং ওয়ার্ড", "voters_male": 1720, "voters_female": 1685, "voters_total": 3405 }
+      ],
+      "center_total_male": 1720,
+      "center_total_female": 1685,
+      "center_grand_total": 3405,
+      "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+    }
+  
+          ]
+        }
+      ]
+    }
+  ]
+}

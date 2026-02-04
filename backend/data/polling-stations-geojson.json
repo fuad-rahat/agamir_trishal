@@ -1,0 +1,47 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "center_id": 1,
+        "center_name_bn": "সোনাখালী পাজলার চর উচ্চ বিদ্যালয়",
+        "center_name_en": "Sonakhali Pazar Char High School",
+        "union_bn": "ধানীখোলা",
+        "union_en": "Dhankhola",
+        "village_bn": "পাজলারচর",
+        "village_en": "Pazlarchar",
+        "polling_booths": 5,
+        "total_voters": 2821,
+        "male_voters": 1419,
+        "female_voters": 1402,
+        "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [90.08, 24.36]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "center_id": 2,
+        "center_name_bn": "কাটাখালী উমর আলী উচ্চ বিদ্যালয়",
+        "center_name_en": "Katakhali Umar Ali High School",
+        "union_bn": "ধানীখোলা",
+        "union_en": "Dhankhola",
+        "village_bn": "কাটাখালী",
+        "village_en": "Katakhali",
+        "polling_booths": 4,
+        "total_voters": 2308,
+        "male_voters": 1177,
+        "female_voters": 1131,
+        "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [90.12, 24.34]
+      }
+    }
+  ]
+}

@@ -1,0 +1,364 @@
+{
+  "type": "FeatureCollection",
+  "upazilaBoundary": {
+    "type": "Feature",
+    "properties": {
+      "name": "Trishal",
+      "bengaliName": "ত্রিশাল",
+      "area": "338.98",
+      "population": "435803",
+      "totalVoters": "257052"
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [90.2546475, 24.6142831],
+          [90.3200000, 24.6050000],
+          [90.3800000, 24.5950000],
+          [90.4200000, 24.5700000],
+          [90.4500000, 24.5400000],
+          [90.4700000, 24.5000000],
+          [90.4600000, 24.4500000],
+          [90.4200000, 24.4000000],
+          [90.3800000, 24.3600000],
+          [90.3200000, 24.3400000],
+          [90.2600000, 24.3300000],
+          [90.2000000, 24.3500000],
+          [90.1500000, 24.3800000],
+          [90.1200000, 24.4200000],
+          [90.1000000, 24.4700000],
+          [90.1100000, 24.5200000],
+          [90.1300000, 24.5700000],
+          [90.1600000, 24.6000000],
+          [90.2000000, 24.6200000],
+          [90.2546475, 24.6142831]
+        ]
+      ]
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Dhankhola",
+        "bengaliName": "ধানীখোলা",
+        "unionId": 1,
+        "area": "28.5",
+        "population": "36320",
+        "voters": "21480",
+        "villages": 14,
+        "color": "#00d4ff"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [90.10, 24.62],
+            [90.18, 24.62],
+            [90.18, 24.52],
+            [90.10, 24.52],
+            [90.10, 24.62]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bailor",
+        "bengaliName": "বৈলর",
+        "unionId": 2,
+        "area": "26.3",
+        "population": "32560",
+        "voters": "19280",
+        "villages": 12,
+        "color": "#1ade06"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [90.18, 24.62],
+            [90.28, 24.62],
+            [90.28, 24.52],
+            [90.18, 24.52],
+            [90.18, 24.62]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kanthal",
+        "bengaliName": "কাঁঠাল",
+        "unionId": 3,
+        "area": "31.5",
+        "population": "38920",
+        "voters": "23040",
+        "villages": 16,
+        "color": "#ff6b35"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [90.28, 24.62],
+            [90.40, 24.62],
+            [90.40, 24.52],
+            [90.28, 24.52],
+            [90.28, 24.62]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kanihary",
+        "bengaliName": "কানিহারী",
+        "unionId": 4,
+        "area": "25.2",
+        "population": "31200",
+        "voters": "18480",
+        "villages": 11,
+        "color": "#f7b801"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [90.40, 24.58],
+            [90.47, 24.55],
+            [90.47, 24.42],
+            [90.40, 24.45],
+            [90.40, 24.58]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Rampur",
+        "bengaliName": "রামপুর",
+        "unionId": 5,
+        "area": "33.8",
+        "population": "41840",
+        "voters": "24750",
+        "villages": 18,
+        "color": "#a100f2"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [90.18, 24.52],
+            [90.28, 24.52],
+            [90.28, 24.40],
+            [90.18, 24.40],
+            [90.18, 24.52]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Trishal",
+        "bengaliName": "ত্রিশাল",
+        "unionId": 6,
+        "area": "36.4",
+        "population": "45120",
+        "voters": "26720",
+        "villages": 20,
+        "color": "#10b981"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [90.28, 24.52],
+            [90.40, 24.52],
+            [90.40, 24.45],
+            [90.28, 24.40],
+            [90.28, 24.52]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Harirampur",
+        "bengaliName": "হরিরামপুর",
+        "unionId": 7,
+        "area": "32.0",
+        "population": "39680",
+        "voters": "23480",
+        "villages": 15,
+        "color": "#0ea5e9"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [90.10, 24.52],
+            [90.18, 24.52],
+            [90.18, 24.40],
+            [90.10, 24.40],
+            [90.10, 24.52]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Sakhua",
+        "bengaliName": "সাখুয়া",
+        "unionId": 8,
+        "area": "28.6",
+        "population": "35440",
+        "voters": "20960",
+        "villages": 13,
+        "color": "#ec4899"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [90.40, 24.45],
+            [90.47, 24.42],
+            [90.45, 24.30],
+            [90.38, 24.35],
+            [90.40, 24.45]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Balipara",
+        "bengaliName": "বালিপাড়া",
+        "unionId": 9,
+        "area": "30.1",
+        "population": "37280",
+        "voters": "22080",
+        "villages": 14,
+        "color": "#06b6d4"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [90.28, 24.40],
+            [90.40, 24.45],
+            [90.38, 24.35],
+            [90.28, 24.30],
+            [90.28, 24.40]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mothbari",
+        "bengaliName": "মঠবাড়ী",
+        "unionId": 10,
+        "area": "29.2",
+        "population": "36120",
+        "voters": "21360",
+        "villages": 13,
+        "color": "#f59e0b"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [90.18, 24.40],
+            [90.28, 24.40],
+            [90.28, 24.30],
+            [90.18, 24.30],
+            [90.18, 24.40]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mokspur",
+        "bengaliName": "মোক্ষপুর",
+        "unionId": 11,
+        "area": "31.0",
+        "population": "38440",
+        "voters": "22750",
+        "villages": 15,
+        "color": "#8b5cf6"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [90.18, 24.30],
+            [90.32, 24.30],
+            [90.32, 24.18],
+            [90.18, 24.18],
+            [90.18, 24.30]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Amirabari",
+        "bengaliName": "আমিরাবাড়ী",
+        "unionId": 12,
+        "area": "31.7",
+        "population": "39263",
+        "voters": "23212",
+        "villages": 16,
+        "color": "#ef4444"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [90.32, 24.30],
+            [90.45, 24.30],
+            [90.45, 24.18],
+            [90.32, 24.18],
+            [90.32, 24.30]
+          ]
+        ]
+      }
+    }
+  ],
+  "upazilaMeta": {
+    "name": "Trishal",
+    "bengaliName": "ত্রিশাল",
+    "center": [24.5826256, 90.3947568],
+    "district": "Mymensingh",
+    "division": "Mymensingh",
+    "constituency": "152-Mymensingh-7",
+    "area": "338.98",
+    "population": "435803",
+    "totalVoters": "257052",
+    "maleVoters": "128595",
+    "femaleVoters": "128457",
+    "villages": "159",
+    "moujas": "91",
+    "totalUnions": "12",
+    "totalRoads": "900.43",
+    "packedRoads": "137.55",
+    "unpachedRoads": "759.26",
+    "rivers": "10",
+    "bridges": "137",
+    "markets": "30"
+  }
+}

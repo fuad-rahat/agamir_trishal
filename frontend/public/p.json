@@ -1,0 +1,68 @@
+{
+  "country": "Bangladesh",
+  "elections": [
+    {
+      "year": 2018,
+      "election_type": "Jatiyo Sangsad",
+      "parliamentary_election_number": 11,
+      "source": {
+        "document_type": "Gazette",
+        "publication_date": "2018-12-04",
+        "authority": "Bangladesh Election Commission"
+      },
+      "constituencies": [
+        {
+          "constituency_id": 152,
+          "constituency_name_bn": "ময়মনসিংহ-৭ (ত্রিশাল)",
+          "district": "Mymensingh",
+          "division": "Mymensingh",
+          "polling_centers": [
+            {
+              "center_id": 1,
+              "union_bn": "ধানীখোলা",
+              "center_name_bn": "সোনাখালী পাজলার চর উচ্চ বিদ্যালয়",
+              "village_bn": "পাজলারচর",
+              "polling_booths": 5,
+              "voter_areas": [
+                {
+                  "area_name_bn": "পাজলারচর",
+                  "voters_male": 594,
+                  "voters_female": 538,
+                  "voters_total": 1132
+                },
+                {
+                  "area_name_bn": "সোনাখালী",
+                  "voters_male": 825,
+                  "voters_female": 864,
+                  "voters_total": 1689
+                }
+              ],
+              "center_total_male": 1419,
+              "center_total_female": 1402,
+              "center_grand_total": 2821,
+              "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+            },
+            {
+              "center_id": 2,"union_bn": "ধানীখোলা",
+              "center_name_bn": "কাটাখালী উমর আলী উচ্চ বিদ্যালয়",
+              "village_bn": "কাটাখালী",
+              "polling_booths": 4,
+              "voter_areas": [
+                {
+                  "area_name_bn": "কাটাখালী",
+                  "voters_male": 1177,
+                  "voters_female": 1131,
+                  "voters_total": 2308
+                }
+              ],
+              "center_total_male": 1177,
+              "center_total_female": 1131,
+              "center_grand_total": 2308,
+              "remarks": "পুরুষ ও মহিলা ভোটকেন্দ্র"
+            }
+           ]
+        }
+      ]
+    }
+  ]
+}
