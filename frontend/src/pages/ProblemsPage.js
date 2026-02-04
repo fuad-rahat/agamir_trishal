@@ -118,13 +118,32 @@ const ProblemsPage = () => {
           key={i}
           className="bg-white rounded-lg shadow p-6 animate-pulse"
         >
-          <div className="h-4 bg-gray-300 rounded w-1/3 mb-3"></div>
-          <div className="h-3 bg-gray-200 rounded w-full mb-2"></div>
-          <div className="h-3 bg-gray-200 rounded w-5/6"></div>
+          {/* Top row: Union + Category */}
+          <div className="flex justify-between items-center mb-3">
+            <div className="h-3 bg-gray-300 rounded w-24"></div>
+            <div className="h-6 bg-gray-200 rounded-full w-20"></div>
+          </div>
+  
+          {/* Title */}
+          <div className="h-4 bg-gray-300 rounded w-2/3 mb-3"></div>
+  
+          {/* Description */}
+          <div className="space-y-2 mb-4">
+            <div className="h-3 bg-gray-200 rounded w-full"></div>
+            <div className="h-3 bg-gray-200 rounded w-5/6"></div>
+            <div className="h-3 bg-gray-200 rounded w-4/6"></div>
+          </div>
+  
+          {/* Footer actions */}
+          <div className="flex justify-between items-center">
+            <div className="h-3 bg-gray-300 rounded w-20"></div>
+            <div className="h-8 bg-gray-300 rounded w-28"></div>
+          </div>
         </div>
       ))}
     </div>
   );
+  
 
   return (
     <div className="bg-gray-50 min-h-screen py-8 px-4">
@@ -202,12 +221,7 @@ const ProblemsPage = () => {
           </div>
         </div>
 
-        {/* ERROR */}
-        {error && (
-          <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-6 text-red-700 rounded">
-            {error}
-          </div>
-        )}
+       
 
         {/* CONTENT */}
         {loading ? (
