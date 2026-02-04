@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Footer from '../components/Footer';
 
 const StatisticsPage = () => {
   const [stats, setStats] = useState(null);
@@ -28,7 +27,7 @@ const StatisticsPage = () => {
     const bgColor = color === 'green' ? 'bg-green-50 border-green-300' : 'bg-blue-50 border-blue-300';
     const textColor = color === 'green' ? 'text-green-700' : 'text-blue-700';
     return (
-      <div className={`${bgColor} border-l-4 p-6 rounded-lg shadow`}>
+      <div className={`${bgColor} border-l-4 p-6 rounded-2xl shadow-sm hover:shadow-md transition`}>
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm font-medium text-gray-600">{label}</p>
@@ -41,13 +40,17 @@ const StatisticsPage = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
-      
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-emerald-50 via-white to-blue-50">
       <main className="flex-grow container mx-auto px-4 py-12">
         {/* Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">ত্রিশাল উপজেলা - সাধারণ তথ্যাদি</h1>
-          <p className="text-gray-600">Trishal Upazila Statistics & Information</p>
+          <div className="bg-white/90 backdrop-blur rounded-2xl shadow-lg p-8 border border-green-100">
+            <p className="text-sm font-semibold text-green-700 mb-2">Trishal Upazila</p>
+            <h1 className="text-4xl font-bold text-gray-900 mb-3">ত্রিশাল উপজেলা - সাধারণ তথ্যাদি</h1>
+            <p className="text-gray-600 max-w-2xl">
+              উপজেলা সম্পর্কিত গুরুত্বপূর্ণ তথ্য ও অবকাঠামোগত পরিসংখ্যান এক নজরে দেখুন।
+            </p>
+          </div>
         </div>
 
         {/* Key Statistics Grid */}
@@ -69,7 +72,7 @@ const StatisticsPage = () => {
         </div>
 
         {/* Detailed Information */}
-        <div className="bg-white rounded-lg shadow-lg p-8 mb-12">
+        <div className="bg-white rounded-2xl shadow-lg p-8 mb-12 border border-gray-100">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">বিস্তারিত তথ্য (Detailed Information)</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -127,34 +130,7 @@ const StatisticsPage = () => {
           </div>
         </div>
 
-        {/* Unions Information */}
-        <div className="bg-white rounded-lg shadow-lg p-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">১২টি ইউনিয়ন (12 Unions)</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[
-              { bn: "ধানীখোলা", en: "Dhankhola" },
-              { bn: "বৈলর", en: "Bailor" },
-              { bn: "কাঁঠাল", en: "Kanthal" },
-              { bn: "কানিহারী", en: "Kanihary" },
-              { bn: "রামপুর", en: "Rampur" },
-              { bn: "ত্রিশাল", en: "Trishal" },
-              { bn: "হরিরামপুর", en: "Harirampur" },
-              { bn: "সাখুয়া", en: "Sakhua" },
-              { bn: "বালিপাড়া", en: "Balipara" },
-              { bn: "মঠবাড়ী", en: "Mothbari" },
-              { bn: "মোক্ষপুর", en: "Mokspur" },
-              { bn: "আমিরাবাড়ী", en: "Amirabari" },
-            ].map((union, idx) => (
-              <div key={idx} className="p-4 bg-gradient-to-br from-green-50 to-blue-50 rounded-lg border border-green-200 hover:shadow-md transition">
-                <h3 className="font-semibold text-gray-900">{union.bn}</h3>
-                <p className="text-sm text-gray-600 mt-1">{union.en}</p>
-              </div>
-            ))}
-          </div>
-        </div>
       </main>
-
-      <Footer />
     </div>
   );
 };
