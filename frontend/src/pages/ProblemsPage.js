@@ -1,7 +1,6 @@
 import React, {
   useState,
   useEffect,
-  useRef,
   useMemo,
   useCallback
 } from 'react';
@@ -9,6 +8,18 @@ import { Link } from 'react-router-dom';
 import { problemsAPI, unionsAPI } from '../services/api';
 import ProblemCard from '../components/ProblemCard';
 import { PROBLEM_CATEGORIES } from '../utils/constants';
+
+/* =====================
+   SAFE SESSION STORAGE
+===================== */
+const safeSetSession = (key, value) => {
+  try {
+    sessionStorage.setItem(key, JSON.stringify(value));
+  } catch (e) {
+    console.warn('Session storage full. Clearing cache...');
+    sessionStorage.clear();
+  }
+};
 
 const ProblemsPage = () => {
   const [problems, setProblems] = useState([]);
@@ -18,103 +29,55 @@ const ProblemsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const hasLoadedCache = useRef(false);
+  const cacheKeys = useMemo(() => ({
+    unions: 'cachedUnions'
+  }), []);
 
-  const cacheKeys = useMemo(
-    () => ({
-      problems: 'cachedProblems',
-      unions: 'cachedUnions',
-    }),
-    []
-  );
-
-  const loadData = useCallback(async () => {
+  /* =====================
+     FETCH DATA
+  ===================== */
+  const fetchData = useCallback(async () => {
     try {
-      if (!hasLoadedCache.current) setLoading(true);
+      setLoading(true);
+      setError('');
 
       const [problemsRes, unionsRes] = await Promise.all([
         problemsAPI.getAll(),
         unionsAPI.getAll(),
       ]);
 
-      setProblems(problemsRes.data);
-      setUnions(unionsRes.data);
-      setError('');
+      setProblems(problemsRes.data || []);
+      setUnions(unionsRes.data || []);
 
-      sessionStorage.setItem(
-        cacheKeys.problems,
-        JSON.stringify(problemsRes.data)
-      );
-      sessionStorage.setItem(
-        cacheKeys.unions,
-        JSON.stringify(unionsRes.data)
-      );
+      // Cache ONLY unions (small & static)
+      safeSetSession(cacheKeys.unions, unionsRes.data);
+
     } catch (err) {
       console.error('Error fetching data:', err);
       setError('ডাটা লোড করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।');
     } finally {
       setLoading(false);
     }
-  }, [cacheKeys]);
+  }, [cacheKeys.unions]);
 
-  const fetchData = useCallback(async () => {
-    try {
-      if (!hasLoadedCache.current) setLoading(true);
-
-      const [problemsRes, unionsRes] = await Promise.all([
-        problemsAPI.getAll(),
-        unionsAPI.getAll(),
-      ]);
-
-      setProblems(problemsRes.data);
-      setUnions(unionsRes.data);
-      setError('');
-
-      sessionStorage.setItem(
-        cacheKeys.problems,
-        JSON.stringify(problemsRes.data)
-      );
-      sessionStorage.setItem(
-        cacheKeys.unions,
-        JSON.stringify(unionsRes.data)
-      );
-    } catch (err) {
-      console.error('Error fetching data:', err);
-      setError('ডাটা রিফ্রেশ করতে সমস্যা হয়েছে।');
-    } finally {
-      setLoading(false);
-    }
-  }, [cacheKeys]);
-
-  // Load cached data first
+  /* =====================
+     LOAD CACHED UNIONS
+  ===================== */
   useEffect(() => {
-    const cachedProblems = sessionStorage.getItem(cacheKeys.problems);
     const cachedUnions = sessionStorage.getItem(cacheKeys.unions);
-
-    if (cachedProblems && cachedUnions) {
+    if (cachedUnions) {
       try {
-        setProblems(JSON.parse(cachedProblems));
         setUnions(JSON.parse(cachedUnions));
-        setLoading(false);
-        hasLoadedCache.current = true;
-      } catch (err) {
-        console.error('Cache parse error:', err);
-      }
+      } catch {}
     }
+    fetchData();
+  }, [cacheKeys.unions, fetchData]);
 
-    loadData();
-  }, [cacheKeys, loadData]);
-
-  // Filter logic
+  /* =====================
+     FILTER HANDLER
+  ===================== */
   useEffect(() => {
     if (!selectedUnion && !selectedCategory) {
-      const cached = sessionStorage.getItem(cacheKeys.problems);
-      if (cached) {
-        try {
-          setProblems(JSON.parse(cached));
-          return;
-        } catch {}
-      }
       fetchData();
       return;
     }
@@ -128,8 +91,8 @@ const ProblemsPage = () => {
         if (selectedUnion) params.union = selectedUnion;
         if (selectedCategory) params.category = selectedCategory;
 
-        const response = await problemsAPI.getAll(params);
-        setProblems(response.data || []);
+        const res = await problemsAPI.getAll(params);
+        setProblems(res.data || []);
       } catch (err) {
         console.error('Filter error:', err);
         setError('ফিল্টার প্রয়োগ করতে সমস্যা হয়েছে।');
@@ -139,33 +102,43 @@ const ProblemsPage = () => {
     };
 
     applyFilter();
-  }, [
-    selectedUnion,
-    selectedCategory,
-    fetchData,
-    cacheKeys.problems,
-  ]);
+  }, [selectedUnion, selectedCategory, fetchData]);
 
   const handleShowDetails = (problem) => {
-    alert(
-      `সমস্যা: ${problem.title}\n\nবর্ণনা: ${problem.description}`
-    );
+    alert(`সমস্যা: ${problem.title}\n\nবর্ণনা: ${problem.description}`);
   };
+
+  /* =====================
+     LOADING SKELETON
+  ===================== */
+  const LoadingSkeleton = () => (
+    <div className="space-y-4">
+      {[...Array(5)].map((_, i) => (
+        <div
+          key={i}
+          className="bg-white rounded-lg shadow p-6 animate-pulse"
+        >
+          <div className="h-4 bg-gray-300 rounded w-1/3 mb-3"></div>
+          <div className="h-3 bg-gray-200 rounded w-full mb-2"></div>
+          <div className="h-3 bg-gray-200 rounded w-5/6"></div>
+        </div>
+      ))}
+    </div>
+  );
 
   return (
     <div className="bg-gray-50 min-h-screen py-8 px-4">
       <div className="max-w-6xl mx-auto">
 
-        {/* Header */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        {/* HEADER */}
+        <div className="bg-white rounded-lg shadow p-6 mb-8">
+          <div className="flex flex-col sm:flex-row justify-between gap-4">
             <div>
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
-                <i className="fas fa-exclamation-circle text-red-600 mr-2"></i>
+              <h1 className="text-3xl font-bold text-gray-800">
                 রিপোর্ট করা সমস্যাসমূহ
               </h1>
-              <p className="text-gray-600 mt-1">
-                সম্প্রদায় দ্বারা রিপোর্ট করা সমস্যাসমূহ
+              <p className="text-gray-600">
+                সম্প্রদায় দ্বারা রিপোর্ট করা সমস্যা
               </p>
             </div>
 
@@ -173,31 +146,24 @@ const ProblemsPage = () => {
               <button
                 onClick={fetchData}
                 disabled={loading}
-                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 font-semibold"
+                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-60"
               >
-                <i
-                  className={`fas ${
-                    loading ? 'fa-spinner fa-spin' : 'fa-sync-alt'
-                  } mr-2`}
-                ></i>
-                রিফ্রেশ
+                {loading ? 'লোড হচ্ছে...' : 'রিফ্রেশ'}
               </button>
 
               <Link
                 to="/report-problem"
-                className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 font-semibold"
+                className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
               >
-                <i className="fas fa-plus mr-2"></i>
                 নতুন সমস্যা
               </Link>
             </div>
           </div>
         </div>
 
-        {/* Filters */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
+        {/* FILTERS */}
+        <div className="bg-white rounded-lg shadow p-6 mb-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-
             <select
               value={selectedUnion}
               onChange={(e) => setSelectedUnion(e.target.value)}
@@ -236,33 +202,29 @@ const ProblemsPage = () => {
           </div>
         </div>
 
-        {/* Error */}
+        {/* ERROR */}
         {error && (
           <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-6 text-red-700 rounded">
-            <p className="font-semibold">{error}</p>
+            {error}
           </div>
         )}
 
-        {/* Content */}
+        {/* CONTENT */}
         {loading ? (
-          <div className="text-center py-12">
-            <div className="animate-spin h-10 w-10 border-b-2 border-green-500 mx-auto"></div>
-          </div>
+          <LoadingSkeleton />
         ) : problems.length > 0 ? (
           <div className="space-y-4">
-            {problems.map((problem) => {
-              let unionName = 'অজ্ঞাত';
-              if (problem.union?.bengaliName)
-                unionName = problem.union.bengaliName;
-
-              return (
-                <ProblemCard
-                  key={problem._id}
-                  problem={{ ...problem, unionName }}
-                  onDetails={handleShowDetails}
-                />
-              );
-            })}
+            {problems.map((problem) => (
+              <ProblemCard
+                key={problem._id}
+                problem={{
+                  ...problem,
+                  unionName:
+                    problem.union?.bengaliName || 'অজ্ঞাত',
+                }}
+                onDetails={handleShowDetails}
+              />
+            ))}
           </div>
         ) : (
           <div className="bg-white p-12 text-center rounded-lg shadow">
