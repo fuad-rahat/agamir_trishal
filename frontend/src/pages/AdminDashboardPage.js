@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
 
@@ -6,7 +6,6 @@ const AdminDashboardPage = () => {
   const navigate = useNavigate();
   const [unions, setUnions] = useState([]);
   const [selectedUnion, setSelectedUnion] = useState(null);
-  const [activeTab, setActiveTab] = useState('list');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [adminRole, setAdminRole] = useState('');
@@ -16,16 +15,9 @@ const AdminDashboardPage = () => {
   const [imageModal, setImageModal] = useState({ open: false, src: '', images: [], currentIndex: 0 });
 
   const adminName = localStorage.getItem('adminName');
-  const adminEmail = localStorage.getItem('adminEmail');
   const token = localStorage.getItem('adminToken');
 
-  useEffect(() => {
-    const role = localStorage.getItem('adminRole');
-    setAdminRole(role);
-    fetchUnions();
-  }, []);
-
-  const fetchUnions = async () => {
+  const fetchUnions = useCallback(async () => {
     try {
       setLoading(true);
       const response = await api.get('/unions');
@@ -42,7 +34,13 @@ const AdminDashboardPage = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedUnion]);
+
+  useEffect(() => {
+    const role = localStorage.getItem('adminRole');
+    setAdminRole(role);
+    fetchUnions();
+  }, [fetchUnions]);
 
   const handleLogout = () => {
     localStorage.removeItem('adminToken');
@@ -61,17 +59,6 @@ const AdminDashboardPage = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleImageUpload = (e, fieldName) => {
-    const files = Array.from(e.target.files);
-    if (files.length > 0) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData(prev => ({ ...prev, [fieldName]: reader.result }));
-      };
-      reader.readAsDataURL(files[0]);
-    }
   };
 
   const handleMultipleImageUpload = (e, fieldName) => {
@@ -112,24 +99,12 @@ const AdminDashboardPage = () => {
     setImageModal({ open: false, src: '', images: [], currentIndex: 0 });
   };
 
-  const handleArrayInputChange = (e, index, field) => {
-    const { name, value } = e.target;
-    setFormData(prev => {
-      const arrayField = prev[name] || [];
-      if (!Array.isArray(arrayField)) {
-        arrayField = [];
-      }
-      arrayField[index] = { ...arrayField[index], [field]: value };
-      return { ...prev, [name]: arrayField };
-    });
-  };
-
   const handleAddChairman = async (e) => {
     e.preventDefault();
     if (!selectedUnion || !formData.chairmanName) return;
 
     try {
-      const response = await api.post(
+      await api.post(
         `/unions/${selectedUnion._id}/chairman`,
         {
           name: formData.chairmanName,
@@ -219,7 +194,7 @@ const AdminDashboardPage = () => {
         }
       }
 
-      const response = await api.post(
+      await api.post(
         `/unions/${selectedUnion._id}/culture`,
         {
           name: formData.cultureName,

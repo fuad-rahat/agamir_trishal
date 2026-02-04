@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { adminAPI, api } from '../services/api';
+import React, { useState, useEffect, useCallback } from 'react';
+import { adminAPI } from '../services/api';
 
 const AdminManagementPage = () => {
   const [admins, setAdmins] = useState([]);
@@ -19,6 +19,22 @@ const AdminManagementPage = () => {
   const userRole = localStorage.getItem('adminRole');
   const token = localStorage.getItem('adminToken');
 
+  const fetchAdmins = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError('');
+
+      const response = await adminAPI.getAll();
+      setAdmins(response.data);
+    } catch (err) {
+      console.error('Error fetching admins:', err);
+      const errorMsg = err.response?.data?.message || err.message || 'অ্যাডমিন তালিকা লোড বিফল';
+      setError(errorMsg);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   useEffect(() => {
     if (userRole !== 'super_admin') {
       setError('শুধুমাত্র সুপার অ্যাডমিন এই পৃষ্ঠায় প্রবেশ করতে পারেন');
@@ -32,29 +48,8 @@ const AdminManagementPage = () => {
       return;
     }
 
-    console.log('AdminManagementPage mounted. User role:', userRole, 'Token available:', !!token);
     fetchAdmins();
-  }, []);
-
-  const fetchAdmins = async () => {
-    try {
-      setLoading(true);
-      setError('');
-
-      console.log('Fetching admins with token:', token);
-
-      const response = await adminAPI.getAll();
-
-      console.log('Admins fetched successfully:', response.data);
-      setAdmins(response.data);
-    } catch (err) {
-      console.error('Error fetching admins:', err);
-      const errorMsg = err.response?.data?.message || err.message || 'অ্যাডমিন তালিকা লোড বিফল';
-      setError(errorMsg);
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [userRole, token, fetchAdmins]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
