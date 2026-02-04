@@ -15,6 +15,7 @@ const UnionDetailPage = () => {
   useEffect(() => {
     const loadUnionDetails = () => {
       setLoading(true);
+      setImageModal({ open: false, src: '', images: [], currentIndex: 0 });
       const match = demoUnionLookup[String(unionId)];
       if (match) {
         setUnion(match);

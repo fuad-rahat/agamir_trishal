@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, useNavigationType } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -29,6 +29,39 @@ import AdminDashboardPage from './pages/AdminDashboardPage';
 import AdminManagementPage from './pages/AdminManagementPage';
 import './App.css';
 
+const ScrollRestoration = () => {
+  const location = useLocation();
+  const navigationType = useNavigationType();
+
+  useEffect(() => {
+    const key = `${location.pathname}${location.search}${location.hash}`;
+
+    const handleScroll = () => {
+      sessionStorage.setItem(`scroll:${key}`, String(window.scrollY));
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      handleScroll();
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [location]);
+
+  useEffect(() => {
+    const key = `${location.pathname}${location.search}${location.hash}`;
+    if (navigationType === 'POP') {
+      const saved = sessionStorage.getItem(`scroll:${key}`);
+      if (saved !== null) {
+        window.scrollTo(0, Number(saved));
+        return;
+      }
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [location, navigationType]);
+
+  return null;
+};
+
 function App() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -41,6 +74,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollRestoration />
       <div className="flex flex-col min-h-screen bg-white">
         {/* Navigation - Not shown on admin pages */}
         {!window.location.pathname.startsWith('/admin/login') && !window.location.pathname.startsWith('/admin/dashboard') && !window.location.pathname.startsWith('/admin/management') && (
