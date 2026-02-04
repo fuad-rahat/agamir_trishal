@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, GeoJSON, Popup, Marker, Circle } from 'react-leaflet';
+import { MapContainer, TileLayer, GeoJSON, Popup, Marker } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { unionsAPI, problemsAPI } from '../services/api';
+import { demoProblems } from '../data/demoUnions';
 
 // Fix for default marker icon
 delete L.Icon.Default.prototype._getIconUrl;
@@ -13,7 +13,6 @@ L.Icon.Default.mergeOptions({
 });
 
 const UpazilaMap = ({ onUnionClick, selectedUnion, zoom = 10 }) => {
-  const [unions, setUnions] = useState([]);
   const [problems, setProblems] = useState([]);
   const [geoJsonData, setGeoJsonData] = useState(null);
   const [roadsGeoJson, setRoadsGeoJson] = useState(null);
@@ -25,7 +24,6 @@ const UpazilaMap = ({ onUnionClick, selectedUnion, zoom = 10 }) => {
 
   const fetchData = async () => {
     try {
-      // Try to fetch from API first, fallback to local GeoJSON
       let geoData = null;
       try {
         const response = await fetch('/trishal-complete-geojson.json');
@@ -36,32 +34,14 @@ const UpazilaMap = ({ onUnionClick, selectedUnion, zoom = 10 }) => {
         console.warn('Could not load local GeoJSON:', err);
       }
 
-      const unionsData = await unionsAPI.getAll().catch(() => ({ data: [] }));
-      setUnions(unionsData.data || []);
-      
-      const problemsData = await problemsAPI.getAll({ status: 'approved' }).catch(() => ({ data: [] }));
-      setProblems(problemsData.data || []);
-
-      // Use loaded GeoJSON or create from API data
       if (geoData && geoData.features) {
         setGeoJsonData(geoData);
-      } else if (unionsData.data && unionsData.data.length > 0) {
-        const features = unionsData.data.map((union) => ({
-          type: 'Feature',
-          properties: {
-            name: union.name,
-            bengaliName: union.bengaliName,
-            _id: union._id,
-            problemCount: union.problemCount,
-          },
-          geometry: union.boundary,
-        }));
-        setGeoJsonData({ type: 'FeatureCollection', features });
       }
 
-      // Compute bounding box from data to fetch roads
+      setProblems(demoProblems);
+
       try {
-        const features = geoData?.features || unionsData.data || [];
+        const features = geoData?.features || [];
         const allCoords = features.flatMap((f) => {
           const geom = f.geometry;
           if (!geom) return [];

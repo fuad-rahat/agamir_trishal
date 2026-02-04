@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { createPortal } from 'react-dom';
+import ReactDOM from 'react-dom';
 import { useParams, useNavigate } from 'react-router-dom';
-import { api } from '../services/api';
+import { demoUnionLookup, demoImageFallback } from '../data/demoUnions';
 
 const UnionDetailPage = () => {
   const { unionId } = useParams();
@@ -13,27 +13,32 @@ const UnionDetailPage = () => {
   const [imageModal, setImageModal] = useState({ open: false, src: '', images: [], currentIndex: 0 });
 
   useEffect(() => {
-    const fetchUnionDetails = async () => {
-      try {
-        setLoading(true);
-        const response = await api.get(`/unions/${unionId}`);
-        setUnion(response.data);
+    const loadUnionDetails = () => {
+      setLoading(true);
+      setImageModal({ open: false, src: '', images: [], currentIndex: 0 });
+      const match = demoUnionLookup[String(unionId)];
+      if (match) {
+        setUnion(match);
         setError('');
-      } catch (err) {
-        setError('ইউনিয়ন তথ্য লোড করতে ব্যর্থ');
-        console.error(err);
-      } finally {
-        setLoading(false);
+      } else {
+        setUnion(null);
+        setError('ডেমো ডাটায় এই ইউনিয়ন পাওয়া যায়নি');
       }
+      setLoading(false);
     };
 
-    fetchUnionDetails();
+    loadUnionDetails();
   }, [unionId]);
 
   const openImageModal = (src, images = [], currentIndex = 0) => {
-    const imgList = Array.isArray(images) ? images : (src ? [src] : []);
-    const safeSrc = src || (imgList[0]);
-    setImageModal({ open: true, src: safeSrc, images: imgList, currentIndex: Math.min(currentIndex, imgList.length - 1) });
+    const imgList = Array.isArray(images) ? images.filter(Boolean) : (src ? [src] : []);
+    const safeList = imgList.length > 0 ? imgList : [demoImageFallback];
+    const safeIndex = Math.max(0, Math.min(currentIndex, safeList.length - 1));
+    setImageModal({ open: true, src: safeList[safeIndex], images: safeList, currentIndex: safeIndex });
+  };
+
+  const handleImageError = (event) => {
+    event.currentTarget.src = demoImageFallback;
   };
 
   const navigateImage = (direction) => {
@@ -223,6 +228,7 @@ const UnionDetailPage = () => {
                             alt={`Introduction ${idx + 1}`}
                             className="w-full h-40 sm:h-48 object-cover rounded-lg border-2 border-gray-300 cursor-pointer hover:border-green-500 transition-all hover:scale-105"
                             onClick={() => openImageModal(img, union.introductionImages, idx)}
+                            onError={handleImageError}
                           />
                           <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition rounded-lg flex items-center justify-center">
                             <i className="fas fa-search-plus text-white opacity-0 group-hover:opacity-100 text-2xl"></i>
@@ -263,6 +269,7 @@ const UnionDetailPage = () => {
                                 alt={`${union.chairman.name} ${idx + 1}`}
                                 className="w-full h-40 sm:h-48 object-cover rounded-lg border-2 border-gray-300 cursor-pointer hover:border-green-500 transition-all hover:scale-105"
                                 onClick={() => openImageModal(img, union.chairman.images, idx)}
+                                onError={handleImageError}
                               />
                               <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition rounded-lg flex items-center justify-center">
                                 <i className="fas fa-search-plus text-white opacity-0 group-hover:opacity-100 text-2xl"></i>
@@ -336,6 +343,7 @@ const UnionDetailPage = () => {
                             alt={place.name}
                             className="w-full h-full object-cover transition-transform duration-500 hover:scale-110 cursor-pointer"
                             onClick={() => openImageModal(place.images[0], place.images, 0)}
+                            onError={handleImageError}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                           <div className="absolute bottom-4 left-4 right-4">
@@ -357,6 +365,7 @@ const UnionDetailPage = () => {
                             alt={place.name}
                             className="w-full h-full object-cover transition-transform duration-500 hover:scale-110 cursor-pointer"
                             onClick={() => openImageModal(place.image, [place.image], 0)}
+                            onError={handleImageError}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                           <div className="absolute bottom-4 left-4 right-4">
@@ -391,6 +400,7 @@ const UnionDetailPage = () => {
                                     alt={`${place.name} ${idx + 2}`}
                                     className="w-full h-20 sm:h-24 object-cover rounded-lg border-2 border-gray-300 cursor-pointer hover:border-green-500 transition-all hover:scale-105"
                                     onClick={() => openImageModal(img, place.images, idx + 1)}
+                                    onError={handleImageError}
                                   />
                                   <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition rounded-lg flex items-center justify-center">
                                     <i className="fas fa-search-plus text-white opacity-0 group-hover:opacity-100"></i>
@@ -444,6 +454,7 @@ const UnionDetailPage = () => {
                             alt={culture.name}
                             className="w-full h-full object-cover transition-transform duration-500 hover:scale-110 cursor-pointer"
                             onClick={() => openImageModal(culture.images[0], culture.images, 0)}
+                            onError={handleImageError}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                           <div className="absolute bottom-4 left-4 right-4">
@@ -488,6 +499,7 @@ const UnionDetailPage = () => {
                                     alt={`${culture.name} ${idx + 2}`}
                                     className="w-full h-20 sm:h-24 object-cover rounded-lg border-2 border-gray-300 cursor-pointer hover:border-purple-500 transition-all hover:scale-105"
                                     onClick={() => openImageModal(img, culture.images, idx + 1)}
+                                    onError={handleImageError}
                                   />
                                   <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition rounded-lg flex items-center justify-center">
                                     <i className="fas fa-search-plus text-white opacity-0 group-hover:opacity-100"></i>
@@ -541,6 +553,7 @@ const UnionDetailPage = () => {
                             alt={food.name}
                             className="w-full h-full object-cover transition-transform duration-500 hover:scale-110 cursor-pointer"
                             onClick={() => openImageModal(food.images[0], food.images, 0)}
+                            onError={handleImageError}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                           <div className="absolute bottom-4 left-4 right-4">
@@ -578,6 +591,7 @@ const UnionDetailPage = () => {
                                     alt={`${food.name} ${idx + 2}`}
                                     className="w-full h-20 sm:h-24 object-cover rounded-lg border-2 border-gray-300 cursor-pointer hover:border-orange-500 transition-all hover:scale-105"
                                     onClick={() => openImageModal(img, food.images, idx + 1)}
+                                    onError={handleImageError}
                                   />
                                   <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition rounded-lg flex items-center justify-center">
                                     <i className="fas fa-search-plus text-white opacity-0 group-hover:opacity-100"></i>
@@ -625,7 +639,7 @@ const UnionDetailPage = () => {
       </div>
 
       {/* Image Modal - rendered in portal so it's always on top and clickable */}
-      {imageModal.open && createPortal(
+      {imageModal.open && ReactDOM.createPortal(
         <div
           role="dialog"
           aria-modal="true"
@@ -668,11 +682,14 @@ const UnionDetailPage = () => {
             )}
 
             <img
-              src={imageModal.src}
+              src={imageModal.src || demoImageFallback}
               alt="বড় দেখুন"
               className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
               onClick={(e) => e.stopPropagation()}
               style={{ pointerEvents: 'auto' }}
+              onError={(e) => {
+                e.currentTarget.src = demoImageFallback;
+              }}
             />
 
             {(imageModal.images && imageModal.images.length > 0) && (
