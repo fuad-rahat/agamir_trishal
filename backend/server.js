@@ -7,18 +7,29 @@ const app = express();
 
 // CORS – allow frontend and dev
 const allowedOrigins = [
-  process.env.FRONTEND_URL,
+  'https://agamir-trishal-web.vercel.app',
   'http://localhost:3000',
 ];
+
+if (process.env.FRONTEND_URL) {
+  process.env.FRONTEND_URL.split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean)
+    .forEach((origin) => allowedOrigins.push(origin));
+}
+
+const isAllowedOrigin = (origin) => {
+  if (!origin) return true;
+  if (allowedOrigins.includes(origin)) return true;
+
+  const vercelPreviewPattern = /^https:\/\/agamir-trishal-web(-[\w-]+)?\.vercel\.app$/;
+  return vercelPreviewPattern.test(origin);
+};
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow non-browser / server-to-server or when no origin
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin)) return callback(null, true);
-      // Fallback: allow any origin if FRONTEND_URL not set
-      if (!process.env.FRONTEND_URL) return callback(null, true);
+      if (isAllowedOrigin(origin)) return callback(null, true);
       return callback(new Error('Not allowed by CORS'));
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
