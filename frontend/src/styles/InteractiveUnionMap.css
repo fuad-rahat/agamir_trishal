@@ -216,9 +216,7 @@
 }
 
 .home-map-card {
-  background: #fff;
   border-radius: 1.25rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   padding: rem;
   overflow: hidden;
 }
