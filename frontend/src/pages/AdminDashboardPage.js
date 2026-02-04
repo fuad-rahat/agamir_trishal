@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
-import ImageModal from '../components/ImageModal';
 
 const AdminDashboardPage = () => {
   const navigate = useNavigate();

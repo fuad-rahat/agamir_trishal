@@ -111,7 +111,7 @@ const ProblemsPage = () => {
     };
 
     applyFilter();
-  }, [loadData, selectedUnion, selectedCategory]);
+  }, [loadData, selectedUnion, selectedCategory, fetchData, cacheKeys.problems]);
 
   const handleShowDetails = (problem) => {
     alert(`সমস্যা: ${problem.title}\n\nবর্ণনা: ${problem.description}`);
