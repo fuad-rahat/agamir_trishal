@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/InteractiveUnionMap.css';
 
 const InteractiveUnionMap = () => {
   const navigate = useNavigate();
   const [selectedUnion, setSelectedUnion] = useState(null);
-  const [hoveredUnion, setHoveredUnion] = useState(null);
   const [svgContent, setSvgContent] = useState(null);
 
   // Union metadata for details panel
-  const unions = [
+  const unions = useMemo(() => [
     {
       id: 1,
       name: 'Mothbari',
@@ -142,7 +141,7 @@ const InteractiveUnionMap = () => {
       color: '#ef4444',
         pathId: 'SvgjsPath1015'
     }
-  ];
+  ], []);
 
     // Load SVG and make paths interactive (uses trishal_new.svg)
     useEffect(() => {
@@ -203,8 +202,6 @@ const InteractiveUnionMap = () => {
                   return !bgColors.some(bgColor => fill.includes(bgColor));
                 });
                 
-                // Count how many unmatched unions remain
-                const unmatchedUnions = unions.length - matchedUnions.size;
                 const unmatchedIdx = idx - matchedUnions.size;
                 
                 if (unmatchedIdx >= 0 && unmatchedIdx < unassignedEls.length) {
@@ -230,29 +227,23 @@ const InteractiveUnionMap = () => {
                   // Navigate to union detail page
                   navigate(`/union/${union.id}`);
                 };
-                const onEnter = () => {
-                  setHoveredUnion(union);
-                  el.style.filter = 'drop-shadow(4px 4px 8px rgba(0,0,0,0.25)) brightness(1.1)';
-                  el.setAttribute('stroke-width', '4');
-                };
-                const onLeave = () => {
-                  setHoveredUnion(null);
-                  el.style.filter = 'drop-shadow(2px 2px 4px rgba(0,0,0,0.15))';
-                  el.setAttribute('stroke-width', '2');
-                };
-
                 el.style.cursor = 'pointer';
                 el.style.transition = 'all 0.25s ease';
                 el.style.pointerEvents = 'auto';
 
                 el.addEventListener('click', onClick);
-                el.addEventListener('mouseenter', onEnter);
-                el.addEventListener('mouseleave', onLeave);
+                el.addEventListener('mouseenter', () => {
+                  el.style.filter = 'drop-shadow(4px 4px 8px rgba(0,0,0,0.25)) brightness(1.1)';
+                  el.setAttribute('stroke-width', '4');
+                });
+                el.addEventListener('mouseleave', () => {
+                  el.style.filter = 'drop-shadow(2px 2px 4px rgba(0,0,0,0.15))';
+                  el.setAttribute('stroke-width', '2');
+                });
 
                 cleanupFns.push(() => {
                   el.removeEventListener('click', onClick);
-                  el.removeEventListener('mouseenter', onEnter);
-                  el.removeEventListener('mouseleave', onLeave);
+                  el.removeEventListener('click', onClick);
                 });
               } else {
                 console.warn(`Could not find element for union: ${union.name} (${union.color})`);
@@ -269,7 +260,7 @@ const InteractiveUnionMap = () => {
       return () => {
         cleanupFns.forEach(fn => fn());
       };
-    }, []);
+    }, [navigate, unions]);
 
   // Union list with IDs for navigation (order: ১নং to ১২নং)
   const unionList = [
