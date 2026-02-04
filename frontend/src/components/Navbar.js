@@ -10,11 +10,11 @@ const Navbar = ({ isAdmin = false }) => {
   return (
     <nav className="bg-gradient-to-r from-green-600 to-green-700 shadow-lg sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex items-center h-16 relative">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="bg-white rounded-full p-2">
-              <i className="fas fa-map text-green-600 text-xl"></i>
+          <Link to="/" className="flex items-center space-x-2 mx-auto md:mx-0">
+            <div className="bg-white rounded-full p-3 sm:p-2">
+              <i className="fas fa-map text-green-600 text-2xl sm:text-xl"></i>
             </div>
             <div className="hidden sm:block">
               <h1 className="text-white font-bold text-lg">Trishal Civic Map</h1>
@@ -78,8 +78,9 @@ const Navbar = ({ isAdmin = false }) => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white p-2 rounded-md hover:bg-green-700 transition"
+            className="md:hidden text-white p-2 rounded-md hover:bg-green-700 transition absolute right-0"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="মেনু টগল করুন"
           >
             <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'} text-xl`}></i>
           </button>

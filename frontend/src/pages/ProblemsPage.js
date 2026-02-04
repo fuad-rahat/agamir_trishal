@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { problemsAPI, unionsAPI } from '../services/api';
 import ProblemCard from '../components/ProblemCard';
@@ -10,14 +10,52 @@ const ProblemsPage = () => {
   const [selectedUnion, setSelectedUnion] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [loading, setLoading] = useState(true);
+  const hasLoadedCache = useRef(false);
+  const cacheKeys = useMemo(() => ({
+    problems: 'cachedProblems',
+    unions: 'cachedUnions',
+  }), []);
+
+  const loadData = useCallback(async () => {
+    try {
+      if (!hasLoadedCache.current) {
+        setLoading(true);
+      }
+      const [problemsRes, unionsRes] = await Promise.all([
+        problemsAPI.getAll(),
+        unionsAPI.getAll()
+      ]);
+      setProblems(problemsRes.data);
+      setUnions(unionsRes.data);
+      sessionStorage.setItem(cacheKeys.problems, JSON.stringify(problemsRes.data));
+      sessionStorage.setItem(cacheKeys.unions, JSON.stringify(unionsRes.data));
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false);
+    }
+  }, [cacheKeys]);
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    const cachedProblems = sessionStorage.getItem(cacheKeys.problems);
+    const cachedUnions = sessionStorage.getItem(cacheKeys.unions);
+    if (cachedProblems && cachedUnions) {
+      try {
+        setProblems(JSON.parse(cachedProblems));
+        setUnions(JSON.parse(cachedUnions));
+        setLoading(false);
+        hasLoadedCache.current = true;
+      } catch (error) {
+        console.error('Error parsing cached data:', error);
+      }
+    }
+    loadData();
+  }, [cacheKeys, loadData]);
 
   useEffect(() => {
     const applyFilter = async () => {
       try {
+        setLoading(true);
         const params = {};
         if (selectedUnion) params.union = selectedUnion;
         if (selectedCategory) params.category = selectedCategory;
@@ -26,30 +64,17 @@ const ProblemsPage = () => {
           const response = await problemsAPI.getAll(params);
           setProblems(response.data);
         } else {
-          await fetchData();
+          await loadData();
         }
       } catch (error) {
         console.error('Error filtering problems:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
     applyFilter();
-  }, [selectedUnion, selectedCategory]);
-
-  const fetchData = async () => {
-    try {
-      const [problemsRes, unionsRes] = await Promise.all([
-        problemsAPI.getAll(),
-        unionsAPI.getAll()
-      ]);
-      setProblems(problemsRes.data);
-      setUnions(unionsRes.data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [loadData, selectedUnion, selectedCategory]);
 
   const handleShowDetails = (problem) => {
     alert(`সমস্যা: ${problem.title}\n\nবর্ণনা: ${problem.description}`);
