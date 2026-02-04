@@ -1,13 +1,13 @@
 import axios from 'axios';
 
 const normalizeApiBase = (value) => {
-  if (!value) return 'http://localhost:5000/api';
-  const trimmed = value.trim().replace(/\/+$/, '');
-  if (trimmed.endsWith('/api')) return trimmed;
-  return `${trimmed}/api`;
+  const trimmed = value.replace(/\/+$/, '');
+  return trimmed.endsWith('/api') ? trimmed : `${trimmed}/api`;
 };
 
-const API_BASE = normalizeApiBase(process.env.REACT_APP_API_URL || 'http://localhost:5000');
+const API_BASE = normalizeApiBase(
+  process.env.REACT_APP_API_URL || 'http://localhost:5000'
+);
 
 export const api = axios.create({
   baseURL: API_BASE,

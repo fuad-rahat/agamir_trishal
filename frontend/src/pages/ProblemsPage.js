@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { problemsAPI, unionsAPI } from '../services/api';
 import ProblemCard from '../components/ProblemCard';
@@ -10,12 +10,31 @@ const ProblemsPage = () => {
   const [selectedUnion, setSelectedUnion] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const hasLoadedCache = useRef(false);
   const cacheKeys = useMemo(() => ({
     problems: 'cachedProblems',
     unions: 'cachedUnions',
-    timestamp: 'cacheTimestamp',
   }), []);
+
+  const fetchData = useCallback(async () => {
+    try {
+      if (!hasLoadedCache.current) {
+        setLoading(true);
+      }
+      const [problemsRes, unionsRes] = await Promise.all([
+        problemsAPI.getAll(),
+        unionsAPI.getAll()
+      ]);
+      setProblems(problemsRes.data);
+      setUnions(unionsRes.data);
+      sessionStorage.setItem(cacheKeys.problems, JSON.stringify(problemsRes.data));
+      sessionStorage.setItem(cacheKeys.unions, JSON.stringify(unionsRes.data));
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false);
+    }
+  }, [cacheKeys]);
 
   // Load cached data immediately for instant display
   useEffect(() => {
@@ -96,8 +115,20 @@ const ProblemsPage = () => {
 
   // Initial load
   useEffect(() => {
+    const cachedProblems = sessionStorage.getItem(cacheKeys.problems);
+    const cachedUnions = sessionStorage.getItem(cacheKeys.unions);
+    if (cachedProblems && cachedUnions) {
+      try {
+        setProblems(JSON.parse(cachedProblems));
+        setUnions(JSON.parse(cachedUnions));
+        setLoading(false);
+        hasLoadedCache.current = true;
+      } catch (error) {
+        console.error('Error parsing cached data:', error);
+      }
+    }
     fetchData();
-  }, [fetchData]);
+  }, [cacheKeys, fetchData]);
 
   // Filter handling - optimized to avoid unnecessary calls
   useEffect(() => {
@@ -118,7 +149,6 @@ const ProblemsPage = () => {
     const applyFilter = async () => {
       try {
         setLoading(true);
-        setError('');
         const params = {};
         if (selectedUnion) params.union = selectedUnion;
         if (selectedCategory) params.category = selectedCategory;
@@ -127,16 +157,15 @@ const ProblemsPage = () => {
         if (response?.data) {
           setProblems(response.data);
         }
-      } catch (err) {
-        console.error('Error filtering problems:', err);
-        setError(err.response?.data?.error || 'ফিল্টার প্রয়োগ করতে সমস্যা হয়েছে');
+      } catch (error) {
+        console.error('Error filtering problems:', error);
       } finally {
         setLoading(false);
       }
     };
 
     applyFilter();
-  }, [selectedUnion, selectedCategory, cacheKeys, fetchData]);
+  }, [fetchData, selectedUnion, selectedCategory]);
 
   const handleShowDetails = (problem) => {
     alert(`সমস্যা: ${problem.title}\n\nবর্ণনা: ${problem.description}`);

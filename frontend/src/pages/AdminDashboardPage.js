@@ -10,41 +10,8 @@ const AdminDashboardPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [adminRole, setAdminRole] = useState('');
-  const [imageModal, setImageModal] = useState({ isOpen: false, images: [], currentIndex: 0 });
 
   const adminName = localStorage.getItem('adminName');
-
-  const openImageModal = (src, images = [], currentIndex = 0) => {
-    // Handle both signatures: (images, index) and (src, images, index)
-    let imgList, safeIndex;
-    if (Array.isArray(src)) {
-      // Called as openImageModal(images, index)
-      imgList = src.filter(Boolean);
-      safeIndex = images; // images parameter is actually the index
-    } else {
-      // Called as openImageModal(src, images, index)
-      imgList = Array.isArray(images) ? images.filter(Boolean) : (src ? [src] : []);
-      safeIndex = currentIndex;
-    }
-    
-    if (imgList.length > 0) {
-      const validIndex = Math.max(0, Math.min(safeIndex, imgList.length - 1));
-      setImageModal({ isOpen: true, images: imgList, currentIndex: validIndex });
-    }
-  };
-
-  const navigateImage = (direction) => {
-    const { images, currentIndex } = imageModal;
-    if (!images || images.length === 0) return;
-    let newIndex = currentIndex + direction;
-    if (newIndex < 0) newIndex = images.length - 1;
-    if (newIndex >= images.length) newIndex = 0;
-    setImageModal(prev => ({ ...prev, currentIndex: newIndex }));
-  };
-
-  const closeImageModal = () => {
-    setImageModal({ isOpen: false, images: [], currentIndex: 0 });
-  };
 
   const fetchUnions = useCallback(async () => {
     try {
@@ -195,34 +162,11 @@ const AdminDashboardPage = () => {
                 <h4 className="text-lg font-bold text-gray-800 mb-4">
                   <i className="fas fa-info-circle text-green-600 mr-2"></i>সংক্ষিপ্ত পরিচয়
                 </h4>
-                <p className="text-gray-700 text-sm leading-relaxed mb-4">
+                <p className="text-gray-700 text-sm leading-relaxed">
                   {selectedUnion.introduction || 'এই ইউনিয়নের সংক্ষিপ্ত পরিচয় এখনো যোগ করা হয়নি।'}
                 </p>
-                {selectedUnion.introductionImages && selectedUnion.introductionImages.length > 0 && (
-                  <div className="grid grid-cols-3 gap-2 mt-4">
-                    {selectedUnion.introductionImages.slice(0, 3).map((img, idx) => (
-                      <img
-                        key={idx}
-                        src={img}
-                        alt={`Introduction ${idx + 1}`}
-                        onClick={() => openImageModal(selectedUnion.introductionImages, idx)}
-                        className="w-full h-24 object-cover rounded-lg cursor-pointer hover:opacity-80 transition"
-                        onError={(e) => {
-                          e.target.src = 'https://via.placeholder.com/300x200?text=Image';
-                        }}
-                      />
-                    ))}
-                    {selectedUnion.introductionImages.length > 3 && (
-                      <div
-                        onClick={() => openImageModal(selectedUnion.introductionImages, 3)}
-                        className="w-full h-24 bg-gray-200 rounded-lg flex items-center justify-center cursor-pointer hover:bg-gray-300 transition text-gray-600 text-sm font-semibold"
-                      >
-                        +{selectedUnion.introductionImages.length - 3}
-                      </div>
-                    )}
-                  </div>
-                )}
               </div>
+            </div>
 
               <div className="bg-white rounded-lg shadow-md p-6">
                 <h4 className="text-lg font-bold text-gray-800 mb-4">
@@ -233,22 +177,6 @@ const AdminDashboardPage = () => {
                     <p className="text-gray-800 font-semibold">{selectedUnion.chairman.name}</p>
                     {selectedUnion.chairman.contactNumber && (
                       <p className="text-gray-600 text-sm mt-1">{selectedUnion.chairman.contactNumber}</p>
-                    )}
-                    {selectedUnion.chairman.images && selectedUnion.chairman.images.length > 0 && (
-                      <div className="grid grid-cols-2 gap-2 mt-4">
-                        {selectedUnion.chairman.images.map((img, idx) => (
-                          <img
-                            key={idx}
-                            src={img}
-                            alt={`Chairman ${idx + 1}`}
-                            onClick={() => openImageModal(selectedUnion.chairman.images, idx)}
-                            className="w-full h-32 object-cover rounded-lg cursor-pointer hover:opacity-80 transition"
-                            onError={(e) => {
-                              e.target.src = 'https://via.placeholder.com/300x200?text=Image';
-                            }}
-                          />
-                        ))}
-                      </div>
                     )}
                   </>
                 ) : (
@@ -261,37 +189,11 @@ const AdminDashboardPage = () => {
                   <i className="fas fa-location-dot text-green-600 mr-2"></i>ভ্রমণ স্থান
                 </h4>
                 {selectedUnion.placesToVisit?.length > 0 ? (
-                  <div className="space-y-4">
+                  <ul className="space-y-2 text-sm text-gray-700">
                     {selectedUnion.placesToVisit.slice(0, 4).map((place, idx) => (
-                      <div key={idx}>
-                        <p className="text-sm font-semibold text-gray-800 mb-2">• {place.bengaliName || place.name}</p>
-                        {place.images && place.images.length > 0 && (
-                          <div className="flex gap-2 mt-2">
-                            {place.images.slice(0, 3).map((img, imgIdx) => (
-                              <img
-                                key={imgIdx}
-                                src={img}
-                                alt={place.bengaliName || place.name}
-                                onClick={() => openImageModal(place.images, imgIdx)}
-                                className="w-20 h-20 object-cover rounded cursor-pointer hover:opacity-80 transition"
-                                onError={(e) => {
-                                  e.target.src = 'https://via.placeholder.com/100x100?text=Image';
-                                }}
-                              />
-                            ))}
-                            {place.images.length > 3 && (
-                              <div
-                                onClick={() => openImageModal(place.images, 3)}
-                                className="w-20 h-20 bg-gray-200 rounded flex items-center justify-center cursor-pointer hover:bg-gray-300 transition text-gray-600 text-xs font-semibold"
-                              >
-                                +{place.images.length - 3}
-                              </div>
-                            )}
-                          </div>
-                        )}
-                      </div>
+                      <li key={idx}>• {place.bengaliName || place.name}</li>
                     ))}
-                  </div>
+                  </ul>
                 ) : (
                   <p className="text-gray-600 text-sm">ভ্রমণ স্থানের তথ্য যোগ করা হয়নি।</p>
                 )}
@@ -317,37 +219,11 @@ const AdminDashboardPage = () => {
                   <i className="fas fa-utensils text-orange-600 mr-2"></i>বিখ্যাত খাবার
                 </h4>
                 {selectedUnion.famousFood?.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <ul className="space-y-2 text-sm text-gray-700">
                     {selectedUnion.famousFood.slice(0, 6).map((food, idx) => (
-                      <div key={idx} className="border rounded-lg p-3">
-                        <p className="text-sm font-semibold text-gray-800 mb-2">• {food.bengaliName || food.name}</p>
-                        {food.images && food.images.length > 0 && (
-                          <div className="flex gap-2 mt-2">
-                            {food.images.slice(0, 2).map((img, imgIdx) => (
-                              <img
-                                key={imgIdx}
-                                src={img}
-                                alt={food.bengaliName || food.name}
-                                onClick={() => openImageModal(food.images, imgIdx)}
-                                className="w-16 h-16 object-cover rounded cursor-pointer hover:opacity-80 transition"
-                                onError={(e) => {
-                                  e.target.src = 'https://via.placeholder.com/100x100?text=Image';
-                                }}
-                              />
-                            ))}
-                            {food.images.length > 2 && (
-                              <div
-                                onClick={() => openImageModal(food.images, 2)}
-                                className="w-16 h-16 bg-gray-200 rounded flex items-center justify-center cursor-pointer hover:bg-gray-300 transition text-gray-600 text-xs font-semibold"
-                              >
-                                +{food.images.length - 2}
-                              </div>
-                            )}
-                          </div>
-                        )}
-                      </div>
+                      <li key={idx}>• {food.bengaliName || food.name}</li>
                     ))}
-                  </div>
+                  </ul>
                 ) : (
                   <p className="text-gray-600 text-sm">বিখ্যাত খাবারের তথ্য যোগ করা হয়নি।</p>
                 )}
@@ -355,15 +231,6 @@ const AdminDashboardPage = () => {
             </div>
           </div>
         )}
-
-        {/* Image Modal */}
-        <ImageModal
-          isOpen={imageModal.isOpen}
-          images={imageModal.images}
-          currentIndex={imageModal.currentIndex}
-          onClose={closeImageModal}
-          onNavigate={navigateImage}
-        />
       </div>
     </div>
   );
