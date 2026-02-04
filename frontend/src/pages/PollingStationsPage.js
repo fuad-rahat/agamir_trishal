@@ -23,11 +23,21 @@ const PollingStationsPage = () => {
   }, []);
 
   useEffect(() => {
-    if (selectedUnion) {
-      fetchStationsByUnion();
-    } else {
-      fetchAllStations();
-    }
+    const loadStations = async () => {
+      try {
+        if (selectedUnion) {
+          const response = await pollingStationsAPI.getByUnion(selectedUnion);
+          setStations(response.data);
+        } else {
+          const response = await pollingStationsAPI.getAll();
+          setStations(response.data);
+        }
+      } catch (error) {
+        console.error('Error fetching stations:', error);
+      }
+    };
+
+    loadStations();
   }, [selectedUnion]);
 
   const fetchData = async () => {
@@ -42,24 +52,6 @@ const PollingStationsPage = () => {
       console.error('Error fetching data:', error);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const fetchAllStations = async () => {
-    try {
-      const response = await pollingStationsAPI.getAll();
-      setStations(response.data);
-    } catch (error) {
-      console.error('Error fetching stations:', error);
-    }
-  };
-
-  const fetchStationsByUnion = async () => {
-    try {
-      const response = await pollingStationsAPI.getByUnion(selectedUnion);
-      setStations(response.data);
-    } catch (error) {
-      console.error('Error fetching stations:', error);
     }
   };
 

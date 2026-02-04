@@ -16,7 +16,24 @@ const ProblemsPage = () => {
   }, []);
 
   useEffect(() => {
-    filterProblems();
+    const applyFilter = async () => {
+      try {
+        const params = {};
+        if (selectedUnion) params.union = selectedUnion;
+        if (selectedCategory) params.category = selectedCategory;
+
+        if (selectedUnion || selectedCategory) {
+          const response = await problemsAPI.getAll(params);
+          setProblems(response.data);
+        } else {
+          await fetchData();
+        }
+      } catch (error) {
+        console.error('Error filtering problems:', error);
+      }
+    };
+
+    applyFilter();
   }, [selectedUnion, selectedCategory]);
 
   const fetchData = async () => {
@@ -31,33 +48,6 @@ const ProblemsPage = () => {
       console.error('Error fetching data:', error);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const filterProblems = async () => {
-    try {
-      const params = {};
-      if (selectedUnion) params.union = selectedUnion;
-      if (selectedCategory) params.category = selectedCategory;
-      if (selectedUnion || selectedCategory) {
-        const response = await problemsAPI.getAll(params);
-        setProblems(response.data);
-      } else {
-        fetchData();
-      }
-    } catch (error) {
-      console.error('Error filtering problems:', error);
-    }
-  };
-
-  const handleUpvote = async (problemId) => {
-    try {
-      await problemsAPI.upvote(problemId);
-      setProblems(problems.map(p => 
-        p._id === problemId ? { ...p, upvotes: (p.upvotes || 0) + 1 } : p
-      ));
-    } catch (error) {
-      console.error('Error upvoting problem:', error);
     }
   };
 
