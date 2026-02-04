@@ -75,21 +75,30 @@ const mongooseOptions = {
   bufferCommands: false, // Disable mongoose buffering
 };
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://trishal_user:trishal123@cluster0.mongodb.net/trishal-civic?retryWrites=true&w=majority', mongooseOptions)
-.then(() => {
-  console.log('MongoDB Connected Successfully');
-  // Set mongoose to use the connection
-  mongoose.connection.on('error', (err) => {
-    console.error('MongoDB connection error:', err);
-  });
-  mongoose.connection.on('disconnected', () => {
-    console.warn('MongoDB disconnected');
-  });
-})
-.catch(err => {
-  console.error('MongoDB Connection Error:', err);
-  process.exit(1);
-});
+// MongoDB Connection - don't exit process on failure (for serverless)
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://trishal_user:trishal123@cluster0.mongodb.net/trishal-civic?retryWrites=true&w=majority', mongooseOptions);
+    console.log('MongoDB Connected Successfully');
+    
+    mongoose.connection.on('error', (err) => {
+      console.error('MongoDB connection error:', err);
+    });
+    
+    mongoose.connection.on('disconnected', () => {
+      console.warn('MongoDB disconnected');
+    });
+    
+    return true;
+  } catch (err) {
+    console.error('MongoDB Connection Error:', err);
+    // Don't exit process in serverless - let it retry on next request
+    return false;
+  }
+};
+
+// Connect to database (non-blocking for serverless)
+connectDB();
 
 // Routes
 app.use('/api/unions', require('./routes/unionRoutes'));
@@ -100,31 +109,43 @@ app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
 app.use('/api/helpline', require('./routes/helplineRoutes'));
 
-// Health Check
+// Health Check - must handle errors gracefully
 app.get('/api/health', (req, res) => {
-  const mongoose = require('mongoose');
-  const dbStatus = mongoose.connection.readyState;
-  const dbStates = {
-    0: 'disconnected',
-    1: 'connected',
-    2: 'connecting',
-    3: 'disconnecting'
-  };
-  
-  res.json({ 
-    status: 'Server is running',
-    database: {
-      status: dbStates[dbStatus] || 'unknown',
-      readyState: dbStatus
-    },
-    cors: {
-      allowedOrigins: allowedOrigins,
-      frontendUrl: process.env.FRONTEND_URL
-    }
-  });
+  try {
+    const mongoose = require('mongoose');
+    const dbStatus = mongoose.connection?.readyState || 0;
+    const dbStates = {
+      0: 'disconnected',
+      1: 'connected',
+      2: 'connecting',
+      3: 'disconnecting'
+    };
+    
+    res.json({ 
+      status: 'Server is running',
+      database: {
+        status: dbStates[dbStatus] || 'unknown',
+        readyState: dbStatus
+      },
+      cors: {
+        allowedOrigins: allowedOrigins,
+        frontendUrl: process.env.FRONTEND_URL
+      },
+      environment: {
+        nodeEnv: process.env.NODE_ENV || 'development',
+        vercel: process.env.VERCEL || 'false'
+      }
+    });
+  } catch (error) {
+    console.error('Health check error:', error);
+    res.status(500).json({ 
+      status: 'Server error',
+      error: error.message 
+    });
+  }
 });
 
-// Error handling middleware - MUST be after routes but before listen
+// Error handling middleware - MUST be after routes
 // This ensures CORS headers are sent even on errors
 app.use((err, req, res, next) => {
   console.error('Error:', err);
@@ -134,6 +155,9 @@ app.use((err, req, res, next) => {
   if (origin && isAllowedOrigin(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Vary', 'Origin');
+  } else if (!origin) {
+    // Allow requests with no origin
+    res.setHeader('Access-Control-Allow-Origin', '*');
   }
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
@@ -147,25 +171,38 @@ app.use((err, req, res, next) => {
   });
 });
 
-// 404 handler
+// 404 handler - must be last
 app.use((req, res) => {
   // Set CORS headers for 404
   const origin = req.headers.origin;
   if (origin && isAllowedOrigin(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Vary', 'Origin');
+  } else if (!origin) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
   }
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   
-  res.status(404).json({ error: 'Route not found' });
+  res.status(404).json({ error: 'Route not found', path: req.path });
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// Export app for Vercel serverless functions
+module.exports = app;
+
+// Only start server if not in serverless environment
+if (process.env.VERCEL !== '1' && !process.env.AWS_LAMBDA_FUNCTION_NAME) {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+    console.log('CORS Allowed Origins:', allowedOrigins);
+    console.log('FRONTEND_URL from env:', process.env.FRONTEND_URL);
+    console.log('MongoDB URI:', process.env.MONGODB_URI ? 'Set' : 'Not set');
+  });
+} else {
+  console.log('Running in serverless mode');
   console.log('CORS Allowed Origins:', allowedOrigins);
   console.log('FRONTEND_URL from env:', process.env.FRONTEND_URL);
   console.log('MongoDB URI:', process.env.MONGODB_URI ? 'Set' : 'Not set');
-});
+}
