@@ -9,6 +9,7 @@ const app = express();
 const allowedOrigins = [
   'https://agamir-trishal-web.vercel.app',
   'http://localhost:3000',
+  'https://agamir-trishal.vercel.app'
 ];
 
 // Add FRONTEND_URL from environment if provided
