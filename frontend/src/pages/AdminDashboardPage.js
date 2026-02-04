@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
+import ImageModal from '../components/ImageModal';
 
 const AdminDashboardPage = () => {
   const navigate = useNavigate();
@@ -166,6 +167,7 @@ const AdminDashboardPage = () => {
                   {selectedUnion.introduction || 'এই ইউনিয়নের সংক্ষিপ্ত পরিচয় এখনো যোগ করা হয়নি।'}
                 </p>
               </div>
+            </div>
 
               <div className="bg-white rounded-lg shadow-md p-6">
                 <h4 className="text-lg font-bold text-gray-800 mb-4">

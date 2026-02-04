@@ -62,7 +62,11 @@ const problemSchema = new mongoose.Schema({
   }
 });
 
-// Create 2dsphere index for location
+// Create indexes for faster queries
 problemSchema.index({ location: '2dsphere' });
+problemSchema.index({ union: 1, status: 1 }); // Compound index for union + status queries
+problemSchema.index({ status: 1, createdAt: -1 }); // For status-based sorting
+problemSchema.index({ category: 1, status: 1 }); // For category filtering
+problemSchema.index({ upvotes: -1, createdAt: -1 }); // For sorting by popularity
 
 module.exports = mongoose.model('Problem', problemSchema);

@@ -12,21 +12,35 @@ exports.adminLogin = async (req, res) => {
 
     const admin = await Admin.findOne({ email });
     if (!admin) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+      return res.status(401).json({ message: 'অবৈধ ইমেল বা পাসওয়ার্ড' });
     }
 
     const isPasswordValid = await admin.comparePassword(password);
     if (!isPasswordValid) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+      return res.status(401).json({ message: 'অবৈধ ইমেল বা পাসওয়ার্ড' });
+    }
+
+    // Only allow admin or super_admin roles
+    if (admin.role !== 'admin' && admin.role !== 'super_admin') {
+      return res.status(403).json({ message: 'অ্যাক্সেস নেই: আপনার রোল এই পোর্টালে লগইন করার অনুমতি দেয় না' });
     }
 
     const token = jwt.sign(
-      { id: admin._id, email: admin.email, role: admin.role },
-      process.env.JWT_SECRET || 'your_jwt_secret_key_here',
-      { expiresIn: '24h' }
+      { adminId: admin._id, email: admin.email, role: admin.role, permissions: admin.permissions },
+      process.env.JWT_SECRET || 'your-secret-key',
+      { expiresIn: '7d' }
     );
 
-    res.json({ token, admin: { email: admin.email, role: admin.role } });
+    res.json({
+      message: 'লগইন সফল',
+      token,
+      admin: {
+        id: admin._id,
+        email: admin.email,
+        fullName: admin.fullName,
+        role: admin.role
+      }
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

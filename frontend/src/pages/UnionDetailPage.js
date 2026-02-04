@@ -10,7 +10,7 @@ const UnionDetailPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('overview');
-  const [imageModal, setImageModal] = useState({ open: false, src: '', images: [], currentIndex: 0 });
+  const [imageModal, setImageModal] = useState({ isOpen: false, images: [], currentIndex: 0 });
 
   useEffect(() => {
     const loadUnionDetails = () => {
@@ -51,13 +51,12 @@ const UnionDetailPage = () => {
 
     setImageModal(prev => ({
       ...prev,
-      src: images[newIndex],
       currentIndex: newIndex
     }));
   };
 
   const closeImageModal = () => {
-    setImageModal({ open: false, src: '', images: [], currentIndex: 0 });
+    setImageModal({ isOpen: false, images: [], currentIndex: 0 });
   };
 
   if (loading) {
