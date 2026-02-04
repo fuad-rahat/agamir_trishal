@@ -1,85 +1,153 @@
 const demoImageBase = 'https://images.unsplash.com';
 
-const images = {
-  river: `${demoImageBase}/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=80`,
-  market: `${demoImageBase}/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80`,
-  culture: `${demoImageBase}/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80`,
-  food: `${demoImageBase}/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80`,
-  mosque: `${demoImageBase}/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=900&q=80`,
-  chair: `${demoImageBase}/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80`,
-  landscape: `${demoImageBase}/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=80`,
-  lake: `${demoImageBase}/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=900&q=80`,
-};
-
-const buildUnion = ({ id, name, bengaliName, populationEstimate, areaSize, villages, voters }) => ({
-  id,
-  name,
-  bengaliName,
-  populationEstimate,
-  areaSize,
-  villages,
-  voters,
-  problemCount: Math.floor(Number(villages || 10) / 2),
-  introduction: `${bengaliName} ইউনিয়ন ত্রিশাল উপজেলার একটি ঐতিহ্যবাহী অঞ্চল। এখানে কৃষি, শিক্ষা ও স্থানীয় ব্যবসা মিলিয়ে বৈচিত্র্যময় জীবনধারা গড়ে উঠেছে।`,
-  introductionFields: [
-    { key: 'প্রতিষ্ঠা সাল', value: '১৯৭৪' },
-    { key: 'শিক্ষা প্রতিষ্ঠান', value: '৫ টি' },
-    { key: 'হাট-বাজার', value: '২ টি' },
-    { key: 'উল্লেখযোগ্য নদী', value: '১ টি' },
-  ],
-  introductionImages: [images.landscape, images.river, images.market],
-  chairman: {
-    name: 'মোঃ হাসান উদ্দিন',
-    contactNumber: '+8801XXXXXXXXX',
-    images: [images.chair, images.mosque],
+const imageSets = [
+  {
+    landscape: `${demoImageBase}/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=80`,
+    river: `${demoImageBase}/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=80`,
+    market: `${demoImageBase}/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80`,
+    culture: `${demoImageBase}/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80`,
+    food: `${demoImageBase}/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80`,
+    mosque: `${demoImageBase}/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=900&q=80`,
+    chair: `${demoImageBase}/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80`,
+    lake: `${demoImageBase}/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=900&q=80`,
   },
-  placesToVisit: [
-    {
-      name: 'Union Riverside Park',
-      bengaliName: 'নদীর পাড়ের উদ্যান',
-      description: 'সন্ধ্যায় হাঁটার জন্য শান্ত পরিবেশ ও নদীর সৌন্দর্য উপভোগ করার স্থান।',
-      images: [images.river, images.lake, images.landscape],
+  {
+    landscape: `${demoImageBase}/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80`,
+    river: `${demoImageBase}/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=900&q=80`,
+    market: `${demoImageBase}/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=80`,
+    culture: `${demoImageBase}/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80`,
+    food: `${demoImageBase}/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80`,
+    mosque: `${demoImageBase}/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=900&q=80`,
+    chair: `${demoImageBase}/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80`,
+    lake: `${demoImageBase}/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80`,
+  },
+  {
+    landscape: `${demoImageBase}/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=80`,
+    river: `${demoImageBase}/photo-1455218873509-8097305ee378?auto=format&fit=crop&w=900&q=80`,
+    market: `${demoImageBase}/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80`,
+    culture: `${demoImageBase}/photo-1470770903676-69b98201ea1c?auto=format&fit=crop&w=900&q=80`,
+    food: `${demoImageBase}/photo-1482049016688-2d3e1b311543?auto=format&fit=crop&w=900&q=80`,
+    mosque: `${demoImageBase}/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80`,
+    chair: `${demoImageBase}/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80`,
+    lake: `${demoImageBase}/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80`,
+  },
+  {
+    landscape: `${demoImageBase}/photo-1470770903676-69b98201ea1c?auto=format&fit=crop&w=900&q=80`,
+    river: `${demoImageBase}/photo-1431794062232-2a99a5431c6c?auto=format&fit=crop&w=900&q=80`,
+    market: `${demoImageBase}/photo-1458642849426-cfb724f15ef7?auto=format&fit=crop&w=900&q=80`,
+    culture: `${demoImageBase}/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80`,
+    food: `${demoImageBase}/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=900&q=80`,
+    mosque: `${demoImageBase}/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80`,
+    chair: `${demoImageBase}/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80`,
+    lake: `${demoImageBase}/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=900&q=80`,
+  },
+];
+
+const chairmanNames = [
+  'মোঃ হাসান উদ্দিন',
+  'মোঃ রফিকুল ইসলাম',
+  'মোঃ শাহজাহান মিয়া',
+  'মোঃ আনোয়ার হোসেন',
+  'মোঃ ফরিদ আহমেদ',
+  'মোঃ জালাল উদ্দিন',
+  'মোঃ হাবিবুর রহমান',
+  'মোঃ নুরুল ইসলাম',
+  'মোঃ কামাল উদ্দিন',
+  'মোঃ আব্দুল হালিম',
+  'মোঃ সাইফুল ইসলাম',
+  'মোঃ ফারুক হোসেন',
+];
+
+const unionIntroductions = [
+  'এই ইউনিয়নটি নদী ও খাল ঘেরা একটি শান্তিপূর্ণ অঞ্চল। কৃষি ও নৌপরিবহন এখানকার প্রধান ভরসা।',
+  'শিক্ষা ও বাজার কেন্দ্রিক অর্থনীতি এই ইউনিয়নের বিশেষ পরিচয়।',
+  'কৃষি ও হস্তশিল্পের ঐতিহ্য এখানে সমৃদ্ধ, বিশেষ করে মৌসুমি ফল চাষে সুনাম আছে।',
+  'প্রধান সড়ক সংলগ্ন হওয়ায় ব্যবসা ও যাতায়াত সুবিধা এখানে বেশি।',
+  'এই ইউনিয়নটি প্রাকৃতিক সৌন্দর্য ও জলাশয়ের জন্য পরিচিত।',
+  'স্থানীয় বাজার, মসজিদ ও বিদ্যালয় কেন্দ্রিক সামাজিক কাঠামো গড়ে উঠেছে।',
+  'কৃষি, মাছ চাষ ও ছোট ব্যবসা এখানকার প্রধান আয়ের উৎস।',
+  'উৎসব ও লোকসংগীতের মাধ্যমে এখানকার সংস্কৃতি আরও সমৃদ্ধ হয়েছে।',
+  'চাষাবাদ ও নৌপথের পাশাপাশি গ্রামীণ পর্যটনের সম্ভাবনা রয়েছে।',
+  'এখানে ঐতিহাসিক মসজিদ ও পুরনো বাজার রয়েছে যা মানুষকে আকর্ষণ করে।',
+  'কৃষিভিত্তিক এই অঞ্চলে ধান ও সবজির উৎপাদন বেশি।',
+  'ইতিহাস ও সংস্কৃতিতে সমৃদ্ধ এই ইউনিয়ন পর্যটনের জন্য উপযোগী।',
+];
+
+const buildUnion = ({ id, name, bengaliName, populationEstimate, areaSize, villages, voters }) => {
+  const imageSet = imageSets[(id - 1) % imageSets.length];
+  const chairmanName = chairmanNames[(id - 1) % chairmanNames.length];
+  const introCopy = unionIntroductions[(id - 1) % unionIntroductions.length];
+
+  return {
+    id,
+    name,
+    bengaliName,
+    populationEstimate,
+    areaSize,
+    villages,
+    voters,
+    problemCount: Math.floor(Number(villages || 10) / 2),
+    introduction: `${bengaliName} ইউনিয়ন ত্রিশাল উপজেলার একটি ঐতিহ্যবাহী অঞ্চল। ${introCopy}`,
+    introductionFields: [
+      { key: 'প্রতিষ্ঠা সাল', value: `১৯${70 + id}` },
+      { key: 'শিক্ষা প্রতিষ্ঠান', value: `${4 + (id % 3)} টি` },
+      { key: 'হাট-বাজার', value: `${1 + (id % 2)} টি` },
+      { key: 'উল্লেখযোগ্য নদী', value: `${1 + (id % 3)} টি` },
+    ],
+    introductionImages: [imageSet.landscape, imageSet.river, imageSet.market],
+    chairman: {
+      name: chairmanName,
+      contactNumber: `+8801${id}XXXXXXX`,
+      images: [imageSet.chair, imageSet.mosque],
     },
-    {
-      name: 'Heritage Market',
-      bengaliName: 'ঐতিহ্যবাহী বাজার',
-      description: 'স্থানীয় কৃষিপণ্য ও হস্তশিল্পের জন্য পরিচিত ঐতিহাসিক বাজার।',
-      images: [images.market, images.culture],
-    },
-  ],
-  literatureAndCulture: [
-    {
-      name: 'Folk Song Festival',
-      bengaliName: 'লোকগানের উৎসব',
-      type: 'সঙ্গীত',
-      description: 'শীতের মৌসুমে আয়োজিত লোকগানের উৎসব, যেখানে স্থানীয় শিল্পীরা অংশ নেন।',
-      images: [images.culture, images.landscape],
-    },
-    {
-      name: 'Handicraft Tradition',
-      bengaliName: 'হস্তশিল্প ঐতিহ্য',
-      type: 'কারুশিল্প',
-      description: 'বাঁশ ও বেতের তৈরি সামগ্রী এখানে বহুল জনপ্রিয়।',
-      images: [images.market],
-    },
-  ],
-  famousFood: [
-    {
-      name: 'Bhapa Pitha',
-      bengaliName: 'ভাপা পিঠা',
-      description: 'চালের গুঁড়ো ও নারকেলের তৈরি ঐতিহ্যবাহী ভাপা পিঠা।',
-      mainIngredients: ['চালের গুঁড়ো', 'নারকেল', 'খেজুরের গুড়'],
-      images: [images.food, images.market],
-    },
-    {
-      name: 'Chitoi with Bhorta',
-      bengaliName: 'চিতই ও ভর্তা',
-      description: 'সকালের নাস্তার জনপ্রিয় ঐতিহ্যবাহী খাবার।',
-      mainIngredients: ['চালের গুঁড়ো', 'ভর্তা', 'সরিষার তেল'],
-      images: [images.food, images.lake],
-    },
-  ],
-});
+    placesToVisit: [
+      {
+        name: 'Union Riverside Park',
+        bengaliName: 'নদীর পাড়ের উদ্যান',
+        description: 'সন্ধ্যায় হাঁটার জন্য শান্ত পরিবেশ ও নদীর সৌন্দর্য উপভোগ করার স্থান।',
+        images: [imageSet.river, imageSet.lake, imageSet.landscape],
+      },
+      {
+        name: 'Heritage Market',
+        bengaliName: 'ঐতিহ্যবাহী বাজার',
+        description: 'স্থানীয় কৃষিপণ্য ও হস্তশিল্পের জন্য পরিচিত ঐতিহাসিক বাজার।',
+        images: [imageSet.market, imageSet.culture],
+      },
+    ],
+    literatureAndCulture: [
+      {
+        name: 'Folk Song Festival',
+        bengaliName: 'লোকগানের উৎসব',
+        type: 'সঙ্গীত',
+        description: 'শীতের মৌসুমে আয়োজিত লোকগানের উৎসব, যেখানে স্থানীয় শিল্পীরা অংশ নেন।',
+        images: [imageSet.culture, imageSet.landscape],
+      },
+      {
+        name: 'Handicraft Tradition',
+        bengaliName: 'হস্তশিল্প ঐতিহ্য',
+        type: 'কারুশিল্প',
+        description: 'বাঁশ ও বেতের তৈরি সামগ্রী এখানে বহুল জনপ্রিয়।',
+        images: [imageSet.market],
+      },
+    ],
+    famousFood: [
+      {
+        name: 'Bhapa Pitha',
+        bengaliName: 'ভাপা পিঠা',
+        description: 'চালের গুঁড়ো ও নারকেলের তৈরি ঐতিহ্যবাহী ভাপা পিঠা।',
+        mainIngredients: ['চালের গুঁড়ো', 'নারকেল', 'খেজুরের গুড়'],
+        images: [imageSet.food, imageSet.market],
+      },
+      {
+        name: 'Chitoi with Bhorta',
+        bengaliName: 'চিতই ও ভর্তা',
+        description: 'সকালের নাস্তার জনপ্রিয় ঐতিহ্যবাহী খাবার।',
+        mainIngredients: ['চালের গুঁড়ো', 'ভর্তা', 'সরিষার তেল'],
+        images: [imageSet.food, imageSet.lake],
+      },
+    ],
+  };
+};
 
 export const demoUnions = [
   buildUnion({ id: 1, name: 'Mothbari', bengaliName: 'মঠবাড়ী', populationEstimate: 36120, areaSize: 29.2, villages: 13, voters: 21360 }),
@@ -118,4 +186,4 @@ export const demoProblems = [
   },
 ];
 
-export const demoImageFallback = images.landscape;
+export const demoImageFallback = imageSets[0].landscape;
