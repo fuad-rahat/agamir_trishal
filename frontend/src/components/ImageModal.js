@@ -28,7 +28,14 @@ const ImageModal = ({ isOpen, images = [], currentIndex = 0, onClose, onNavigate
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose, onNavigate]);
 
-  if (!isOpen || !images || images.length === 0) {
+  // Early return if modal should not be shown
+  if (!isOpen) {
+    return null;
+  }
+
+  // Ensure we have images
+  if (!images || !Array.isArray(images) || images.length === 0) {
+    console.warn('ImageModal: No images provided');
     return null;
   }
 
@@ -37,6 +44,7 @@ const ImageModal = ({ isOpen, images = [], currentIndex = 0, onClose, onNavigate
   const currentImage = images[validIndex];
   
   if (!currentImage) {
+    console.warn('ImageModal: No image at index', validIndex);
     return null;
   }
 
@@ -58,11 +66,25 @@ const ImageModal = ({ isOpen, images = [], currentIndex = 0, onClose, onNavigate
     }
   };
 
-  return createPortal(
+  const modalContent = (
     <div
       className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center p-4"
       onClick={handleBackdropClick}
-      style={{ zIndex: 99999, position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
+      style={{ 
+        zIndex: 99999, 
+        position: 'fixed', 
+        top: 0, 
+        left: 0, 
+        right: 0, 
+        bottom: 0,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: 'pointer'
+      }}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Image viewer"
     >
       {/* Close Button */}
       <button
@@ -77,14 +99,23 @@ const ImageModal = ({ isOpen, images = [], currentIndex = 0, onClose, onNavigate
       <div 
         className="relative max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center"
         onClick={(e) => e.stopPropagation()}
+        style={{ cursor: 'default' }}
       >
         <img
           src={currentImage}
           alt={`${validIndex + 1} of ${images.length}`}
           className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
-          style={{ maxHeight: '90vh', maxWidth: '100%' }}
+          style={{ 
+            maxHeight: '90vh', 
+            maxWidth: '100%',
+            display: 'block',
+            cursor: 'default'
+          }}
           onError={(e) => {
             e.target.src = 'https://via.placeholder.com/800x600?text=Image+Not+Found';
+          }}
+          onLoad={() => {
+            // Image loaded successfully
           }}
         />
 
@@ -123,9 +154,15 @@ const ImageModal = ({ isOpen, images = [], currentIndex = 0, onClose, onNavigate
           <div>ESC to close</div>
         </div>
       )}
-    </div>,
-    document.body
+    </div>
   );
+
+  // Ensure document.body exists before creating portal
+  if (typeof document !== 'undefined' && document.body) {
+    return createPortal(modalContent, document.body);
+  }
+  
+  return null;
 };
 
 export default ImageModal;

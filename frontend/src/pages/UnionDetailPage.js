@@ -34,6 +34,13 @@ const UnionDetailPage = () => {
     const imgList = Array.isArray(images) ? images.filter(Boolean) : (src ? [src] : []);
     const safeList = imgList.length > 0 ? imgList : [demoImageFallback];
     const safeIndex = Math.max(0, Math.min(currentIndex, safeList.length - 1));
+    
+    // Ensure we have valid images
+    if (safeList.length === 0) {
+      console.warn('No images to display in modal');
+      return;
+    }
+    
     setImageModal({ isOpen: true, images: safeList, currentIndex: safeIndex });
   };
 

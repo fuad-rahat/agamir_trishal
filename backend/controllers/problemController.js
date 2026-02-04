@@ -4,6 +4,13 @@ const Union = require('../models/Union');
 // Get all problems (optimized with indexing and selective fields)
 exports.getAllProblems = async (req, res) => {
   try {
+    // Check MongoDB connection state
+    const mongoose = require('mongoose');
+    if (mongoose.connection.readyState !== 1) {
+      console.error('MongoDB not connected. State:', mongoose.connection.readyState);
+      return res.status(503).json({ error: 'Database connection not ready. Please try again.' });
+    }
+
     const { union, category, status, isElectionDay } = req.query;
     let query = {};
 
@@ -20,17 +27,23 @@ exports.getAllProblems = async (req, res) => {
     if (isElectionDay !== undefined) query.isElectionDay = isElectionDay === 'true';
 
     // Optimized query: select only needed fields, populate efficiently, limit results
+    // Add timeout to the query itself
     const problems = await Problem.find(query)
       .select('title description category status union pollingStation location images upvotes createdAt updatedAt')
       .populate('union', 'name bengaliName _id')
       .populate('pollingStation', 'name address')
       .sort({ upvotes: -1, createdAt: -1 })
       .lean()
+      .maxTimeMS(20000) // 20 second timeout for the query
       .limit(1000); // Reasonable limit
 
     res.json(problems || []);
   } catch (error) {
     console.error('Error fetching problems:', error);
+    // Provide more specific error messages
+    if (error.name === 'MongoServerSelectionError' || error.message.includes('buffering timed out')) {
+      return res.status(503).json({ error: 'Database connection timeout. Please try again in a moment.' });
+    }
     res.status(500).json({ error: error.message || 'সমস্যা ডেটা লোড করতে ব্যর্থ হয়েছে' });
   }
 };
