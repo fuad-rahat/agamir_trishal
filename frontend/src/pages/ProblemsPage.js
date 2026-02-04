@@ -54,7 +54,6 @@ const ProblemsPage = () => {
 
     } catch (err) {
       console.error('Error fetching data:', err);
-      setError('ডাটা লোড করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।');
     } finally {
       setLoading(false);
     }
