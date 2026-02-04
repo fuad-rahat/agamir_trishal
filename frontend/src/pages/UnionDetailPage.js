@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import { useParams, useNavigate } from 'react-router-dom';
 import { demoUnionLookup, demoImageFallback } from '../data/demoUnions';
 
@@ -637,7 +638,7 @@ const UnionDetailPage = () => {
       </div>
 
       {/* Image Modal - rendered in portal so it's always on top and clickable */}
-      {imageModal.open && createPortal(
+      {imageModal.open && ReactDOM.createPortal(
         <div
           role="dialog"
           aria-modal="true"
