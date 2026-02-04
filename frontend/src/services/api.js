@@ -14,6 +14,7 @@ export const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  timeout: 30000, // 30 second timeout
 });
 
 // Add request interceptor to include auth token
@@ -26,6 +27,23 @@ api.interceptors.request.use(
     return config;
   },
   (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Add response interceptor for error handling
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('adminToken');
+      localStorage.removeItem('adminEmail');
+      localStorage.removeItem('adminName');
+      localStorage.removeItem('adminRole');
+      if (window.location.pathname.startsWith('/admin')) {
+        window.location.href = '/admin/login';
+      }
+    }
     return Promise.reject(error);
   }
 );
