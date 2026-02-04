@@ -14,10 +14,22 @@ const AdminDashboardPage = () => {
 
   const adminName = localStorage.getItem('adminName');
 
-  const openImageModal = (images = [], currentIndex = 0) => {
-    const imgList = Array.isArray(images) ? images.filter(Boolean) : [];
+  const openImageModal = (src, images = [], currentIndex = 0) => {
+    // Handle both signatures: (images, index) and (src, images, index)
+    let imgList, safeIndex;
+    if (Array.isArray(src)) {
+      // Called as openImageModal(images, index)
+      imgList = src.filter(Boolean);
+      safeIndex = images; // images parameter is actually the index
+    } else {
+      // Called as openImageModal(src, images, index)
+      imgList = Array.isArray(images) ? images.filter(Boolean) : (src ? [src] : []);
+      safeIndex = currentIndex;
+    }
+    
     if (imgList.length > 0) {
-      setImageModal({ isOpen: true, images: imgList, currentIndex: Math.max(0, Math.min(currentIndex, imgList.length - 1)) });
+      const validIndex = Math.max(0, Math.min(safeIndex, imgList.length - 1));
+      setImageModal({ isOpen: true, images: imgList, currentIndex: validIndex });
     }
   };
 

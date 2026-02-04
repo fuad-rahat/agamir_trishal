@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { problemsAPI, unionsAPI } from '../services/api';
 import ProblemCard from '../components/ProblemCard';
@@ -136,7 +136,7 @@ const ProblemsPage = () => {
     };
 
     applyFilter();
-  }, [selectedUnion, selectedCategory, cacheKeys]);
+  }, [selectedUnion, selectedCategory, cacheKeys, fetchData]);
 
   const handleShowDetails = (problem) => {
     alert(`সমস্যা: ${problem.title}\n\nবর্ণনা: ${problem.description}`);

@@ -28,9 +28,18 @@ const ImageModal = ({ isOpen, images = [], currentIndex = 0, onClose, onNavigate
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose, onNavigate]);
 
-  if (!isOpen || !images || images.length === 0) return null;
+  if (!isOpen || !images || images.length === 0) {
+    return null;
+  }
 
-  const currentImage = images[currentIndex];
+  // Ensure currentIndex is valid
+  const validIndex = Math.max(0, Math.min(currentIndex, images.length - 1));
+  const currentImage = images[validIndex];
+  
+  if (!currentImage) {
+    return null;
+  }
+
   const hasMultiple = images.length > 1;
 
   const handlePrev = (e) => {
@@ -51,8 +60,9 @@ const ImageModal = ({ isOpen, images = [], currentIndex = 0, onClose, onNavigate
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[9999] bg-black bg-opacity-90 flex items-center justify-center p-4"
+      className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center p-4"
       onClick={handleBackdropClick}
+      style={{ zIndex: 99999, position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
     >
       {/* Close Button */}
       <button
@@ -64,11 +74,15 @@ const ImageModal = ({ isOpen, images = [], currentIndex = 0, onClose, onNavigate
       </button>
 
       {/* Image Container */}
-      <div className="relative max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center">
+      <div 
+        className="relative max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center"
+        onClick={(e) => e.stopPropagation()}
+      >
         <img
           src={currentImage}
-          alt={`Image ${currentIndex + 1} of ${images.length}`}
-          className="max-w-full max-h-full object-contain rounded-lg"
+          alt={`${validIndex + 1} of ${images.length}`}
+          className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+          style={{ maxHeight: '90vh', maxWidth: '100%' }}
           onError={(e) => {
             e.target.src = 'https://via.placeholder.com/800x600?text=Image+Not+Found';
           }}
@@ -97,7 +111,7 @@ const ImageModal = ({ isOpen, images = [], currentIndex = 0, onClose, onNavigate
         {/* Image Counter */}
         {hasMultiple && (
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-full text-sm">
-            {currentIndex + 1} / {images.length}
+            {validIndex + 1} / {images.length}
           </div>
         )}
       </div>
