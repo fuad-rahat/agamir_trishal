@@ -5,49 +5,57 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-// CORS – allow frontend and dev
+// CORS Configuration - allow frontend and dev
 const allowedOrigins = [
   'https://agamir-trishal-web.vercel.app',
   'http://localhost:3000',
 ];
 
+// Add FRONTEND_URL from environment if provided
 if (process.env.FRONTEND_URL) {
   process.env.FRONTEND_URL.split(',')
-    .map((origin) => origin.trim())
+    .map((origin) => origin.trim().replace(/\/+$/, '')) // Remove trailing slashes
     .filter(Boolean)
-    .forEach((origin) => allowedOrigins.push(origin));
+    .forEach((origin) => {
+      if (!allowedOrigins.includes(origin)) {
+        allowedOrigins.push(origin);
+      }
+    });
 }
 
 const isAllowedOrigin = (origin) => {
+  // Allow requests with no origin (like mobile apps or curl requests)
   if (!origin) return true;
+  
+  // Check exact match
   if (allowedOrigins.includes(origin)) return true;
 
+  // Allow Vercel preview deployments
   const vercelPreviewPattern = /^https:\/\/agamir-trishal-web(-[\w-]+)?\.vercel\.app$/;
-  return vercelPreviewPattern.test(origin);
+  if (vercelPreviewPattern.test(origin)) return true;
+
+  // Log blocked origins for debugging (only in development)
+  if (process.env.NODE_ENV === 'development') {
+    console.log('CORS: Blocked origin:', origin);
+    console.log('CORS: Allowed origins:', allowedOrigins);
+  }
+  return false;
 };
 
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  if (origin && isAllowedOrigin(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-    res.setHeader('Vary', 'Origin');
-  }
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  if (req.method === 'OPTIONS') {
-    return res.sendStatus(204);
-  }
-  return next();
-});
-
+// CORS middleware - must be before routes
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (isAllowedOrigin(origin)) return callback(null, true);
-      return callback(new Error('Not allowed by CORS'));
+      if (isAllowedOrigin(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
     },
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+    credentials: true,
+    optionsSuccessStatus: 200, // Some legacy browsers (IE11, various SmartTVs) choke on 204
   })
 );
 app.use(express.json({ limit: '100mb' }));
