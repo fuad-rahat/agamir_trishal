@@ -2,33 +2,33 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = ({ isAdmin = false }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const location = useLocation();
+  let [isMenuOpen, setIsMenuOpen] = useState(false);
+  let location = useLocation();
 
-  const isActive = (path) => location.pathname === path;
+  let isActive = (path) => location.pathname === path;
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
 
-  const navItemClass = (path) =>
-    `flex items-center px-4 py-2 rounded-md transition
+  let navItemClass = (path) =>
+    `flex items-center gap-2 px-4 py-2 rounded-md transition text-sm
      ${isActive(path)
        ? 'bg-green-800 text-white'
        : 'text-green-100 hover:bg-green-700'}`;
 
   return (
-    <nav className="bg-gradient-to-r from-green-600 to-green-700 shadow-lg sticky top-0 z-40">
+    <nav className="bg-gradient-to-r from-green-600 to-green-700 sticky top-0 z-50 shadow-md">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center h-16 relative">
+        {/* Top bar */}
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 mx-auto md:mx-0">
-            <div className="bg-white rounded-full p-3 sm:p-2">
-              <i className="fas fa-map text-green-600 text-2xl sm:text-xl"></i>
+          <Link to="/" className="flex items-center gap-2">
+            <div className="bg-white rounded-full p-2">
+              <i className="fas fa-map text-green-600 text-xl"></i>
             </div>
-            <div className="hidden sm:block">
-              <h1 className="text-white font-bold text-lg">
+            <div className="hidden sm:block leading-tight">
+              <h1 className="text-white font-bold text-base">
                 Trishal Civic Map
               </h1>
               <p className="text-green-100 text-xs">
@@ -38,31 +38,31 @@ const Navbar = ({ isAdmin = false }) => {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden md:flex items-center gap-1">
             <Link to="/" className={navItemClass('/')}>
-              <i className="fas fa-home mr-2"></i>হোম
+              <i className="fas fa-home"></i>হোম
             </Link>
             <Link to="/problems" className={navItemClass('/problems')}>
-              <i className="fas fa-exclamation-circle mr-2"></i>সমস্যা
+              <i className="fas fa-exclamation-circle"></i>সমস্যা
             </Link>
             <Link to="/helpline" className={navItemClass('/helpline')}>
-              <i className="fas fa-phone mr-2"></i>হেল্পলাইন
+              <i className="fas fa-phone"></i>হেল্পলাইন
             </Link>
             <Link to="/statistics" className={navItemClass('/statistics')}>
-              <i className="fas fa-chart-bar mr-2"></i>তথ্য
+              <i className="fas fa-chart-bar"></i>তথ্য
             </Link>
             {isAdmin && (
               <Link to="/admin" className={navItemClass('/admin')}>
-                <i className="fas fa-shield-alt mr-2"></i>অ্যাডমিন
+                <i className="fas fa-shield-alt"></i>অ্যাডমিন
               </Link>
             )}
           </div>
 
           {/* Mobile Toggle */}
           <button
-            className="md:hidden text-white p-2 rounded-md hover:bg-green-700 transition absolute right-0"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="মেনু টগল করুন"
+            className="md:hidden text-white p-2 rounded-md hover:bg-green-700"
+            aria-label="Toggle menu"
           >
             <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'} text-xl`} />
           </button>
@@ -70,25 +70,18 @@ const Navbar = ({ isAdmin = false }) => {
 
         {/* Mobile Menu */}
         <div
-          className={`md:hidden overflow-hidden transition-all duration-300
-            ${isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
+          className={`md:hidden transition-all duration-300 ease-in-out
+          ${isMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}
+          overflow-hidden`}
         >
-          <div className="pb-4 space-y-2">
-            <Link to="/" className={navItemClass('/')}>
-              <i className="fas fa-home mr-2"></i>হোম
-            </Link>
-            <Link to="/problems" className={navItemClass('/problems')}>
-              <i className="fas fa-exclamation-circle mr-2"></i>সমস্যা
-            </Link>
-            <Link to="/helpline" className={navItemClass('/helpline')}>
-              <i className="fas fa-phone mr-2"></i>হেল্পলাইন
-            </Link>
-            <Link to="/statistics" className={navItemClass('/statistics')}>
-              <i className="fas fa-chart-bar mr-2"></i>তথ্য
-            </Link>
+          <div className="flex flex-col gap-2 pb-4 pt-2">
+            <Link to="/" className={navItemClass('/')}>হোম</Link>
+            <Link to="/problems" className={navItemClass('/problems')}>সমস্যা</Link>
+            <Link to="/helpline" className={navItemClass('/helpline')}>হেল্পলাইন</Link>
+            <Link to="/statistics" className={navItemClass('/statistics')}>তথ্য</Link>
             {isAdmin && (
               <Link to="/admin" className={navItemClass('/admin')}>
-                <i className="fas fa-shield-alt mr-2"></i>অ্যাডমিন
+                অ্যাডমিন
               </Link>
             )}
           </div>
