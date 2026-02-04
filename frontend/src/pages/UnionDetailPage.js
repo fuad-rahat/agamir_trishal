@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { createPortal } from 'react-dom';
 import { useParams, useNavigate } from 'react-router-dom';
 import { demoUnionLookup, demoImageFallback } from '../data/demoUnions';
+import ImageModal from '../components/ImageModal';
 
 const UnionDetailPage = () => {
   const { unionId } = useParams();
@@ -10,12 +10,12 @@ const UnionDetailPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('overview');
-  const [imageModal, setImageModal] = useState({ open: false, src: '', images: [], currentIndex: 0 });
+  const [imageModal, setImageModal] = useState({ isOpen: false, images: [], currentIndex: 0 });
 
   useEffect(() => {
     const loadUnionDetails = () => {
       setLoading(true);
-      setImageModal({ open: false, src: '', images: [], currentIndex: 0 });
+      setImageModal({ isOpen: false, images: [], currentIndex: 0 });
       const match = demoUnionLookup[String(unionId)];
       if (match) {
         setUnion(match);
@@ -34,7 +34,7 @@ const UnionDetailPage = () => {
     const imgList = Array.isArray(images) ? images.filter(Boolean) : (src ? [src] : []);
     const safeList = imgList.length > 0 ? imgList : [demoImageFallback];
     const safeIndex = Math.max(0, Math.min(currentIndex, safeList.length - 1));
-    setImageModal({ open: true, src: safeList[safeIndex], images: safeList, currentIndex: safeIndex });
+    setImageModal({ isOpen: true, images: safeList, currentIndex: safeIndex });
   };
 
   const handleImageError = (event) => {
@@ -51,13 +51,12 @@ const UnionDetailPage = () => {
 
     setImageModal(prev => ({
       ...prev,
-      src: images[newIndex],
       currentIndex: newIndex
     }));
   };
 
   const closeImageModal = () => {
-    setImageModal({ open: false, src: '', images: [], currentIndex: 0 });
+    setImageModal({ isOpen: false, images: [], currentIndex: 0 });
   };
 
   if (loading) {
@@ -638,69 +637,14 @@ const UnionDetailPage = () => {
         )}
       </div>
 
-      {/* Image Modal - rendered in portal so it's always on top and clickable */}
-      {imageModal.open && createPortal(
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center p-4"
-          style={{ zIndex: 99999 }}
-          onClick={closeImageModal}
-        >
-          <div
-            className="relative max-w-6xl w-full max-h-[90vh] flex items-center justify-center"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              type="button"
-              onClick={closeImageModal}
-              className="absolute -top-2 -right-2 md:top-4 md:right-4 text-white text-3xl hover:text-gray-300 z-20 bg-black bg-opacity-60 rounded-full w-12 h-12 flex items-center justify-center transition shadow-lg"
-              aria-label="বন্ধ করুন"
-            >
-              <i className="fas fa-times"></i>
-            </button>
-
-            {imageModal.images && imageModal.images.length > 1 && (
-              <>
-                <button
-                  type="button"
-                  onClick={(e) => { e.stopPropagation(); navigateImage(-1); }}
-                  className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 text-white text-2xl md:text-3xl hover:text-gray-300 z-20 bg-black bg-opacity-60 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center transition shadow-lg"
-                  aria-label="আগের ছবি"
-                >
-                  <i className="fas fa-chevron-left"></i>
-                </button>
-                <button
-                  type="button"
-                  onClick={(e) => { e.stopPropagation(); navigateImage(1); }}
-                  className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 text-white text-2xl md:text-3xl hover:text-gray-300 z-20 bg-black bg-opacity-60 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center transition shadow-lg"
-                  aria-label="পরের ছবি"
-                >
-                  <i className="fas fa-chevron-right"></i>
-                </button>
-              </>
-            )}
-
-            <img
-              src={imageModal.src || demoImageFallback}
-              alt="বড় দেখুন"
-              className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-              style={{ pointerEvents: 'auto' }}
-              onError={(e) => {
-                e.currentTarget.src = demoImageFallback;
-              }}
-            />
-
-            {(imageModal.images && imageModal.images.length > 0) && (
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-base md:text-lg bg-black bg-opacity-60 px-4 py-2 rounded-full">
-                {imageModal.currentIndex + 1} / {imageModal.images.length}
-              </div>
-            )}
-          </div>
-        </div>,
-        document.body
-      )}
+      {/* Image Modal */}
+      <ImageModal
+        isOpen={imageModal.isOpen}
+        images={imageModal.images}
+        currentIndex={imageModal.currentIndex}
+        onClose={closeImageModal}
+        onNavigate={navigateImage}
+      />
     </div>
   );
 };

@@ -1,40 +1,57 @@
 const Problem = require('../models/Problem');
 const Union = require('../models/Union');
 
-// Get all problems
+// Get all problems (optimized with indexing and selective fields)
 exports.getAllProblems = async (req, res) => {
   try {
     const { union, category, status, isElectionDay } = req.query;
     let query = {};
 
+    // Show all problems by default (including pending), unless status filter is specified
+    if (status) {
+      query.status = status;
+    } else {
+      // Default: show all except hidden
+      query.status = { $ne: 'hidden' };
+    }
+
     if (union) query.union = union;
     if (category) query.category = category;
-    if (status) query.status = status;
     if (isElectionDay !== undefined) query.isElectionDay = isElectionDay === 'true';
 
+    // Optimized query: select only needed fields, populate efficiently, limit results
     const problems = await Problem.find(query)
-      .populate('union', 'name bengaliName')
+      .select('title description category status union pollingStation location images upvotes createdAt updatedAt')
+      .populate('union', 'name bengaliName _id')
       .populate('pollingStation', 'name address')
-      .sort({ createdAt: -1 });
+      .sort({ upvotes: -1, createdAt: -1 })
+      .lean()
+      .limit(1000); // Reasonable limit
 
-    res.json(problems);
+    res.json(problems || []);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('Error fetching problems:', error);
+    res.status(500).json({ error: error.message || 'সমস্যা ডেটা লোড করতে ব্যর্থ হয়েছে' });
   }
 };
 
-// Get problems by union
+// Get problems by union (optimized)
 exports.getProblemsByUnion = async (req, res) => {
   try {
     const problems = await Problem.find({ 
       union: req.params.unionId,
       status: { $in: ['approved', 'in-progress', 'resolved'] }
     })
-    .populate('union', 'name bengaliName')
-    .sort({ upvotes: -1, createdAt: -1 });
+    .select('title description category status union pollingStation location images upvotes createdAt updatedAt')
+    .populate('union', 'name bengaliName _id')
+    .populate('pollingStation', 'name address')
+    .sort({ upvotes: -1, createdAt: -1 })
+    .lean()
+    .limit(500);
 
     res.json(problems);
   } catch (error) {
+    console.error('Error fetching problems by union:', error);
     res.status(500).json({ error: error.message });
   }
 };
@@ -118,9 +135,10 @@ exports.upvoteProblem = async (req, res) => {
 exports.getProblemStats = async (req, res) => {
   try {
     const { unionId } = req.params;
+    const mongoose = require('mongoose');
     
     const stats = await Problem.aggregate([
-      { $match: { union: require('mongoose').Types.ObjectId(unionId), status: 'approved' } },
+      { $match: { union: new mongoose.Types.ObjectId(unionId), status: 'approved' } },
       {
         $group: {
           _id: '$category',
@@ -131,6 +149,7 @@ exports.getProblemStats = async (req, res) => {
 
     res.json(stats);
   } catch (error) {
+    console.error('Error fetching problem stats:', error);
     res.status(500).json({ error: error.message });
   }
 };

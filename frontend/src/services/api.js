@@ -1,13 +1,13 @@
 import axios from 'axios';
 
 const normalizeApiBase = (value) => {
-  const trimmed = value.replace(/\/+$/, '');
-  return trimmed.endsWith('/api') ? trimmed : `${trimmed}/api`;
+  if (!value) return 'http://localhost:5000/api';
+  const trimmed = value.trim().replace(/\/+$/, '');
+  if (trimmed.endsWith('/api')) return trimmed;
+  return `${trimmed}/api`;
 };
 
-const API_BASE = normalizeApiBase(
-  process.env.REACT_APP_API_URL || 'http://localhost:5000'
-);
+const API_BASE = normalizeApiBase(process.env.REACT_APP_API_URL || 'http://localhost:5000');
 
 export const api = axios.create({
   baseURL: API_BASE,
@@ -26,6 +26,23 @@ api.interceptors.request.use(
     return config;
   },
   (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Add response interceptor for error handling
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('adminToken');
+      localStorage.removeItem('adminEmail');
+      localStorage.removeItem('adminName');
+      localStorage.removeItem('adminRole');
+      if (window.location.pathname.startsWith('/admin')) {
+        window.location.href = '/admin/login';
+      }
+    }
     return Promise.reject(error);
   }
 );
