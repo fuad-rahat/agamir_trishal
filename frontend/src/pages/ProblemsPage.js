@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { problemsAPI, unionsAPI } from '../services/api';
 import ProblemCard from '../components/ProblemCard';
@@ -11,10 +11,30 @@ const ProblemsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [loading, setLoading] = useState(true);
   const hasLoadedCache = useRef(false);
-  const cacheKeys = {
+  const cacheKeys = useMemo(() => ({
     problems: 'cachedProblems',
     unions: 'cachedUnions',
-  };
+  }), []);
+
+  const fetchData = useCallback(async () => {
+    try {
+      if (!hasLoadedCache.current) {
+        setLoading(true);
+      }
+      const [problemsRes, unionsRes] = await Promise.all([
+        problemsAPI.getAll(),
+        unionsAPI.getAll()
+      ]);
+      setProblems(problemsRes.data);
+      setUnions(unionsRes.data);
+      sessionStorage.setItem(cacheKeys.problems, JSON.stringify(problemsRes.data));
+      sessionStorage.setItem(cacheKeys.unions, JSON.stringify(unionsRes.data));
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false);
+    }
+  }, [cacheKeys]);
 
   useEffect(() => {
     const cachedProblems = sessionStorage.getItem(cacheKeys.problems);
@@ -30,7 +50,7 @@ const ProblemsPage = () => {
       }
     }
     fetchData();
-  }, []);
+  }, [cacheKeys, fetchData]);
 
   useEffect(() => {
     const applyFilter = async () => {
@@ -54,27 +74,7 @@ const ProblemsPage = () => {
     };
 
     applyFilter();
-  }, [selectedUnion, selectedCategory]);
-
-  const fetchData = async () => {
-    try {
-      if (!hasLoadedCache.current) {
-        setLoading(true);
-      }
-      const [problemsRes, unionsRes] = await Promise.all([
-        problemsAPI.getAll(),
-        unionsAPI.getAll()
-      ]);
-      setProblems(problemsRes.data);
-      setUnions(unionsRes.data);
-      sessionStorage.setItem(cacheKeys.problems, JSON.stringify(problemsRes.data));
-      sessionStorage.setItem(cacheKeys.unions, JSON.stringify(unionsRes.data));
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [fetchData, selectedUnion, selectedCategory]);
 
   const handleShowDetails = (problem) => {
     alert(`সমস্যা: ${problem.title}\n\nবর্ণনা: ${problem.description}`);
