@@ -5,7 +5,6 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import ProblemsPage from './pages/ProblemsPage';
 import ReportProblemPage from './pages/ReportProblemPage';
-import PollingStationsPage from './pages/PollingStationsPage';
 import HelplinePage from './pages/HelplinePage';
 import StatisticsPage from './pages/StatisticsPage';
 import SvgTracerPage from './pages/SvgTracerPage';
@@ -39,18 +38,6 @@ function App() {
     setIsAdmin(!!adminToken);
     setIsLoading(false);
   }, []);
-
-  const handleAdminLogin = () => {
-    setIsAdmin(true);
-  };
-
-  const handleAdminLogout = () => {
-    setIsAdmin(false);
-    localStorage.removeItem('adminToken');
-    localStorage.removeItem('adminEmail');
-    localStorage.removeItem('adminName');
-    localStorage.removeItem('adminRole');
-  };
 
   return (
     <Router>
