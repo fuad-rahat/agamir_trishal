@@ -75,30 +75,92 @@ const mongooseOptions = {
   bufferCommands: false, // Disable mongoose buffering
 };
 
-// MongoDB Connection - don't exit process on failure (for serverless)
+// MongoDB Connection - optimized for serverless (Vercel)
+let isConnecting = false;
+let connectionPromise = null;
+
 const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://trishal_user:trishal123@cluster0.mongodb.net/trishal-civic?retryWrites=true&w=majority', mongooseOptions);
-    console.log('MongoDB Connected Successfully');
-    
-    mongoose.connection.on('error', (err) => {
-      console.error('MongoDB connection error:', err);
-    });
-    
-    mongoose.connection.on('disconnected', () => {
-      console.warn('MongoDB disconnected');
-    });
-    
+  // If already connected, return
+  if (mongoose.connection.readyState === 1) {
     return true;
-  } catch (err) {
-    console.error('MongoDB Connection Error:', err);
-    // Don't exit process in serverless - let it retry on next request
-    return false;
   }
+  
+  // If already connecting, wait for that connection
+  if (isConnecting && connectionPromise) {
+    return connectionPromise;
+  }
+  
+  // Start new connection
+  isConnecting = true;
+  connectionPromise = (async () => {
+    try {
+      // Close existing connection if any
+      if (mongoose.connection.readyState !== 0) {
+        await mongoose.connection.close();
+      }
+      
+      const mongoUri = process.env.MONGODB_URI;
+      if (!mongoUri) {
+        throw new Error('MONGODB_URI environment variable is not set');
+      }
+      
+      console.log('Attempting MongoDB connection...');
+      console.log('MongoDB URI length:', mongoUri.length);
+      console.log('MongoDB URI starts with:', mongoUri.substring(0, 20) + '...');
+      
+      await mongoose.connect(mongoUri, {
+        ...mongooseOptions,
+        // Serverless-specific options - faster timeouts
+        serverSelectionTimeoutMS: 15000, // 15 seconds for serverless
+        socketTimeoutMS: 30000,
+        connectTimeoutMS: 15000,
+      });
+      
+      console.log('MongoDB Connected Successfully');
+      console.log('Connection state:', mongoose.connection.readyState);
+      
+      mongoose.connection.on('error', (err) => {
+        console.error('MongoDB connection error:', err);
+        isConnecting = false;
+        connectionPromise = null;
+      });
+      
+      mongoose.connection.on('disconnected', () => {
+        console.warn('MongoDB disconnected');
+        isConnecting = false;
+        connectionPromise = null;
+      });
+      
+      isConnecting = false;
+      return true;
+    } catch (err) {
+      console.error('MongoDB Connection Error:', err.message);
+      isConnecting = false;
+      connectionPromise = null;
+      return false;
+    }
+  })();
+  
+  return connectionPromise;
 };
 
+// Export connectDB before routes so controllers can use it
+app.connectDB = connectDB;
+
 // Connect to database (non-blocking for serverless)
-connectDB();
+// In serverless, connection happens on first request
+if (process.env.VERCEL !== '1') {
+  connectDB();
+} else {
+  // In serverless, ensure connection on first request
+  app.use(async (req, res, next) => {
+    if (mongoose.connection.readyState !== 1 && req.path !== '/api/health') {
+      // Don't block, but try to connect in background
+      connectDB().catch(err => console.error('Background connection failed:', err.message));
+    }
+    next();
+  });
+}
 
 // Routes
 app.use('/api/unions', require('./routes/unionRoutes'));
@@ -110,10 +172,31 @@ app.use('/api/admin', require('./routes/adminRoutes'));
 app.use('/api/helpline', require('./routes/helplineRoutes'));
 
 // Health Check - must handle errors gracefully
-app.get('/api/health', (req, res) => {
+app.get('/api/health', async (req, res) => {
   try {
     const mongoose = require('mongoose');
-    const dbStatus = mongoose.connection?.readyState || 0;
+    let dbStatus = mongoose.connection?.readyState || 0;
+    
+    // Try to connect if disconnected (for serverless)
+    if (dbStatus === 0) {
+      try {
+        console.log('Health check: Attempting to connect to MongoDB...');
+        const connected = await connectDB();
+        console.log('Health check: Connection result:', connected);
+        if (connected) {
+          // Wait a bit for connection to stabilize
+          await new Promise(resolve => setTimeout(resolve, 1500));
+          dbStatus = mongoose.connection?.readyState || 0;
+          console.log('Health check: Final connection state:', dbStatus);
+        } else {
+          console.log('Health check: Connection failed or returned false');
+        }
+      } catch (err) {
+        console.error('Health check connection attempt failed:', err.message);
+        console.error('Error stack:', err.stack);
+      }
+    }
+    
     const dbStates = {
       0: 'disconnected',
       1: 'connected',
@@ -125,7 +208,9 @@ app.get('/api/health', (req, res) => {
       status: 'Server is running',
       database: {
         status: dbStates[dbStatus] || 'unknown',
-        readyState: dbStatus
+        readyState: dbStatus,
+        mongoUriSet: !!process.env.MONGODB_URI,
+        mongoUriLength: process.env.MONGODB_URI ? process.env.MONGODB_URI.length : 0
       },
       cors: {
         allowedOrigins: allowedOrigins,
@@ -188,7 +273,8 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Route not found', path: req.path });
 });
 
-// Export app for Vercel serverless functions
+// Export app and connectDB for Vercel serverless functions
+app.connectDB = connectDB;
 module.exports = app;
 
 // Only start server if not in serverless environment

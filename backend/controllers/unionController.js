@@ -47,11 +47,32 @@ const resolveUnionId = (id) => {
 // Get all unions
 exports.getAllUnions = async (req, res) => {
   try {
-    // Check MongoDB connection state
+    // Ensure MongoDB connection (for serverless)
     const mongoose = require('mongoose');
     if (mongoose.connection.readyState !== 1) {
-      console.error('MongoDB not connected. State:', mongoose.connection.readyState);
-      return res.status(503).json({ error: 'Database connection not ready. Please try again.' });
+      // Try to connect if not connected (serverless cold start)
+      const app = require('../server');
+      const connectDB = app.connectDB || (async () => {
+        try {
+          if (mongoose.connection.readyState === 1) return true;
+          await mongoose.connect(process.env.MONGODB_URI, {
+            serverSelectionTimeoutMS: 10000,
+            socketTimeoutMS: 30000,
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+          });
+          return true;
+        } catch (err) {
+          console.error('Failed to connect:', err.message);
+          return false;
+        }
+      });
+      
+      const connected = await connectDB();
+      if (!connected || mongoose.connection.readyState !== 1) {
+        console.error('MongoDB not connected. State:', mongoose.connection.readyState);
+        return res.status(503).json({ error: 'Database connection not ready. Please try again.' });
+      }
     }
 
     const unions = await Union.find().lean().limit(1000);
