@@ -20,7 +20,6 @@ const Navbar = ({ isAdmin = false }) => {
   return (
     <nav className="bg-gradient-to-r from-green-600 to-green-700 sticky top-0 z-50 shadow-md">
       <div className="max-w-7xl mx-auto px-4">
-        {/* Top bar */}
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
